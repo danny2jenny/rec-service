@@ -29,9 +29,9 @@ link_libraries(
         "userenv"
         "iphlpapi"
         "HCNetSDK"
-        "paho-mqtt3a"
+        "mosquitto"
 )
 
-set(SOURCE_FILES src/main.c src/ry_msg_sub.c)
+set(SOURCE_FILES src/main.c src/client_shared.c src/ry_msg_sub.c)
 
 add_executable(RY_Service ${SOURCE_FILES})

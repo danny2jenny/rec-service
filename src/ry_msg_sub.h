@@ -8,7 +8,7 @@
 extern "C" {
 #endif
 
-int ry_msg_sub_init();
+int ry_msg_sub_init(int argc, char *argv[]);
 
 #ifdef __cplusplus
 }
