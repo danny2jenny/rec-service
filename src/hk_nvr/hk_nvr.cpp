@@ -4,14 +4,25 @@
  */
 
 #include <hk/HCNetSDK.h>
-#include <stdio.h>
+#include "ry_video_adapter.h"
 
 
 // 初始化
 extern "C" {
 
-void device_init()
-{
+// 回调函数
+NVR_ADP_CALLBACK nvr_adp_callback;
+
+
+/**
+ * 登录
+ * @param ip
+ * @param port
+ * @param username
+ * @param password
+ * @return
+ */
+int nvr_adp_log_in(char *ip, int port, char *username, char *password) {
     //  初始化
     NET_DVR_Init();
     //设置连接时间与重连时间
@@ -21,33 +32,59 @@ void device_init()
     //---------------------------------------
     //  注册设备
     LONG lUserID;
-    // NET_DVR_DEVICEINFO_V30 struDeviceInfo;
-    // lUserID = NET_DVR_Login_V30("172.6.22.165", 8000, "admin", "12345", &struDeviceInfo);
-    // if (lUserID < 0)
-    // {
-    //     printf("Login error, %d\n", NET_DVR_GetLastError());
-    //     NET_DVR_Cleanup();
-    // }
+    NET_DVR_DEVICEINFO_V30 struDeviceInfo;
+    lUserID = NET_DVR_Login_V30(ip, port, username, password, &struDeviceInfo);
 
-    printf("HK DVR INIT: %d\n", 0); //模拟通道个数
+    // 设置相应的回调
+    // NET_DVR_SetDVRMessage NET_DVR_SetExceptionCallBack_V30
+    // todo：实现事件的监听
+    if (lUserID > 0) {
+
+    }
+    return lUserID;
+
 }
 
-// 注册回调函数
-/*
-    NET_DVR_SetDVRMessage
-    NET_DVR_SetExceptionCallBack
-    这两个函数用于注册不同类型的回调
-    */
+/**
+ * PTZ 控制
+ * @param nvr
+ * @param cmd
+ * @param ptz
+ * @return
+ */
+int nvr_adp_ptz(int nvr, int cmd, int ptz) {
 
-// 设置PTZ
-int set_ptz(LONG channel, DWORD dwPresetIndex)
-{
+    int rst;
+    switch (cmd) {
+        case PTZ_SET_PRESET:
+            rst = NET_DVR_PTZPreset(nvr, SET_PRESET, ptz);
+            break;
+        case PTZ_CLE_PRESET:
+            rst = NET_DVR_PTZPreset(nvr, CLE_PRESET, ptz);
+            break;
+        case PTZ_GOTO_PRESET:
+            rst = NET_DVR_PTZPreset(nvr, GOTO_PRESET, ptz);
+            break;
+    }
+    return rst;
+}
+
+/**
+ * 注册回调函数
+ * @param fun
+ * @return
+ */
+int nvr_adp_callback_reg(NVR_ADP_CALLBACK fun) {
+    nvr_adp_callback = fun;
     return 0;
 }
 
-// 清理
-void device_cleanup()
-{
+/**
+ * 资源释放
+ */
+int nvr_adp_free() {
     NET_DVR_Cleanup();
+    return 0;
 }
+
 }

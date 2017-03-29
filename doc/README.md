@@ -46,9 +46,6 @@ Spring 集成 http://docs.spring.io/spring-integration/reference/html/mqtt.html
 
 一个嵌入式的服务：https://github.com/andsel/moquette
 
-C 客户端，很好编译：https://www.eclipse.org/paho/clients/c/
-
-
 # MQTT 测试服务
 
 iot.eclipse.org 1883
