@@ -4,6 +4,7 @@
  */
 
 #include <hk/HCNetSDK.h>
+#include <cstdio>
 #include "ry_video_adapter.h"
 
 
@@ -38,7 +39,7 @@ int nvr_adp_log_in(char *ip, int port, char *username, char *password) {
     // 设置相应的回调
     // NET_DVR_SetDVRMessage NET_DVR_SetExceptionCallBack_V30
     // todo：实现事件的监听
-    if (lUserID > 0) {
+    if (lUserID >= 0) {
 
     }
     return lUserID;
@@ -47,25 +48,26 @@ int nvr_adp_log_in(char *ip, int port, char *username, char *password) {
 
 /**
  * PTZ 控制
- * @param nvr
+ * @param session
  * @param cmd
  * @param ptz
  * @return
  */
-int nvr_adp_ptz(int nvr, int cmd, int ptz) {
+int nvr_adp_ptz(int session, int cmd, int cha, int ptz) {
 
     int rst;
     switch (cmd) {
         case PTZ_SET_PRESET:
-            rst = NET_DVR_PTZPreset(nvr, SET_PRESET, ptz);
+            rst = NET_DVR_PTZPreset_Other(session, cha, SET_PRESET, ptz);
             break;
         case PTZ_CLE_PRESET:
-            rst = NET_DVR_PTZPreset(nvr, CLE_PRESET, ptz);
+            rst = NET_DVR_PTZPreset_Other(session, cha, CLE_PRESET, ptz);
             break;
         case PTZ_GOTO_PRESET:
-            rst = NET_DVR_PTZPreset(nvr, GOTO_PRESET, ptz);
+            rst = NET_DVR_PTZPreset_Other(session, cha, GOTO_PRESET, ptz);
             break;
     }
+
     return rst;
 }
 

@@ -10,8 +10,9 @@ extern "C" {
 #endif
 //------------------------------------
 
-#define RY_MQTT_SUB_TOPIC "rec/srv/video"
-#define RY_MQTT_PUB_TOPIC "rec/mc/info"
+// MQTT 消息主题
+#define RY_MQTT_SUB_TOPIC "rec/srv/video"       // 订阅主题
+#define RY_MQTT_PUB_TOPIC "rec/mc/info"         // 发送主题
 
 //------------------------------------
 #ifdef __cplusplus

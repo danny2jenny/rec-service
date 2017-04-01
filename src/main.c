@@ -5,12 +5,8 @@
  * https://github.com/luohaha/Chinese-uvbook
  * http://luohaha.github.io/Chinese-uvbook/
  */
-#include <stdio.h>
-#include <stdlib.h>
-#include <memory.h>
 #include <uv.h>
 
-#include "main.h"
 #include "ry_msg.h"
 #include "ry_video_adapter.h"
 
@@ -28,7 +24,13 @@ int mqtt_port;       // 服务端口
  * @param signalId
  */
 void sigint_handler(int signalId) {
+    // 清理 MQTT 通讯
     mqtt_cleanup();
+
+    // 清理 video adapter
+    clear_video_adapters();
+
+    // 停止消息循环
     uv_stop(ry_loop);
 }
 
@@ -64,13 +66,10 @@ int main(int argc, char *argv[]) {
 
     uv_timer_start(&timer_req, on_timer, 5000, 2000);
 
-
     // 开启订阅
     ry_msg_init(mqtt_ip, mqtt_port);
 
     // 运行消息循环
     uv_run(ry_loop, UV_RUN_DEFAULT);
-
-    printf("------------");
 
 }

@@ -24,12 +24,38 @@
 char rec_delim[] = ";";
 char field_delim[] = ",";
 
-int video_adp_state = 0;                 // video 接口初始化状态
+volatile int video_adp_state = 0;                 // video 接口初始化状态
 
 // nvr配置的HASH
 RY_NVR_RECORD *ry_nvr_records = NULL;
 // nvr驱动（动态链接库）、接口的对象
 RY_NVR_INTERFACE *ry_nvr_interfaces = NULL;
+
+
+/**
+ * PTZ控制
+ * @param cmd
+ * @param nvr
+ * @param node
+ * @param parm
+ * @return
+ */
+void nvr_ptz_ctl(int cmd, int nvr, int node, int parm) {
+    RY_NVR_RECORD *nvr_record;
+    RY_NVR_INTERFACE *nvr_interface;
+    HASH_FIND_INT(ry_nvr_records, &nvr, nvr_record);
+
+    if (nvr_record->session < 0) {
+        return;
+    }
+
+    if (nvr_record != NULL) {
+        HASH_FIND_INT(ry_nvr_interfaces, &(nvr_record->type), nvr_interface);
+        if ((nvr_interface->dll != NULL) && (nvr_interface->nvr_ptz != NULL)) {
+            nvr_interface->nvr_ptz(nvr_record->session, cmd, node, parm);
+        }
+    }
+}
 
 /**
  * 根据配置文件，装载动态链接库
@@ -45,20 +71,27 @@ int load_share_libs() {
     // 装载动态链接库
     // 对nvr_interface 进行遍历
     for (nvr_interface = ry_nvr_interfaces; nvr_interface != NULL; nvr_interface = nvr_interface->hh.next) {
-        int type = nvr_interface->id;
-        char filename[40] = "libnvr";
-        sprintf(&filename[6], "%d", type);
-        strcpy(&filename[strlen(filename)], ".so");
-        void *hDll = dlopen(filename, RTLD_NOW);
-        // 添加DLL接口函数的指针
-        if (hDll != NULL) {
-            nvr_interface->dll = hDll;
-            nvr_interface->nvr_login = (NVR_ADP_LOG_IN) dlsym(hDll, "nvr_adp_log_in");
-            nvr_interface->nvr_ptz = (NVR_ADP_PTZ) dlsym(hDll, "nvr_adp_ptz");
-            nvr_interface->nvr_callback_reg = (NVR_ADP_CALLBACK_REG) dlsym(hDll, "nvr_adp_callback_reg");
-            nvr_interface->nvr_adp_free = (NVR_ADP_FREE) dlsym(hDll, "nvr_adp_free");
+
+        if (nvr_interface->dll == NULL) {
+            // Dll 未被加载
+            int type = nvr_interface->id;
+            char filename[40] = "libnvr";
+            sprintf(&filename[6], "%d", type);
+            strcpy(&filename[strlen(filename)], ".so");
+            void *hDll = dlopen(filename, RTLD_NOW);
+            // 添加DLL接口函数的指针
+            if (hDll != NULL) {
+                nvr_interface->dll = hDll;
+                nvr_interface->nvr_login = (NVR_ADP_LOG_IN) dlsym(hDll, "nvr_adp_log_in");
+                nvr_interface->nvr_ptz = (NVR_ADP_PTZ) dlsym(hDll, "nvr_adp_ptz");
+                nvr_interface->nvr_callback_reg = (NVR_ADP_CALLBACK_REG) dlsym(hDll, "nvr_adp_callback_reg");
+                nvr_interface->nvr_free = (NVR_ADP_FREE) dlsym(hDll, "nvr_free");
+            }
+
+        } else {
+            // DLL 已经被加载
         }
-        // 初始化NVR
+
     }
 
     // 对 ry_nvr_records 进行遍历，登录到相应的NVR
@@ -70,13 +103,74 @@ int load_share_libs() {
                                                    nvr_record->port,
                                                    nvr_record->username,
                                                    nvr_record->password);
-                if (session > 0) {
+                if (session >= 0) {
                     nvr_record->session = session;
+                } else {
+                    session = 0;
                 }
+
+                printf("Session = %d\n", session);
             }
+
+            // 更新Session
+            nvr_record->session = session;
         }
     }
 
+}
+
+/**
+ * 重置当前的NVR和Adapater
+ * 1、关闭每个Adapter打开的NVR
+ * 2、清理NVR的HASH列表
+ */
+void rest_adapters() {
+    // 遍历，加载动态链接库
+    RY_NVR_INTERFACE *nvr_interface;            // 当前遍历中的一个 interface
+    RY_NVR_RECORD *nvr_record, *tmp;            // 当前遍历中的一个 record
+
+    // 遍历 Video Interface
+    for (nvr_interface = ry_nvr_interfaces; nvr_interface != NULL; nvr_interface = nvr_interface->hh.next) {
+        // 释放相应的资源，但是不释放DLL
+        nvr_interface->nvr_free();
+    }
+
+    // 遍历 NVR 记录，删除所有的
+    HASH_ITER(hh, ry_nvr_records, nvr_record, tmp) {
+        HASH_DEL(ry_nvr_records, nvr_record);
+        free(nvr_record);
+    }
+}
+
+/**
+ * 清理所有的动态资源
+ * 1、清理NVR的HASH
+ * 2、关闭每个Adpater打开的NVR
+ * 3、释放每个DLL
+ */
+void clear_video_adapters() {
+    // 遍历，加载动态链接库
+    RY_NVR_INTERFACE *nvr_interface, *tmp_interface;            // 当前遍历中的一个 interface
+    RY_NVR_RECORD *nvr_record, *tmp_nvr;                        // 当前遍历中的一个 record
+
+    // 遍历 Video Interface
+    HASH_ITER(hh, ry_nvr_interfaces, nvr_interface, tmp_interface) {
+        nvr_interface->nvr_free();
+        // 关闭DLL
+        if (nvr_interface->dll != NULL) {
+            dlclose(nvr_interface->dll);
+        }
+        // 删除
+        HASH_DEL(ry_nvr_interfaces, nvr_interface);
+        free(nvr_interface);
+
+    }
+
+    // 遍历 NVR 记录，删除所有的
+    HASH_ITER(hh, ry_nvr_records, nvr_record, tmp_nvr) {
+        HASH_DEL(ry_nvr_records, nvr_record);
+        free(nvr_record);
+    }
 }
 
 /**
@@ -86,14 +180,21 @@ int load_share_libs() {
  * @return
  */
 int parse_config(char *cfg) {
+
+    // 清理当前的所有接口
+    rest_adapters();
+
+    // 用于临时存放readord和field的指针
     char *p_record;
     char *p_field;
 
     RY_NVR_INTERFACE *nvr_dll;
 
+    RY_NVR_RECORD *nvr_rec;
+
     p_record = strtok(cfg, rec_delim);
 
-    // 记录处理
+    // 记录处理，添加NVR
     while (p_record != NULL) {
 
         int skipe_len = strlen(p_record) + 1;
@@ -102,41 +203,42 @@ int parse_config(char *cfg) {
         p_field = strtok(p_record, field_delim);
 
         // 生成一个配置记录
-        RY_NVR_RECORD *rec = malloc(sizeof(RY_NVR_RECORD));         // 分配Hash表项目
+        nvr_rec = malloc(sizeof(RY_NVR_RECORD));         // 分配Hash表项目
         int field_index = 0;
         while (p_field != NULL) {
             // 每一个字段
             switch (field_index) {
                 case 0: // id
-                    rec->id = atoi(p_field);
+                    nvr_rec->id = atoi(p_field);
                     break;
                 case 1: // ip
-                    strcpy(rec->ip, p_field);
+                    strcpy(nvr_rec->ip, p_field);
                     break;
                 case 2: // port
-                    rec->port = atoi(p_field);
+                    nvr_rec->port = atoi(p_field);
                     break;
                 case 3: // username
-                    strcpy(rec->username, p_field);
+                    strcpy(nvr_rec->username, p_field);
                     break;
                 case 4: // password
-                    strcpy(rec->password, p_field);
+                    strcpy(nvr_rec->password, p_field);
                     break;
                 case 5: // type
-                    rec->type = atoi(p_field);
+                    nvr_rec->type = atoi(p_field);
                     break;
             }
-            HASH_ADD_INT(ry_nvr_records, id, rec);                 // 加入到Hash
-
             p_field = strtok(NULL, field_delim);
             field_index++;
         };
 
+        HASH_ADD_INT(ry_nvr_records, id, nvr_rec);                 // 加入到Hash
+
+
         // 添加对应接口，首先判断是否存在
-        HASH_FIND_INT(ry_nvr_interfaces, &(rec->type), nvr_dll);
+        HASH_FIND_INT(ry_nvr_interfaces, &(nvr_rec->type), nvr_dll);
         if (nvr_dll == NULL) {
             nvr_dll = malloc(sizeof(RY_NVR_INTERFACE));
-            nvr_dll->id = rec->type;
+            nvr_dll->id = nvr_rec->type;
             HASH_ADD_INT(ry_nvr_interfaces, id, nvr_dll);
         }
 
@@ -157,17 +259,6 @@ int parse_config(char *cfg) {
  * @return
  */
 int nvr_on_message(int nvr, int event, void *data) {
-
-}
-
-/**
- * PTZ控制
- * @param cmd
- * @param nvr
- * @param parm
- * @return
- */
-int nvr_ptz_ctl(int cmd, int nvr, int parm) {
 
 }
 
@@ -193,7 +284,8 @@ void video_on_mqtt_message(char *msg, int len) {
 
     // PTZ参数
     int ptz_cmd = 0;        // PTZ 命令
-    int nvr_id = 0;         // dvr id
+    int nvr_id = 0;         // NVR id
+    int nvr_node = 0;       // session 的通道号
     int ptz_parm = 0;       // PTZ 参数
 
     // 消息体解析
@@ -215,10 +307,13 @@ void video_on_mqtt_message(char *msg, int len) {
                         ptz_cmd = atoi(p_field);
                         break;
                     case 1:
-                        // Channel Id
+                        // NVR id
                         nvr_id = atoi(p_field);
                         break;
                     case 2:
+                        nvr_node = atoi(p_field);
+                        break;
+                    case 3:
                         // 参数
                         ptz_parm = atoi(p_field);
                         break;
@@ -227,20 +322,24 @@ void video_on_mqtt_message(char *msg, int len) {
                 p_field = strtok(NULL, field_delim);
                 i++;
             }
-
-            nvr_ptz_ctl(ptz_cmd, nvr_id, ptz_parm);
+            nvr_ptz_ctl(ptz_cmd, nvr_id, nvr_node, ptz_parm);
             break;// 云台控制
     }
 }
 
 /**
  * 定时检查
+ * 多线程访问
  */
 void ry_vide_ontime() {
 
     // 是否已经初始化，如果没有初始化，需要向MC发送相应的消息
     if (!video_adp_state) {
+        // 发送配置请求，等待配置命令
         mqtt_send_to_mc(MQTT_CMD_INIT_REQUEST, NULL, 0);
+    } else {
+        // todo 检查登录状态
+
     }
 
 }

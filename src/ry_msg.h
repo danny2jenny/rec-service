@@ -10,22 +10,16 @@ extern "C" {
 
 // *************************常量定义***********************************
 
-#define MSG_VIDEO_SUB_TOPIC "video/service"
-
 /**
  * 1-100    服务器发送的消息
  * 101-200  发送给服务器的消息
  */
-
-//初始化
-#define MQTT_CMD_VIDEO_INIT     1
-#define MQTT_CMD_VIDEO_PTZ      2
+#define MQTT_CMD_VIDEO_INIT     1       // 初始化
+#define MQTT_CMD_VIDEO_PTZ      2       // PTZ命令
 
 
-
-// 请求初始化
-#define MQTT_CMD_INIT_REQUEST   101
-#define MQTT_CMD_VIDEO_INFO     102
+#define MQTT_CMD_INIT_REQUEST   101     // 请求初始化
+#define MQTT_CMD_VIDEO_INFO     102     // Video 主动发送的消息
 
 // 初始化MQTT消息
 int ry_msg_init(char *host, int port);

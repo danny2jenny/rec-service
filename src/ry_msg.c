@@ -36,8 +36,9 @@ int mqtt_send_to_mc(int cmd, char *payload, int len) {
  * @param message
  */
 void ry_message_callback(struct mosquitto *mosq, void *userdata, const struct mosquitto_message *message) {
-
+    // todo: 对消息通道进行判断
     // 是video的消息，交给video adapter处理
+
     video_on_mqtt_message(message->payload, message->payloadlen);
 }
 
@@ -117,6 +118,7 @@ int ry_msg_init(char *host, int port) {
  * 释放资源
  */
 void mqtt_cleanup() {
+    // 清理 MQTT 通讯
     mosquitto_destroy(mqtt);
     mosquitto_lib_cleanup();
 }

@@ -25,7 +25,7 @@ typedef int (*NVR_ADP_CALLBACK)(int nvr, int event, void *data);
 
 // NVR Adapter DLL 的接口函数
 typedef int (*NVR_ADP_LOG_IN)(char *ip, int port, char *username, char *password);       // 登录DVR，返回Session
-typedef int (*NVR_ADP_PTZ)(int nvr, int cmd, int ptz);                                   // PTZ控制
+typedef int (*NVR_ADP_PTZ)(int session, int cmd, int cha, int ptz);                      // PTZ控制
 typedef int (*NVR_ADP_CALLBACK_REG)(NVR_ADP_CALLBACK fun);                               // 注册回调接口
 typedef int (*NVR_ADP_FREE)();                                                           // 释放资源
 
@@ -51,7 +51,7 @@ typedef struct {
     NVR_ADP_LOG_IN nvr_login;                   // NVR 登录
     NVR_ADP_PTZ nvr_ptz;                        // PTZ 控制
     NVR_ADP_CALLBACK_REG nvr_callback_reg;      // 注册回调
-    NVR_ADP_FREE nvr_adp_free;                  // 释放资源
+    NVR_ADP_FREE nvr_free;                  // 释放资源
     UT_hash_handle hh;                          // Hash控制域
 } RY_NVR_INTERFACE;
 
@@ -67,6 +67,11 @@ void ry_vide_ontime();
  * @param len
  */
 void video_on_mqtt_message(char *msg, int len);
+
+/**
+ * 清理加载的所有动态资源
+ */
+void clear_video_adapters();
 
 #ifdef __cplusplus
 }
