@@ -18,6 +18,12 @@ extern "C" {
 #define PTZ_CLE_PRESET 2    //清除
 #define PTZ_GOTO_PRESET 3   //调用
 
+// ************************ 消息常量 ***************************
+
+#define VIDEO_MSG_ONLINE     1      // Video 在线
+#define VIDEO_MSG_OFFLINE    2      // Video 离线
+
+
 
 // ************************ 函数指针 ***************************
 // NVR 接口回调函数
@@ -51,7 +57,7 @@ typedef struct {
     NVR_ADP_LOG_IN nvr_login;                   // NVR 登录
     NVR_ADP_PTZ nvr_ptz;                        // PTZ 控制
     NVR_ADP_CALLBACK_REG nvr_callback_reg;      // 注册回调
-    NVR_ADP_FREE nvr_free;                  // 释放资源
+    NVR_ADP_FREE nvr_free;                      // 释放资源
     UT_hash_handle hh;                          // Hash控制域
 } RY_NVR_INTERFACE;
 

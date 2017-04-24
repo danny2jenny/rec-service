@@ -42,7 +42,9 @@ int nvr_adp_log_in(char *ip, int port, char *username, char *password) {
     if (lUserID >= 0) {
 
     }
-    return lUserID;
+
+    // 海康接口返回0也是成功的，其他的接口返回0是失败的，所以加1
+    return lUserID + 1;
 
 }
 
@@ -55,16 +57,20 @@ int nvr_adp_log_in(char *ip, int port, char *username, char *password) {
  */
 int nvr_adp_ptz(int session, int cmd, int cha, int ptz) {
 
-    int rst;
+    int rst, realSession;
+
+    // Session 需要减一
+    realSession = session - 1;
+
     switch (cmd) {
         case PTZ_SET_PRESET:
-            rst = NET_DVR_PTZPreset_Other(session, cha, SET_PRESET, ptz);
+            rst = NET_DVR_PTZPreset_Other(realSession, cha, SET_PRESET, ptz);
             break;
         case PTZ_CLE_PRESET:
-            rst = NET_DVR_PTZPreset_Other(session, cha, CLE_PRESET, ptz);
+            rst = NET_DVR_PTZPreset_Other(realSession, cha, CLE_PRESET, ptz);
             break;
         case PTZ_GOTO_PRESET:
-            rst = NET_DVR_PTZPreset_Other(session, cha, GOTO_PRESET, ptz);
+            rst = NET_DVR_PTZPreset_Other(realSession, cha, GOTO_PRESET, ptz);
             break;
     }
 

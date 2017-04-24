@@ -36,15 +36,12 @@ int mqtt_send_to_mc(int cmd, char *payload, int len) {
  * @param message
  */
 void ry_message_callback(struct mosquitto *mosq, void *userdata, const struct mosquitto_message *message) {
-    // todo: 对消息通道进行判断
     // 是video的消息，交给video adapter处理
-
     video_on_mqtt_message(message->payload, message->payloadlen);
 }
 
 // 连接后的回调，可能失败，也可能成功
 void ry_connect_callback(struct mosquitto *mosq, void *userdata, int result) {
-    int i;
     if (!result) {
         // 订阅
         mosquitto_subscribe(mosq, NULL, RY_MQTT_SUB_TOPIC, 2);

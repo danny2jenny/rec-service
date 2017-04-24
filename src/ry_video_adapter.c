@@ -85,7 +85,7 @@ int load_share_libs() {
                 nvr_interface->nvr_login = (NVR_ADP_LOG_IN) dlsym(hDll, "nvr_adp_log_in");
                 nvr_interface->nvr_ptz = (NVR_ADP_PTZ) dlsym(hDll, "nvr_adp_ptz");
                 nvr_interface->nvr_callback_reg = (NVR_ADP_CALLBACK_REG) dlsym(hDll, "nvr_adp_callback_reg");
-                nvr_interface->nvr_free = (NVR_ADP_FREE) dlsym(hDll, "nvr_free");
+                nvr_interface->nvr_free = (NVR_ADP_FREE) dlsym(hDll, "nvr_adp_free");
             }
 
         } else {
@@ -266,6 +266,8 @@ int nvr_on_message(int nvr, int event, void *data) {
  * 收到 MQTT消息
  * @param msg
  * @param len
+ *
+ * 消息格式: <cmd>+payload
  */
 void video_on_mqtt_message(char *msg, int len) {
     // 消息头解析
@@ -290,13 +292,13 @@ void video_on_mqtt_message(char *msg, int len) {
 
     // 消息体解析
     switch (cmd) {
-
-        case MQTT_CMD_VIDEO_INIT:
+        case MQTT_CMD_VIDEO_INIT:           // 视频初始化命令
             video_adp_state = 1;
             // 初始化adapter
             parse_config(body);
             break;
-        case MQTT_CMD_VIDEO_PTZ:
+
+        case MQTT_CMD_VIDEO_PTZ:            // PTZ 控制
             // 云台控制
             p_field = strtok(body, field_delim);
 
