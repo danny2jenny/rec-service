@@ -35,7 +35,7 @@ link_libraries(
         "hcnetsdk"
 )
 
-set(SOURCE_FILES src/main.c src/ry_msg.c src/ry_video_adapter.c)
+set(SOURCE_FILES src/main.c src/ry_msg.c src/ry_video_adapter.c src/main.h)
 
 add_executable(RY_Service ${SOURCE_FILES})
 

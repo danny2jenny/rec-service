@@ -24,10 +24,9 @@ extern "C" {
 #define VIDEO_MSG_OFFLINE    2      // Video 离线
 
 
-
 // ************************ 函数指针 ***************************
 // NVR 接口回调函数
-typedef int (*NVR_ADP_CALLBACK)(int nvr, int event, void *data);
+typedef int (*NVR_ADP_CALLBACK)(int nvr, int channel, int event, void *data);
 
 // NVR Adapter DLL 的接口函数
 typedef int (*NVR_ADP_LOG_IN)(char *ip, int port, char *username, char *password);       // 登录DVR，返回Session

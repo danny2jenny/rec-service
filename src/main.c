@@ -18,6 +18,8 @@ char *mqtt_ip;       // 服务URL
 int mqtt_port;       // 服务端口
 //----------------------------------------------------
 
+// 定时器
+uv_timer_t timer_req;
 
 /**
  * 接收系统的信号，用于终止消息循环
@@ -38,8 +40,22 @@ void sigint_handler(int signalId) {
  * 定时事件，在这里循环执行各个功能模块的定时功能
  */
 static void on_timer(uv_timer_t *handle) {
-    //printf("on tome \n");
     ry_vide_ontime();           // video adapter 定时任务
+}
+
+/**
+ * 开始定时器
+ */
+void timer_start() {
+// start after 1 secends, repeat every 2 seconds
+    uv_timer_start(&timer_req, on_timer, 1000, 2000);
+}
+
+/**
+ * 停止定时器
+ */
+void timer_stop() {
+    uv_timer_stop(&timer_req);
 }
 
 //主函数入口
@@ -61,10 +77,9 @@ int main(int argc, char *argv[]) {
 
     // 初始化相关的消息处理
 
-    uv_timer_t timer_req;
+    // 定时器
     uv_timer_init(ry_loop, &timer_req);
-
-    uv_timer_start(&timer_req, on_timer, 5000, 2000);
+    timer_start();
 
     // 开启订阅
     ry_msg_init(mqtt_ip, mqtt_port);

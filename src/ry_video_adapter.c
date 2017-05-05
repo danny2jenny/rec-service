@@ -19,6 +19,7 @@
 #include <dlfcn.h>
 #include "ry_video_adapter.h"
 #include "ry_msg.h"
+#include "main.h"
 
 // 配置文件的风格符号
 char rec_delim[] = ";";
@@ -58,6 +59,50 @@ void nvr_ptz_ctl(int cmd, int nvr, int node, int parm) {
 }
 
 /**
+ * 检查并登录所有的NVR
+ */
+void nvr_login() {
+    // 遍历，加载动态链接库
+    RY_NVR_INTERFACE *nvr_interface;            // 当前遍历中的一个 interface
+    RY_NVR_RECORD *nvr_record;                  // 当前遍历中的一个 record
+
+    int session = 0;                            // 登录后的session
+
+    // 遍历所有的ＮＶＲ
+    for (nvr_record = ry_nvr_records; nvr_record != NULL; nvr_record = nvr_record->hh.next) {
+
+        // 找到NVR对应的DLL实现的Interface
+        HASH_FIND_INT(ry_nvr_interfaces, &(nvr_record->type), nvr_interface);
+        // 判断interface和DLL是否实现
+        if ((nvr_interface != NULL) && (nvr_interface->dll != NULL)) {
+
+            // 如果登录，就退出
+            if (nvr_record->session > 0) {
+                continue;
+            }
+
+            if (nvr_interface->nvr_login != NULL) {
+                session = nvr_interface->nvr_login(nvr_record->ip,
+                                                   nvr_record->port,
+                                                   nvr_record->username,
+                                                   nvr_record->password);
+                if (session > 0) {
+                    nvr_record->session = session;
+                } else {
+                    session = 0;
+                }
+
+                printf("Session = %d\n", session);
+            }
+
+            // 更新Session
+            nvr_record->session = session;
+        }
+    }
+}
+
+
+/**
  * 根据配置文件，装载动态链接库
  * @return
  */
@@ -86,6 +131,8 @@ int load_share_libs() {
                 nvr_interface->nvr_ptz = (NVR_ADP_PTZ) dlsym(hDll, "nvr_adp_ptz");
                 nvr_interface->nvr_callback_reg = (NVR_ADP_CALLBACK_REG) dlsym(hDll, "nvr_adp_callback_reg");
                 nvr_interface->nvr_free = (NVR_ADP_FREE) dlsym(hDll, "nvr_adp_free");
+
+                // 注册回调函数
             }
 
         } else {
@@ -95,27 +142,7 @@ int load_share_libs() {
     }
 
     // 对 ry_nvr_records 进行遍历，登录到相应的NVR
-    for (nvr_record = ry_nvr_records; nvr_record != NULL; nvr_record = nvr_record->hh.next) {
-        HASH_FIND_INT(ry_nvr_interfaces, &(nvr_record->type), nvr_interface);
-        if ((nvr_interface != NULL) && (nvr_interface->dll != NULL)) {
-            if (nvr_interface->nvr_login != NULL) {
-                session = nvr_interface->nvr_login(nvr_record->ip,
-                                                   nvr_record->port,
-                                                   nvr_record->username,
-                                                   nvr_record->password);
-                if (session >= 0) {
-                    nvr_record->session = session;
-                } else {
-                    session = 0;
-                }
-
-                printf("Session = %d\n", session);
-            }
-
-            // 更新Session
-            nvr_record->session = session;
-        }
-    }
+    nvr_login();
 
 }
 
@@ -258,7 +285,7 @@ int parse_config(char *cfg) {
  * @param data
  * @return
  */
-int nvr_on_message(int nvr, int event, void *data) {
+int nvr_on_message(int nvr, int channel, int event, void *data) {
 
 }
 
@@ -335,13 +362,17 @@ void video_on_mqtt_message(char *msg, int len) {
  */
 void ry_vide_ontime() {
 
+    // todo 首先关闭定时器
+
     // 是否已经初始化，如果没有初始化，需要向MC发送相应的消息
     if (!video_adp_state) {
         // 发送配置请求，等待配置命令
         mqtt_send_to_mc(MQTT_CMD_INIT_REQUEST, NULL, 0);
     } else {
         // todo 检查登录状态
-
+        timer_stop();
+        nvr_login();
+        timer_start();
     }
 
 }
