@@ -11,8 +11,11 @@ extern "C" {
 //------------------------------------
 
 // MQTT 消息主题
-#define RY_MQTT_SUB_TOPIC "rec/srv/video"       // 订阅主题
-#define RY_MQTT_PUB_TOPIC "rec/mc/info"         // 发送主题
+#define RY_VIDEO_SUB_TOPIC "rec/srv/video/to"           // 订阅主题
+#define RY_VIDEO_PUB_TOPIC "rec/srv/video/from"         // 发送主题
+
+#define RY_61850_SUB_TOPIC "rec/srv/61850/to"           // 61850 订阅
+#define RY_61850_PUB_TOPIC "rec/srv/61850/from"         // 61850 发布
 
 //------------------------------------
 #ifdef __cplusplus

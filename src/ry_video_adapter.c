@@ -17,13 +17,15 @@
 
 #include <stdio.h>
 #include <dlfcn.h>
+#include <parson/parson.h>
 #include "ry_video_adapter.h"
 #include "ry_msg.h"
 #include "main.h"
+#include "config.h"
 
-// 配置文件的风格符号
-char rec_delim[] = ";";
-char field_delim[] = ",";
+// 超前引用
+void ry_video_online(int nvr);
+
 
 volatile int video_adp_state = 0;                 // video 接口初始化状态
 
@@ -47,6 +49,7 @@ void nvr_ptz_ctl(int cmd, int nvr, int node, int parm) {
     HASH_FIND_INT(ry_nvr_records, &nvr, nvr_record);
 
     if (nvr_record->session < 0) {
+        // todo: 错误消息
         return;
     }
 
@@ -87,8 +90,11 @@ void nvr_login() {
                                                    nvr_record->username,
                                                    nvr_record->password);
                 if (session > 0) {
+                    // 登录成功
                     nvr_record->session = session;
+                    ry_video_online(nvr_record->id);
                 } else {
+                    // todo:登录失败，应该向外发送消息
                     session = 0;
                 }
 
@@ -140,10 +146,6 @@ int load_share_libs() {
         }
 
     }
-
-    // 对 ry_nvr_records 进行遍历，登录到相应的NVR
-    nvr_login();
-
 }
 
 /**
@@ -200,83 +202,6 @@ void clear_video_adapters() {
     }
 }
 
-/**
- * 读取配置的字符串，字符串以以下的方式
- * ChannelId,IP,Port,Username,Password,Type;
- * @param cfg
- * @return
- */
-int parse_config(char *cfg) {
-
-    // 清理当前的所有接口
-    rest_adapters();
-
-    // 用于临时存放readord和field的指针
-    char *p_record;
-    char *p_field;
-
-    RY_NVR_INTERFACE *nvr_dll;
-
-    RY_NVR_RECORD *nvr_rec;
-
-    p_record = strtok(cfg, rec_delim);
-
-    // 记录处理，添加NVR
-    while (p_record != NULL) {
-
-        int skipe_len = strlen(p_record) + 1;
-
-        // 字段处理
-        p_field = strtok(p_record, field_delim);
-
-        // 生成一个配置记录
-        nvr_rec = malloc(sizeof(RY_NVR_RECORD));         // 分配Hash表项目
-        int field_index = 0;
-        while (p_field != NULL) {
-            // 每一个字段
-            switch (field_index) {
-                case 0: // id
-                    nvr_rec->id = atoi(p_field);
-                    break;
-                case 1: // ip
-                    strcpy(nvr_rec->ip, p_field);
-                    break;
-                case 2: // port
-                    nvr_rec->port = atoi(p_field);
-                    break;
-                case 3: // username
-                    strcpy(nvr_rec->username, p_field);
-                    break;
-                case 4: // password
-                    strcpy(nvr_rec->password, p_field);
-                    break;
-                case 5: // type
-                    nvr_rec->type = atoi(p_field);
-                    break;
-            }
-            p_field = strtok(NULL, field_delim);
-            field_index++;
-        };
-
-        HASH_ADD_INT(ry_nvr_records, id, nvr_rec);                 // 加入到Hash
-
-
-        // 添加对应接口，首先判断是否存在
-        HASH_FIND_INT(ry_nvr_interfaces, &(nvr_rec->type), nvr_dll);
-        if (nvr_dll == NULL) {
-            nvr_dll = malloc(sizeof(RY_NVR_INTERFACE));
-            nvr_dll->id = nvr_rec->type;
-            HASH_ADD_INT(ry_nvr_interfaces, id, nvr_dll);
-        }
-
-        // 查找下一条记录
-        p_record = p_record + skipe_len;
-        p_record = strtok(p_record, rec_delim);
-    }
-
-    // 加载动态链接库
-    load_share_libs();
-}
 
 /**
  * 收到NVR的消息
@@ -290,6 +215,90 @@ int nvr_on_message(int nvr, int channel, int event, void *data) {
 }
 
 /**
+ * 解析配置文件
+ * @param cfgStr
+ */
+void video_parse_config(char *cfgStr) {
+
+    // 清理当前的所有接口
+    rest_adapters();
+
+    RY_NVR_INTERFACE *nvr_dll;
+
+    RY_NVR_RECORD *nvr_rec;
+
+
+    // *************json处理*******************
+    JSON_Value *root_value;
+    JSON_Object *root_object, *config_object;
+    JSON_Array *json_array;
+
+    root_value = json_parse_string(cfgStr);
+
+    root_object = json_value_get_object(root_value);
+    json_array = json_object_get_array(root_object, "payload");
+
+    int i;
+    for (i = 0; i < json_array_get_count(json_array); i++) {
+        config_object = json_array_get_object(json_array, i);
+
+        // 生成一个配置记录
+        nvr_rec = malloc(sizeof(RY_NVR_RECORD));         // 分配Hash表项目
+        nvr_rec->session = 0;
+
+        nvr_rec->id = json_object_get_number(config_object, "id");
+        strcpy(nvr_rec->ip, json_object_get_string(config_object, "ip"));
+        nvr_rec->port = json_object_get_number(config_object, "port");
+        strcpy(nvr_rec->username, json_object_get_string(config_object, "login"));
+        strcpy(nvr_rec->password, json_object_get_string(config_object, "pass"));
+        nvr_rec->type = json_object_get_number(config_object, "type");
+
+        HASH_ADD_INT(ry_nvr_records, id, nvr_rec);                 // 加入到Hash
+
+
+        // 添加对应接口，首先判断是否存在
+        HASH_FIND_INT(ry_nvr_interfaces, &(nvr_rec->type), nvr_dll);
+        if (nvr_dll == NULL) {
+            nvr_dll = malloc(sizeof(RY_NVR_INTERFACE));
+            nvr_dll->id = nvr_rec->type;
+            HASH_ADD_INT(ry_nvr_interfaces, id, nvr_dll);
+        }
+    }
+
+    /* cleanup code */
+    json_value_free(root_value);
+
+    // 加载动态链接库
+    load_share_libs();
+
+    // 对 ry_nvr_records 进行遍历，登录到相应的NVR
+    nvr_login();
+}
+
+/**
+ * 处理PTZ控制的json
+ * @param jstr
+ */
+void video_parse_ptz(char *msg) {
+    JSON_Value *root_value;
+    JSON_Object *root_object, *payload_object;
+
+
+    root_value = json_parse_string(msg);
+    root_object = json_value_get_object(root_value);
+    payload_object = json_object_get_object(root_object, "payload");
+
+    int ptzCmd = json_object_get_number(payload_object, "ptzCmd");
+    int nvr = json_object_get_number(payload_object, "nvr");
+    int channel = json_object_get_number(payload_object, "channel");
+    int ptz = json_object_get_number(payload_object, "ptz");
+
+    nvr_ptz_ctl(PTZ_GOTO_PRESET, nvr, channel, ptz);
+    /* cleanup code */
+    json_value_free(root_value);
+}
+
+/**
  * 收到 MQTT消息
  * @param msg
  * @param len
@@ -297,63 +306,74 @@ int nvr_on_message(int nvr, int channel, int event, void *data) {
  * 消息格式: <cmd>+payload
  */
 void video_on_mqtt_message(char *msg, int len) {
-    // 消息头解析
-    char *p1 = strchr(msg, '<');
-    char *p2 = strchr(msg, '>');
 
-    if (p1 == NULL || p2 == NULL) {
-        return;
-    }
-    int cmd = atoi(p1 + 1);
-    char *body = p2 + 1;
+    JSON_Value *root_value;
+    JSON_Object *root_object;
 
-    // 用于解析参数的变量
-    char *p_field;
-    int i = 0;
 
-    // PTZ参数
-    int ptz_cmd = 0;        // PTZ 命令
-    int nvr_id = 0;         // NVR id
-    int nvr_node = 0;       // session 的通道号
-    int ptz_parm = 0;       // PTZ 参数
+    root_value = json_parse_string(msg);
 
-    // 消息体解析
+    root_object = json_value_get_object(root_value);
+
+    int cmd = json_object_get_number(root_object, "cmd");
+
     switch (cmd) {
-        case MQTT_CMD_VIDEO_INIT:           // 视频初始化命令
+        case MQTT_CMD_VIDEO_INIT:
             video_adp_state = 1;
-            // 初始化adapter
-            parse_config(body);
+            video_parse_config(msg);
             break;
-
-        case MQTT_CMD_VIDEO_PTZ:            // PTZ 控制
-            // 云台控制
-            p_field = strtok(body, field_delim);
-
-            while (p_field != NULL) {
-                switch (i) {
-                    case 0:
-                        // PTZ 命令
-                        ptz_cmd = atoi(p_field);
-                        break;
-                    case 1:
-                        // NVR id
-                        nvr_id = atoi(p_field);
-                        break;
-                    case 2:
-                        nvr_node = atoi(p_field);
-                        break;
-                    case 3:
-                        // 参数
-                        ptz_parm = atoi(p_field);
-                        break;
-                }
-
-                p_field = strtok(NULL, field_delim);
-                i++;
-            }
-            nvr_ptz_ctl(ptz_cmd, nvr_id, nvr_node, ptz_parm);
-            break;// 云台控制
+        case MQTT_CMD_VIDEO_PTZ:
+            video_parse_ptz(msg);
+            break;
     }
+
+    /* cleanup code */
+    json_value_free(root_value);
+}
+
+/**
+ * 请求配置信息
+ * 发送配置请求，等待配置命令
+ */
+void ry_video_request_config() {
+    // 生成 Json 字符串
+    JSON_Value *root_value = json_value_init_object();
+    JSON_Object *root_object = json_value_get_object(root_value);
+    char *serialized_string = NULL;
+
+    json_object_set_number(root_object, "cmd", MQTT_CMD_INIT_REQUEST);
+    json_object_set_null(root_object, "payload");
+    serialized_string = json_serialize_to_string_pretty(root_value);
+
+    // 发送请求
+    mqtt_publish(RY_VIDEO_PUB_TOPIC, serialized_string, strlen(serialized_string));
+
+    // 释放资源
+    json_free_serialized_string(serialized_string);
+    json_value_free(root_value);
+}
+
+/**
+ * NVR 登录成功的通知
+ * @param nvr
+ */
+void ry_video_online(int nvr) {
+    // 生成 Json 字符串
+    JSON_Value *root_value = json_value_init_object();
+    JSON_Object *root_object = json_value_get_object(root_value);
+    char *serialized_string = NULL;
+
+    json_object_set_number(root_object, "cmd", MQTT_CMD_NVR_ONLINE);
+    json_object_set_number(root_object, "channel", nvr);
+    json_object_set_boolean(root_object, "online", 1);
+    serialized_string = json_serialize_to_string_pretty(root_value);
+
+    // 发送请求
+    mqtt_publish(RY_VIDEO_PUB_TOPIC, serialized_string, strlen(serialized_string));
+
+    // 释放资源
+    json_free_serialized_string(serialized_string);
+    json_value_free(root_value);
 }
 
 /**
@@ -362,14 +382,10 @@ void video_on_mqtt_message(char *msg, int len) {
  */
 void ry_vide_ontime() {
 
-    // todo 首先关闭定时器
-
     // 是否已经初始化，如果没有初始化，需要向MC发送相应的消息
     if (!video_adp_state) {
-        // 发送配置请求，等待配置命令
-        mqtt_send_to_mc(MQTT_CMD_INIT_REQUEST, NULL, 0);
+        ry_video_request_config();
     } else {
-        // todo 检查登录状态
         timer_stop();
         nvr_login();
         timer_start();

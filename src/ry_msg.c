@@ -26,7 +26,17 @@ int mqtt_send_to_mc(int cmd, char *payload, int len) {
     int head_leng = strlen(out_buf);
     // 复制payload
     memcpy(out_buf + head_leng, payload, len);
-    mosquitto_publish(mqtt, NULL, RY_MQTT_PUB_TOPIC, head_leng + len, out_buf, 2, false);
+    mosquitto_publish(mqtt, NULL, RY_VIDEO_PUB_TOPIC, head_leng + len, out_buf, 2, false);
+}
+
+/**
+ * 发布消息
+ * @param topic
+ * @param payload
+ * @param len
+ */
+void mqtt_publish(char *topic, char *payload, int len) {
+    mosquitto_publish(mqtt, NULL, topic, len, payload, 2, false);
 }
 
 /**
@@ -36,17 +46,20 @@ int mqtt_send_to_mc(int cmd, char *payload, int len) {
  * @param message
  */
 void ry_message_callback(struct mosquitto *mosq, void *userdata, const struct mosquitto_message *message) {
-    // 是video的消息，交给video adapter处理
-    video_on_mqtt_message(message->payload, message->payloadlen);
+    //
+
+    if (strcmp(message->topic, RY_VIDEO_SUB_TOPIC)==0){
+        video_on_mqtt_message(message->payload, message->payloadlen);
+    }
 }
 
 // 连接后的回调，可能失败，也可能成功
 void ry_connect_callback(struct mosquitto *mosq, void *userdata, int result) {
     if (!result) {
         // 订阅
-        mosquitto_subscribe(mosq, NULL, RY_MQTT_SUB_TOPIC, 2);
+        mosquitto_subscribe(mosq, NULL, RY_VIDEO_SUB_TOPIC, 2);
         // 发送请求
-        mqtt_send_to_mc(MQTT_CMD_INIT_REQUEST, NULL, 0);
+        ry_video_request_config();
     } else {
         fprintf(stderr, "Connect failed\n");
     }

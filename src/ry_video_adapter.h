@@ -11,20 +11,30 @@ extern "C" {
 
 #include <ut/uthash.h>
 
-// ************************ 命令常量 ***************************
+
+// ************************ MQTT 消息类型 ***************************
+/**
+ * 1-100    服务器发送的消息
+ * 101-200  发送给服务器的消息
+ */
+#define MQTT_CMD_VIDEO_INIT     1       // 初始化
+#define MQTT_CMD_VIDEO_PTZ      2       // PTZ命令
+
+
+#define MQTT_CMD_INIT_REQUEST   101     // 请求初始化
+#define MQTT_CMD_VIDEO_INFO     102     // Video 主动发送的消息
+
+#define MQTT_CMD_NVR_ONLINE     201     // NVR 登录成功
+
+
+// ************************ PTZ命令常量 ***************************
 
 // 标准云台操作命令
 #define PTZ_SET_PRESET 1    //设置
 #define PTZ_CLE_PRESET 2    //清除
 #define PTZ_GOTO_PRESET 3   //调用
 
-// ************************ 消息常量 ***************************
-
-#define VIDEO_MSG_ONLINE     1      // Video 在线
-#define VIDEO_MSG_OFFLINE    2      // Video 离线
-
-
-// ************************ 函数指针 ***************************
+// ************************ DLL接口函数指针 ***************************
 // NVR 接口回调函数
 typedef int (*NVR_ADP_CALLBACK)(int nvr, int channel, int event, void *data);
 
@@ -45,11 +55,11 @@ typedef struct {
     char username[20];      // Username
     char password[20];      // Password
     int type;               // Channel 类型
-    int session;            // NVR/Channel 对应的session，登录后才有，HK中叫做Userid
+    volatile int session;   // NVR/Channel 对应的session，登录后才有，HK中叫做Userid
     UT_hash_handle hh;      // Hash控制域
 } RY_NVR_RECORD;
 
-// NVR 接口的结构体
+// NVR DLL 接口的结构体
 typedef struct {
     int id;                                     // 接口的类型标识对应RY_NVR_RECORD的type
     void *dll;                                  // DLL 的Handle
@@ -61,22 +71,14 @@ typedef struct {
 } RY_NVR_INTERFACE;
 
 // *********************** 对外接口 ****************************
-/**
- * 定时调用
- */
+
 void ry_vide_ontime();
 
-/**
- * 收到MQTT消息
- * @param msg
- * @param len
- */
 void video_on_mqtt_message(char *msg, int len);
 
-/**
- * 清理加载的所有动态资源
- */
 void clear_video_adapters();
+
+void ry_video_request_config();
 
 #ifdef __cplusplus
 }
