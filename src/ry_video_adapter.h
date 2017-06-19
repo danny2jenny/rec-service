@@ -21,10 +21,9 @@ extern "C" {
 #define MQTT_CMD_VIDEO_PTZ      2       // PTZ命令
 
 
-#define MQTT_CMD_INIT_REQUEST   101     // 请求初始化
-#define MQTT_CMD_VIDEO_INFO     102     // Video 主动发送的消息
+#define MQTT_CMD_INIT_REQUEST   11     // 请求初始化
 
-#define MQTT_CMD_NVR_ONLINE     201     // NVR 登录成功
+#define MQTT_CMD_NVR_ONLINE     21     // NVR 登录成功
 
 
 // ************************ PTZ命令常量 ***************************
@@ -74,7 +73,7 @@ typedef struct {
 
 void ry_vide_ontime();
 
-void video_on_mqtt_message(char *msg, int len);
+void video_on_mqtt_message(int cmd, char *msg, int len);
 
 void clear_video_adapters();
 

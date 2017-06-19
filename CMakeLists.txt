@@ -27,23 +27,34 @@ link_directories(
         "${PROJECT_SOURCE_DIR}/bin"
 )
 
+# 链接的静态库目录
+link_directories(
+        "${PROJECT_SOURCE_DIR}/lib"
+)
 # 需要连接的静态库文件
 link_libraries(
         "dl"            # linux 动态链接库的操作dlfcn.h的库文件
         "uv"
         "mosquitto"
         "hcnetsdk"
+        "iec61850"
 )
 
 set(SOURCE_FILES
         src/main.c
         src/ry_msg.c
         src/ry_video_adapter.c
+        src/model.c
+        src/iec61850.c
         src/parson/parson.c
         )
 
+
 # 主程序
 add_executable(RY_Service ${SOURCE_FILES})
+
+TARGET_LINK_LIBRARIES(RY_Service pthread)
+
 
 # 海康的接口
 ADD_LIBRARY(nvr2001 SHARED src/hk_nvr/hk_nvr.cpp)

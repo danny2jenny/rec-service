@@ -305,17 +305,7 @@ void video_parse_ptz(char *msg) {
  *
  * 消息格式: <cmd>+payload
  */
-void video_on_mqtt_message(char *msg, int len) {
-
-    JSON_Value *root_value;
-    JSON_Object *root_object;
-
-
-    root_value = json_parse_string(msg);
-
-    root_object = json_value_get_object(root_value);
-
-    int cmd = json_object_get_number(root_object, "cmd");
+void video_on_mqtt_message(int cmd, char *msg, int len) {
 
     switch (cmd) {
         case MQTT_CMD_VIDEO_INIT:
@@ -326,9 +316,6 @@ void video_on_mqtt_message(char *msg, int len) {
             video_parse_ptz(msg);
             break;
     }
-
-    /* cleanup code */
-    json_value_free(root_value);
 }
 
 /**

@@ -4,6 +4,7 @@
 
 #ifndef RY_SERVICE_RY_ERROR_H
 #define RY_SERVICE_RY_ERROR_H
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -15,5 +16,6 @@ extern "C" {
 //------------------------------------
 #ifdef __cplusplus
 }
+
 #endif
 #endif //RY_SERVICE_RY_ERROR_H

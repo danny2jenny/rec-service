@@ -14,8 +14,19 @@ extern "C" {
 #define RY_VIDEO_SUB_TOPIC "rec/srv/video/to"           // 订阅主题
 #define RY_VIDEO_PUB_TOPIC "rec/srv/video/from"         // 发送主题
 
-#define RY_61850_SUB_TOPIC "rec/srv/61850/to"           // 61850 订阅
-#define RY_61850_PUB_TOPIC "rec/srv/61850/from"         // 61850 发布
+// -------------------61850配置--------------------
+#define RY_61850_PORT 8090
+#define IEC61850_IED_NAME "RYTEC-REC"
+#define IEC61850_LD_NAME "SENSORS"
+
+
+#define LN_TYPE_INPUT    102
+#define LN_TYPE_ANALOG   201
+#define LN_TYPE_SWITCH   101
+
+#define LN_NAME_INPUT    "CALH"
+#define LN_NAME_ANALOG   "MMXU"
+#define LN_NAME_SWITCH   "GGIO"
 
 //------------------------------------
 #ifdef __cplusplus

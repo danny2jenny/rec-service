@@ -6,9 +6,10 @@
  * http://luohaha.github.io/Chinese-uvbook/
  */
 #include <uv.h>
-
+#include <stdio.h>
 #include "ry_msg.h"
 #include "ry_video_adapter.h"
+#include "iec61850.h"
 
 
 //-------------------全局变量---------------------------
@@ -32,6 +33,8 @@ void sigint_handler(int signalId) {
     // 清理 video adapter
     clear_video_adapters();
 
+    iec61850_cleanup();
+
     // 停止消息循环
     uv_stop(ry_loop);
 }
@@ -41,6 +44,7 @@ void sigint_handler(int signalId) {
  */
 static void on_timer(uv_timer_t *handle) {
     ry_vide_ontime();           // video adapter 定时任务
+    ry_61850_ontime();
 }
 
 /**
