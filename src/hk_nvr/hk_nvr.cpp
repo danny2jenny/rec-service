@@ -4,7 +4,6 @@
  */
 
 #include <hk/HCNetSDK.h>
-#include <cstdio>
 #include "ry_video_adapter.h"
 
 

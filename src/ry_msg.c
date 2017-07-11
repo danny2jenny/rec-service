@@ -64,7 +64,6 @@ void ry_message_callback(struct mosquitto *mosq, void *userdata, const struct mo
         video_on_mqtt_message(cmd, message->payload, message->payloadlen);
     } else {
         iec61850_on_mqtt_message(cmd, message->payload, message->payloadlen);
-        printf("%s\n", message->payload);
     }
 }
 

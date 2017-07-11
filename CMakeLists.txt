@@ -44,7 +44,6 @@ set(SOURCE_FILES
         src/main.c
         src/ry_msg.c
         src/ry_video_adapter.c
-        src/model.c
         src/iec61850.c
         src/parson/parson.c
         )

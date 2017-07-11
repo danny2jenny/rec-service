@@ -62,7 +62,7 @@ ExecStart=/home/rytec/data/moquette/bin/moquette.sh
 [Install]
 WantedBy=multi-user.targe
 
-连接到 /etc/systemd/system/mu  lti-user.target.wants
+连接到 /etc/systemd/system/mu  mlti-user.target.wants
 
 # 依赖包
 build-essential
