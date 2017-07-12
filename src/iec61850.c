@@ -8,6 +8,8 @@
  * CDC_SPC_create 单点控制
  * CDC_DPC_create 双点控制
  *
+ * http://www.doc88.com/p-9915328896975.html
+ *
 */
 
 #include <parson/parson.h>
@@ -59,6 +61,27 @@ void cleanConfig() {
 }
 
 /**
+ * 更新数据
+ */
+
+void updateBoolean(LogicalNode *ln, uint64_t timestamp, bool value) {
+    DataAttribute *dataAttribute;
+    dataAttribute = (DataAttribute *) ModelNode_getChild((ModelNode *) ln, "value.stVal");
+    IedServer_updateBooleanAttributeValue(iedServer, dataAttribute, value);
+
+    dataAttribute = (DataAttribute *) ModelNode_getChild((ModelNode *) ln, "value.t");
+    IedServer_updateUTCTimeAttributeValue(iedServer, dataAttribute, timestamp);
+}
+
+void updateAnalog(LogicalNode *ln, uint64_t timestamp, float value) {
+    DataAttribute *dataAttribute;
+    dataAttribute = (DataAttribute *) ModelNode_getChild((ModelNode *) ln, "value.instMag.f");
+    IedServer_updateFloatAttributeValue(iedServer, dataAttribute, value);
+    dataAttribute = (DataAttribute *) ModelNode_getChild((ModelNode *) ln, "value.t");
+    IedServer_updateUTCTimeAttributeValue(iedServer, dataAttribute, timestamp);
+}
+
+/**
  * 解析配置
  */
 void iec61850_parseConfig(char *cfgStr) {
@@ -79,6 +102,9 @@ void iec61850_parseConfig(char *cfgStr) {
     DataObject *lln0_health = CDC_ENS_create("Health", (ModelNode *) lln0, 0);
 
     SettingGroupControlBlock_create(lln0, 1, 1);
+
+    // 生成报告用的数据
+    DataSet *dataSet = DataSet_create("events", lln0);
 
     LogicalNode *logicalNode;             // 逻辑节点
 
@@ -113,6 +139,7 @@ void iec61850_parseConfig(char *cfgStr) {
                 strcpy(str_buf, LN_NAME_INPUT);
                 sprintf(str_buf + strlen(LN_NAME_INPUT), "%d", ln_rec->id);
 
+                // 创建逻辑节点了数据
                 logicalNode = LogicalNode_create(str_buf, lDevice1);
                 CDC_SPC_create("value", (ModelNode *) logicalNode, 0, false);
 
@@ -125,6 +152,7 @@ void iec61850_parseConfig(char *cfgStr) {
                 strcpy(str_buf, LN_NAME_ANALOG);
                 sprintf(str_buf + strlen(LN_NAME_ANALOG), "%d", ln_rec->id);
 
+                // 创建逻辑节点和数据
                 logicalNode = LogicalNode_create(str_buf, lDevice1);
                 CDC_SAV_create("value", (ModelNode *) logicalNode, 0, false);
 
@@ -149,9 +177,10 @@ void iec61850_parseConfig(char *cfgStr) {
 
     bool state_bool;            // 逻辑量
     float state_float;          // 浮点数
+    uint64_t timestamp;         // 更新时间
+    timestamp = Hal_getTimeInMs();
 
     int device_id;
-    DataAttribute *dataAttribute;
 
     // 再次遍历 json
     for (i = 0; i < json_array_get_count(json_array); i++) {
@@ -171,22 +200,12 @@ void iec61850_parseConfig(char *cfgStr) {
 
         switch (ln_rec->type) {
             case LN_TYPE_INPUT:             // 输入节点
-                dataAttribute = (DataAttribute *) ModelNode_getChild((ModelNode *) ln_rec->ln, "value.stVal");
                 state_bool = json_object_get_boolean(runtime_object, "state");
-                IedServer_updateBooleanAttributeValue(iedServer, dataAttribute, state_bool);
-
-                dataAttribute = (DataAttribute *) ModelNode_getChild((ModelNode *) ln_rec->ln, "value.t");
-                IedServer_updateUTCTimeAttributeValue(iedServer, dataAttribute, Hal_getTimeInMs());
+                updateBoolean(ln_rec->ln, timestamp, state_bool);
                 break;
             case LN_TYPE_ANALOG:            // 模拟量节点
-                dataAttribute = (DataAttribute *) ModelNode_getChild((ModelNode *) ln_rec->ln, "value.instMag.f");
                 state_float = json_object_dotget_number(runtime_object, "state.value");
-                IedServer_updateFloatAttributeValue(iedServer, dataAttribute, state_float);
-
-
-                dataAttribute = (DataAttribute *) ModelNode_getChild((ModelNode *) ln_rec->ln, "value.t");
-                IedServer_updateUTCTimeAttributeValue(iedServer, dataAttribute, Hal_getTimeInMs());
-
+                updateAnalog(ln_rec->ln, timestamp, state_float);
                 break;
             case LN_TYPE_SWITCH:            // 开关节点
                 break;
@@ -217,6 +236,55 @@ void iec61850_start() {
 }
 
 /**
+ * 通过json来更新一个设备
+ */
+void updateDevice(char *str) {
+    // 解析命令
+    JSON_Value *root_value;
+    JSON_Object *root_object, *runtime_object;
+    int device_type, device_id;
+    RY_61850_LN *ln_rec;        // 设备的节点
+    uint64_t timestamp;         // 更新时间
+
+
+    root_value = json_parse_string(str);
+    root_object = json_value_get_object(root_value);
+    runtime_object = json_object_get_object(root_object, "payload");
+
+    device_type = json_object_dotget_number(runtime_object, "device.type");
+    device_id = json_object_dotget_number(runtime_object, "device.id");
+
+
+    // 通过device id 查找列表中的对象
+    HASH_FIND_INT(ry_ln_list, &device_id, ln_rec);
+
+    if (ln_rec == NULL) {
+        return;
+    }
+
+    bool state_bool;            // 逻辑量
+    float state_float;          // 浮点数
+
+    timestamp = Hal_getTimeInMs();
+
+    IedServer_lockDataModel(iedServer);
+    switch (device_type) {
+        case LN_TYPE_INPUT:
+            state_bool = json_object_dotget_boolean(runtime_object, "runtime.state");
+            updateBoolean(ln_rec->ln, timestamp, state_bool);
+            break;
+        case LN_TYPE_ANALOG:
+            state_float = json_object_dotget_number(runtime_object, "runtime.state.value");
+            updateAnalog(ln_rec->ln, timestamp, state_float);
+            break;
+    }
+    IedServer_unlockDataModel(iedServer);
+
+    // 释放资源
+    json_value_free(root_value);
+}
+
+/**
 * 收到61850消息
 */
 void iec61850_on_mqtt_message(int cmd, char *msg, int len) {
@@ -229,7 +297,7 @@ void iec61850_on_mqtt_message(int cmd, char *msg, int len) {
             break;
         case MQTT_CMD_61850_UPDATE:
             // 61850 节点更新
-
+            updateDevice(msg);
             break;
     }
 }
