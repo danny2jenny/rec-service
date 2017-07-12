@@ -103,12 +103,14 @@ void iec61850_parseConfig(char *cfgStr) {
 
     SettingGroupControlBlock_create(lln0, 1, 1);
 
-    // 生成报告用的数据
+
+    // 生成报告
     DataSet *dataSet = DataSet_create("events", lln0);
 
+    // 新的节点变量
     LogicalNode *logicalNode;             // 逻辑节点
-
     char str_buf[100];                    // 字符串buffer
+    char rpt_buf[500];                    // 报告相关的字符串
 
     // ---------------------------------------------------------------------------
 
@@ -146,6 +148,10 @@ void iec61850_parseConfig(char *cfgStr) {
                 // 逻辑节点保存在配置文件
                 ln_rec->ln = logicalNode;
 
+                // 报告数据
+                sprintf(rpt_buf, "%s%s", str_buf, "$ST$value$stVal");
+                DataSetEntry_create(dataSet, rpt_buf, -1, NULL);
+
                 break;
             case LN_TYPE_ANALOG:            // 模拟量节点
                 // 得到逻辑节点的名称
@@ -159,6 +165,10 @@ void iec61850_parseConfig(char *cfgStr) {
                 // 逻辑节点保存在配置文件
                 ln_rec->ln = logicalNode;
 
+                // 报告数据
+                sprintf(rpt_buf, "%s%s", str_buf, "$MX$value$instMag");
+                DataSetEntry_create(dataSet, rpt_buf, -1, NULL);
+
                 break;
             case LN_TYPE_SWITCH:            // 开关节点
                 break;
@@ -166,6 +176,16 @@ void iec61850_parseConfig(char *cfgStr) {
 
         HASH_ADD_INT(ry_ln_list, id, ln_rec);
     }
+
+
+    // 生成报告
+    uint8_t rptOptions = RPT_OPT_SEQ_NUM | RPT_OPT_TIME_STAMP | RPT_OPT_REASON_FOR_INCLUSION;
+
+    ReportControlBlock_create("events01", lln0, "events01", false, NULL, 1, TRG_OPT_DATA_CHANGED, rptOptions, 50,
+                              0);
+    //ReportControlBlock_create("events02", lln0, "events02", false, dataSet, 1, TRG_OPT_DATA_CHANGED, rptOptions, 50, 0);
+
+    GSEControlBlock_create("gse01", lln0, "events01", "events", 1, false, 200, 3000);
 
 
     // 启动服务器

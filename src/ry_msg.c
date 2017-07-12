@@ -24,7 +24,7 @@ char out_buf[512];                  // 发送buffer
  */
 int mqtt_send_to_mc(int cmd, char *payload, int len) {
     // 命令头
-    sprintf(out_buf, "<%d>", cmd);
+    //sprintf(out_buf, "<%d>", cmd);
     int head_leng = strlen(out_buf);
     // 复制payload
     memcpy(out_buf + head_leng, payload, len);
@@ -102,7 +102,7 @@ void ry_subscribe_callback(struct mosquitto *mosq, void *userdata, int mid, int 
 // MQTT的调试信息
 void ry_log_callback(struct mosquitto *mosq, void *userdata, int level, const char *str) {
     /* Pring all log messages regardless of level. */
-    printf("%s\n", str);
+    //printf("%s\n", str);
 }
 
 /**

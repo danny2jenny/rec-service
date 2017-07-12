@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/iec61850.c" line="73" mnemonic="2" />
-    <bookmark url="file://$PROJECT_DIR$/src/iec61850.c" line="194" mnemonic="1" />
-    <bookmark url="file://$PROJECT_DIR$/src/iec61850.c" line="272" mnemonic="3" />
+    <bookmark url="file://$PROJECT_DIR$/src/iec61850.c" line="292" mnemonic="3" />
+    <bookmark url="file://$PROJECT_DIR$/src/iec61850.c" line="185" mnemonic="2" />
+    <bookmark url="file://$PROJECT_DIR$/src/iec61850.c" line="108" mnemonic="1" />
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
     <generated>
@@ -19,10 +19,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="985c589a-e1df-4a86-bdf7-7f14cbd05596" name="Default" comment="1、61850 采用CDC 通用的数据模型&#10;2、目前支持开关量和模拟量上传&#10;3、没有通知报告&#10;4、没有实现数据更新">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/server_example_dynamic.c" />
+    <list default="true" id="985c589a-e1df-4a86-bdf7-7f14cbd05596" name="Default" comment="1、实现数据更新&#10;2、没有通知报告">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/iec61850.c" afterPath="$PROJECT_DIR$/src/iec61850.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ry_msg.c" afterPath="$PROJECT_DIR$/src/ry_msg.c" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/cmake-build-relwithdebinfo/" />
@@ -46,8 +46,8 @@
       <file leaf-file-name="iec61850.c" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/iec61850.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+            <state relative-caret-position="371">
+              <caret line="152" column="0" lean-forward="false" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
               <folding>
                 <element signature="e#201#227#0" expanded="true" />
               </folding>
@@ -55,41 +55,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ied_server.c" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../libiec61850-1.0.1/src/iec61850/server/impl/ied_server.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
-              <caret line="924" column="0" lean-forward="false" selection-start-line="924" selection-start-column="0" selection-end-line="924" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="server_example_dynamic.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/server_example_dynamic.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="90" column="8" lean-forward="false" selection-start-line="90" selection-start-column="8" selection-end-line="90" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ry_msg.c" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ry_msg.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="60" column="4" lean-forward="true" selection-start-line="60" selection-start-column="4" selection-end-line="60" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/config.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
-              <caret line="22" column="8" lean-forward="false" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
+            <state relative-caret-position="425">
+              <caret line="61" column="85" lean-forward="true" selection-start-line="52" selection-start-column="4" selection-end-line="61" selection-end-column="85" />
               <folding />
             </state>
           </provider>
@@ -99,13 +69,11 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>client_on_message</find>
       <find>loop</find>
       <find>mosquitto_connect_async</find>
       <find>ry_disconnect_callback</find>
       <find>skipe_len</find>
       <find>HASH_FIND_INT</find>
-      <find>printf</find>
       <find>3</find>
       <find>json_object_dotget_number</find>
       <find>free</find>
@@ -129,6 +97,8 @@
       <find>print</find>
       <find>update</find>
       <find>cfgStr</find>
+      <find>log</find>
+      <find>printf</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -552,7 +522,7 @@
       <workItem from="1497768393242" duration="5409000" />
       <workItem from="1497792405683" duration="7746000" />
       <workItem from="1497931961374" duration="2649000" />
-      <workItem from="1499696770743" duration="31005000" />
+      <workItem from="1499696770743" duration="34559000" />
     </task>
     <task id="LOCAL-00001" summary="初始化版本">
       <created>1490217132985</created>
@@ -624,11 +594,18 @@
       <option name="project" value="LOCAL" />
       <updated>1499763454673</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="1、实现数据更新&#10;2、没有通知报告">
+      <created>1499840097306</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1499840097306</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="267287000" />
+    <option name="totallyTimeSpent" value="270841000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -647,13 +624,13 @@
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26666668" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22703274" sideWeight="0.50643086" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29787233" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3011111" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3011111" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22555555" sideWeight="0.49356914" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22079314" sideWeight="0.4936306" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32666665" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17684887" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18258575" sideWeight="0.5063694" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31555554" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31555554" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329582" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -725,11 +702,12 @@
     <MESSAGE value="1、登录成功后，返回NVR的状态" />
     <MESSAGE value="按照以前的模型，初步增加61850支持&#10;1、可以和服务器通讯，动态生成模型&#10;2、模型值还没有更新" />
     <MESSAGE value="1、61850 采用CDC 通用的数据模型&#10;2、目前支持开关量和模拟量上传&#10;3、没有通知报告&#10;4、没有实现数据更新" />
-    <option name="LAST_COMMIT_MESSAGE" value="1、61850 采用CDC 通用的数据模型&#10;2、目前支持开关量和模拟量上传&#10;3、没有通知报告&#10;4、没有实现数据更新" />
+    <MESSAGE value="1、实现数据更新&#10;2、没有通知报告" />
+    <option name="LAST_COMMIT_MESSAGE" value="1、实现数据更新&#10;2、没有通知报告" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="165" />
+      <option name="time" value="167" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
@@ -923,22 +901,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="38" column="18" lean-forward="false" selection-start-line="38" selection-start-column="18" selection-end-line="38" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/include/iec61850/iec61850_common.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="78">
@@ -1027,14 +989,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/iec61850/iec61850_dynamic_model.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1398">
-          <caret line="306" column="47" lean-forward="false" selection-start-line="306" selection-start-column="47" selection-end-line="306" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/include/iec61850/iec61850_server.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="217">
@@ -1059,26 +1013,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ry_msg.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="60" column="4" lean-forward="true" selection-start-line="60" selection-start-column="4" selection-end-line="60" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/config.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="194">
           <caret line="22" column="8" lean-forward="false" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/server_example_dynamic.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="90" column="8" lean-forward="false" selection-start-line="90" selection-start-column="8" selection-end-line="90" selection-end-column="45" />
           <folding />
         </state>
       </provider>
@@ -1091,10 +1029,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="37" column="18" lean-forward="false" selection-start-line="37" selection-start-column="9" selection-end-line="37" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ry_msg.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="26" column="6" lean-forward="false" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/iec61850/iec61850_dynamic_model.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="463">
+          <caret line="314" column="0" lean-forward="false" selection-start-line="314" selection-start-column="0" selection-end-line="314" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/server_example_dynamic.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="61" column="85" lean-forward="true" selection-start-line="52" selection-start-column="4" selection-end-line="61" selection-end-column="85" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/iec61850.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+        <state relative-caret-position="371">
+          <caret line="152" column="0" lean-forward="false" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
           <folding>
             <element signature="e#201#227#0" expanded="true" />
           </folding>
