@@ -38,6 +38,7 @@ link_libraries(
         "mosquitto"
         "hcnetsdk"
         "iec61850"
+        "pthread"
 )
 
 set(SOURCE_FILES
