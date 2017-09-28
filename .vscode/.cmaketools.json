@@ -7,5 +7,135 @@
     "description": "Emit debug information without performing optimizations"
   },
   "activeEnvironments": [],
-  "codeModel": null
+  "codeModel": {
+    "configurations": [
+      {
+        "name": "Debug",
+        "projects": [
+          {
+            "buildDirectory": "/home/danny/workspace/RY-Service/build",
+            "name": "RY_Service",
+            "sourceDirectory": "/home/danny/workspace/RY-Service",
+            "targets": [
+              {
+                "artifacts": [
+                  "/home/danny/workspace/RY-Service/bin/test_dny"
+                ],
+                "buildDirectory": "/home/danny/workspace/RY-Service/build",
+                "fileGroups": [
+                  {
+                    "compileFlags": "-g  ",
+                    "defines": [
+                      "_TEST"
+                    ],
+                    "includePath": [
+                      {
+                        "path": "/home/danny/workspace/RY-Service/include"
+                      },
+                      {
+                        "path": "/home/danny/workspace/RY-Service/src"
+                      }
+                    ],
+                    "isGenerated": false,
+                    "language": "C",
+                    "sources": [
+                      "src/test_dynamic.c"
+                    ]
+                  }
+                ],
+                "fullName": "test_dny",
+                "linkFlags": "-Wl,-rpath,'$ORIGIN'",
+                "linkLanguageFlags": "-g",
+                "linkLibraries": "-Wl,-rpath,/home/danny/workspace/RY-Service/bin:/home/danny/workspace/RY-Service/lib -ldl -luv -lmosquitto -lhcnetsdk -liec61850 -lpthread",
+                "linkPath": "-L/home/danny/workspace/RY-Service/bin  -L/home/danny/workspace/RY-Service/lib",
+                "linkerLanguage": "C",
+                "name": "test_dny",
+                "sourceDirectory": "/home/danny/workspace/RY-Service",
+                "type": "EXECUTABLE"
+              },
+              {
+                "artifacts": [
+                  "/home/danny/workspace/RY-Service/bin/RY_Service"
+                ],
+                "buildDirectory": "/home/danny/workspace/RY-Service/build",
+                "fileGroups": [
+                  {
+                    "compileFlags": "-g  ",
+                    "defines": [
+                      "_TEST"
+                    ],
+                    "includePath": [
+                      {
+                        "path": "/home/danny/workspace/RY-Service/include"
+                      },
+                      {
+                        "path": "/home/danny/workspace/RY-Service/src"
+                      }
+                    ],
+                    "isGenerated": false,
+                    "language": "C",
+                    "sources": [
+                      "src/main.c",
+                      "src/mqtt.c",
+                      "src/video_adapter.c",
+                      "src/iec61850.c",
+                      "src/parson/parson.c"
+                    ]
+                  }
+                ],
+                "fullName": "RY_Service",
+                "linkFlags": "-Wl,-rpath,'$ORIGIN'",
+                "linkLanguageFlags": "-g",
+                "linkLibraries": "-Wl,-rpath,/home/danny/workspace/RY-Service/bin:/home/danny/workspace/RY-Service/lib -ldl -luv -lmosquitto -lhcnetsdk -liec61850 -lpthread",
+                "linkPath": "-L/home/danny/workspace/RY-Service/bin  -L/home/danny/workspace/RY-Service/lib",
+                "linkerLanguage": "C",
+                "name": "RY_Service",
+                "sourceDirectory": "/home/danny/workspace/RY-Service",
+                "type": "EXECUTABLE"
+              },
+              {
+                "artifacts": [
+                  "/home/danny/workspace/RY-Service/bin/libnvr2001.so"
+                ],
+                "buildDirectory": "/home/danny/workspace/RY-Service/build",
+                "fileGroups": [
+                  {
+                    "compileFlags": " -O0 -Wall -g2 -ggdb -fPIC  ",
+                    "defines": [
+                      "_TEST",
+                      "nvr2001_EXPORTS"
+                    ],
+                    "includePath": [
+                      {
+                        "path": "/home/danny/workspace/RY-Service/include"
+                      },
+                      {
+                        "path": "/home/danny/workspace/RY-Service/src"
+                      }
+                    ],
+                    "isGenerated": false,
+                    "language": "CXX",
+                    "sources": [
+                      "src/hk_nvr/hk_nvr.cpp"
+                    ]
+                  }
+                ],
+                "fullName": "libnvr2001.so",
+                "linkFlags": "-Wl,-rpath,'$ORIGIN'",
+                "linkLibraries": "-Wl,-rpath,/home/danny/workspace/RY-Service/bin:/home/danny/workspace/RY-Service/lib -ldl -luv -lmosquitto -lhcnetsdk -liec61850 -lpthread",
+                "linkPath": "-L/home/danny/workspace/RY-Service/bin  -L/home/danny/workspace/RY-Service/lib",
+                "linkerLanguage": "CXX",
+                "name": "nvr2001",
+                "sourceDirectory": "/home/danny/workspace/RY-Service",
+                "type": "SHARED_LIBRARY"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "cookie": "0.7499815255043207",
+    "inReplyTo": "codemodel",
+    "type": "reply"
+  }
 }

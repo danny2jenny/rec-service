@@ -31,6 +31,17 @@
 extern "C" {
 #endif
 
+#ifndef GOOSE_SV_COMM_PARAMETERS
+#define GOOSE_SV_COMM_PARAMETERS
+
+typedef struct sCommParameters {
+    uint8_t vlanPriority;
+    uint16_t vlanId;
+    uint16_t appId;
+    uint8_t dstAddress[6];
+} CommParameters;
+
+#endif
 
 #define IEC61850_SV_SMPSYNC_NOT_SYNCHRONIZED 0
 #define IEC61850_SV_SMPSYNC_SYNCED_UNSPEC_LOCAL_CLOCK 1
@@ -45,7 +56,7 @@ typedef struct sSampledValuesPublisher* SampledValuesPublisher;
 typedef struct sSV_ASDU* SV_ASDU;
 
 SampledValuesPublisher
-SampledValuesPublisher_create(const char* interfaceId);
+SampledValuesPublisher_create(CommParameters* parameters, const char* interfaceId);
 
 SV_ASDU
 SampledValuesPublisher_addASDU(SampledValuesPublisher self, char* svID, char* datset, uint32_t confRev);
@@ -88,6 +99,9 @@ SV_ASDU_setFLOAT64(SV_ASDU self, int index, double value);
 
 void
 SV_ASDU_setSmpCnt(SV_ASDU self, uint16_t value);
+
+uint16_t
+SV_ASDU_getSmpCnt(SV_ASDU self);
 
 void
 SV_ASDU_increaseSmpCnt(SV_ASDU self);

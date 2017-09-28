@@ -1,13 +1,14 @@
 cmake_minimum_required(VERSION 3.6)
 project(RY_Service)
 
+# windows的 msys 环境需要
 SET(CMAKE_GENERATOR “MSYS Makefiles”)
-#set(CMAKE_C_STANDARD 99)
-#SET(CMAKE_C_FLAGS_DEBUG "-D_DEBUG")
+
+#生成的代码可以用于GDB调试
 SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g2 -ggdb")
 SET(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
 
-# 设置RPATH
+# 设置动态链接库的搜索路径RPATH，可执行文件在linux下可以在当前路径搜索动态链接库
 SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-rpath,'$ORIGIN'")
 SET(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-rpath,'$ORIGIN'")
 
@@ -15,22 +16,21 @@ SET(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-rpath,'$ORIGIN'
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
+# 源文件的预编译选项
+ADD_DEFINITIONS(-D_TEST)
+
 # 工程中头文件存放位置
 include_directories(
-        # 包含该工程的头文件
         "${PROJECT_SOURCE_DIR}/include"
         "${PROJECT_SOURCE_DIR}/src"
 )
 
-# 静态库文件存放位置
+# 库文件存放位置
 link_directories(
-        "${PROJECT_SOURCE_DIR}/bin"
+        "${PROJECT_SOURCE_DIR}/bin"             # 海康的动态库
+        "${PROJECT_SOURCE_DIR}/lib"             # 静态库
 )
 
-# 链接的静态库目录
-link_directories(
-        "${PROJECT_SOURCE_DIR}/lib"
-)
 # 需要连接的静态库文件
 link_libraries(
         "dl"            # linux 动态链接库的操作dlfcn.h的库文件
@@ -43,18 +43,19 @@ link_libraries(
 
 set(SOURCE_FILES
         src/main.c
-        src/ry_msg.c
-        src/ry_video_adapter.c
-        src/iec61850.c
+        src/ry_mqtt.c
+        src/ry_nvr_mgr.c
+        src/ry_iec61850.c
         src/parson/parson.c
         )
 
+# 测试程序
+add_executable(test_dny "src/test_dynamic.c")
 
 # 主程序
 add_executable(RY_Service ${SOURCE_FILES})
 
-TARGET_LINK_LIBRARIES(RY_Service pthread)
-
-
 # 海康的接口
-ADD_LIBRARY(nvr2001 SHARED src/hk_nvr/hk_nvr.cpp)
+ADD_LIBRARY(nvr2001 SHARED src/nvr_adps/hk_nvr.cpp)
+
+

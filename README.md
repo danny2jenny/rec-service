@@ -32,6 +32,14 @@ HashTable https://github.com/troydhanson/uthash   https://troydhanson.github.io/
 mosquitto_sub -v -t sensor 
 mosquitto_pub -t sensor -m 13 
 
+
+
+## mqtt 环境
+
+服务器采用mosquitto
+
+编译环境：libmosquitto-dev	libuv1-dev
+
 # 对比
 https://www.predic8.com/activemq-hornetq-rabbitmq-apollo-qpid-comparison.htm
 
@@ -78,3 +86,9 @@ https://github.com/zserge/jsmn
 
 https://github.com/cesanta/frozen
 https://docs.cesanta.com/frozen/master/     // 文档也比较丰富
+
+# Goos 报告的解决
+
+原因分析：没有特权，如果 sudo 运行就没有问题。
+
+另外，需要制定用那个网卡，具体请参考：servr_example_goose.c 这个例子。

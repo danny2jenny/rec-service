@@ -353,6 +353,12 @@ typedef union {
     uint8_t val[8];
 } Timestamp;
 
+Timestamp*
+Timestamp_create(void);
+
+void
+Timestamp_destroy(Timestamp* self);
+
 void
 Timestamp_clearFlags(Timestamp* self);
 
@@ -396,6 +402,18 @@ Timestamp_setTimeInSeconds(Timestamp* self, uint32_t secondsSinceEpoch);
 
 void
 Timestamp_setTimeInMilliseconds(Timestamp* self, uint64_t millisSinceEpoch);
+
+void
+Timestamp_setByMmsUtcTime(Timestamp* self, MmsValue* mmsValue);
+
+/**
+ * \brief Set an MmsValue instance of type UTCTime to the timestamp value
+ *
+ * \param self the Timestamp instance
+ * \param mmsValue the mmsValue instance, if NULL a new instance will be created
+ */
+MmsValue*
+Timestamp_toMmsValue(Timestamp* self, MmsValue* mmsValue);
 
 /**
  * \brief Get the version of the library as string

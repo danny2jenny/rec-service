@@ -9,8 +9,8 @@
 extern "C" {
 #endif
 
-void timer_start();     // 开始定时器
-void timer_stop();      // 停止定时器
+void TimerStart();     // 开始定时器
+void TimerStop();      // 停止定时器
 
 #ifdef __cplusplus
 }

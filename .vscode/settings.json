@@ -1,0 +1,10 @@
+{
+    "C_Cpp.intelliSenseEngine": "Default",
+    "cmake.cmakePath": "/home/danny/devtool/cmake/bin/cmake",
+    "files.associations": {
+        "iec61850.h": "c",
+        "video_adapter.h": "c",
+        "uthash.h": "c",
+        "iec61850_server.h": "c"
+    }
+}
