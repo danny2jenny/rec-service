@@ -20,10 +20,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="985c589a-e1df-4a86-bdf7-7f14cbd05596" name="Default" comment="添加编译后的文件">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/RY_Service" afterPath="$PROJECT_DIR$/bin/RY_Service" />
+    <list default="true" id="985c589a-e1df-4a86-bdf7-7f14cbd05596" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeLists.txt" afterPath="$PROJECT_DIR$/CMakeLists.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/nvr_adps/hk_nvr.cpp" afterPath="$PROJECT_DIR$/src/nvr_adps/hk_nvr.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ry_mqtt.h" afterPath="$PROJECT_DIR$/src/ry_mqtt.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ry_nvr_mgr.h" afterPath="$PROJECT_DIR$/src/ry_nvr_mgr.h" />
@@ -599,7 +597,7 @@
       <workItem from="1506501712882" duration="126000" />
       <workItem from="1506502316154" duration="2937000" />
       <workItem from="1506527026246" duration="4044000" />
-      <workItem from="1506564894691" duration="1928000" />
+      <workItem from="1506564894691" duration="1971000" />
     </task>
     <task id="LOCAL-00001" summary="初始化版本">
       <created>1490217132985</created>
@@ -706,11 +704,18 @@
       <option name="project" value="LOCAL" />
       <updated>1506566385857</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="静态哭不能放在 lib 中，不知道为什么">
+      <created>1506566864458</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1506566864458</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="294238000" />
+    <option name="totallyTimeSpent" value="294281000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -816,7 +821,8 @@
     <MESSAGE value="规范命名规则" />
     <MESSAGE value="升级libiec61850到1.1版本" />
     <MESSAGE value="添加编译后的文件" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加编译后的文件" />
+    <MESSAGE value="静态哭不能放在 lib 中，不知道为什么" />
+    <option name="LAST_COMMIT_MESSAGE" value="静态哭不能放在 lib 中，不知道为什么" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
