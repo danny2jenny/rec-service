@@ -28,7 +28,6 @@ include_directories(
 # 库文件存放位置
 link_directories(
         "${PROJECT_SOURCE_DIR}/bin"             # 海康的动态库
-        "${PROJECT_SOURCE_DIR}/lib"             # 静态库
 )
 
 # 需要连接的静态库文件
