@@ -20,11 +20,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="985c589a-e1df-4a86-bdf7-7f14cbd05596" name="Default" comment="">
+    <list default="true" id="985c589a-e1df-4a86-bdf7-7f14cbd05596" name="Default" comment="静态哭不能放在 lib 中，不知道为什么">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/nvr_adps/hk_nvr.cpp" afterPath="$PROJECT_DIR$/src/nvr_adps/hk_nvr.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ry_mqtt.h" afterPath="$PROJECT_DIR$/src/ry_mqtt.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ry_nvr_mgr.h" afterPath="$PROJECT_DIR$/src/ry_nvr_mgr.h" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/cmake-build-relwithdebinfo/" />
@@ -43,18 +40,7 @@
     <favorites_list name="RY_Service" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="33" column="15" lean-forward="true" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="15" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -597,7 +583,7 @@
       <workItem from="1506501712882" duration="126000" />
       <workItem from="1506502316154" duration="2937000" />
       <workItem from="1506527026246" duration="4044000" />
-      <workItem from="1506564894691" duration="1971000" />
+      <workItem from="1506564894691" duration="2086000" />
     </task>
     <task id="LOCAL-00001" summary="初始化版本">
       <created>1490217132985</created>
@@ -711,11 +697,18 @@
       <option name="project" value="LOCAL" />
       <updated>1506566864458</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="静态哭不能放在 lib 中，不知道为什么">
+      <created>1506566883296</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1506566883296</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="294281000" />
+    <option name="totallyTimeSpent" value="294396000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1164,8 +1157,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="33" column="15" lean-forward="true" selection-start-line="33" selection-start-column="15" selection-end-line="33" selection-end-column="15" />
+        <state relative-caret-position="176">
+          <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding />
         </state>
       </provider>
