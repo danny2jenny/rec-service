@@ -183,7 +183,9 @@ void IEC61850ParseConfig(char *cfgStr) {
     // 生成报告
     uint8_t rptOptions = RPT_OPT_SEQ_NUM | RPT_OPT_TIME_STAMP | RPT_OPT_REASON_FOR_INCLUSION;
 
-    ReportControlBlock_create("events01", lln0, "events01", false, NULL, 1, TRG_OPT_DATA_CHANGED, rptOptions, 50, 0);
+    ReportControlBlock_create("events01", lln0, "events01", false, (char *) dataSet, 1, TRG_OPT_DATA_CHANGED,
+                              rptOptions, 50, 0);
+    //ReportControlBlock_create("events01", lln0, "events01", false, NULL, 1, TRG_OPT_DATA_CHANGED, rptOptions, 50, 0);
     //ReportControlBlock_create("events02", lln0, "events02", false, dataSet, 1, TRG_OPT_DATA_CHANGED, rptOptions, 50, 0);
 
     /**

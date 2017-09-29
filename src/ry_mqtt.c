@@ -59,8 +59,10 @@ void MqttOnMsgReceive(struct mosquitto *mosq, void *userdata, const struct mosqu
     json_value_free(root_value);
 
     if (cmd <= 100) {
+        // 小于100是NVR消息
         NvrOnMqttMsg(cmd, message->payload, message->payloadlen);
     } else {
+        // 大于100是61850消息
         IEC61850OnMqttMsg(cmd, message->payload, message->payloadlen);
     }
 }
