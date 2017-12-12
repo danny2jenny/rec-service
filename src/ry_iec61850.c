@@ -20,9 +20,10 @@
 #include "ry_iec61850.h"
 #include "ry_config.h"
 #include "ry_mqtt.h"
+#include "ini.h"
 
 // 服务端口号
-int tcpPort = RY_61850_PORT;
+int iedPort = RY_61850_PORT;
 
 volatile int inited_61850 = 0; // 是否得到过61850的配置
 
@@ -34,6 +35,19 @@ IedModel *model = NULL;
 
 // 61850 服务
 IedServer iedServer = NULL;
+
+// -----------------节点配置--------------------
+
+char iedName[100] = "RYTEC";
+char dsName[100] = "dsIAS";
+char ldName[100] = "SENSOR";
+
+char lnValue[100] = "value";
+char lnValueInput[100] = "value";
+char lnValueAnalog[100] = "value";
+
+char reportName[100] = "ryReport";
+// --------------------------------------------
 
 /**
  * 释放资源
@@ -84,6 +98,20 @@ void IEC61850UpdateAnalog(LogicalNode *ln, uint64_t timestamp, float value) {
  * 解析配置
  */
 void IEC61850ParseConfig(char *cfgStr) {
+    //-----------------读取配置-----------------------
+    ini_t *config = ini_load(ini_file_path);
+
+    ini_sget(config, "61850", "iedName", "%s", iedName);
+    ini_sget(config, "61850", "dsName", "%s", dsName);
+    ini_sget(config, "61850", "ldName", "%s", ldName);
+    ini_sget(config, "61850", "lnValue", "%s", lnValue);
+    ini_sget(config, "61850", "lnValueInput", "%s", lnValueInput);
+    ini_sget(config, "61850", "lnValueAnalog", "%s", lnValueAnalog);
+    ini_sget(config, "61850", "reportName", "%s", reportName);
+    ini_sget(config, "61850", "port", "%d", &iedPort);
+
+    ini_free(config);
+    // ---------------------------------------------
 
     IEC61850Cleanup();
     IEC61850CleanConfig();
@@ -91,9 +119,9 @@ void IEC61850ParseConfig(char *cfgStr) {
     RY_61850_LN *ln_rec;    // 建立的新的配置文件的节点
 
     // --------------------------- 61850 模型-------------------------------------
-    model = IedModel_create(IEC61850_IED_NAME);
+    model = IedModel_create(iedName);
 
-    LogicalDevice *logic_device = LogicalDevice_create(IEC61850_LD_NAME, model);
+    LogicalDevice *logic_device = LogicalDevice_create(ldName, model);
 
     LogicalNode *lln0 = LogicalNode_create("LLN0", logic_device);
 
@@ -104,7 +132,7 @@ void IEC61850ParseConfig(char *cfgStr) {
 
 
     // 生成报告
-    DataSet *dataSet = DataSet_create("events", lln0);
+    DataSet *dataSet = DataSet_create(dsName, lln0);
 
     // 新的节点变量
     LogicalNode *logicalNode;             // 逻辑节点
@@ -148,7 +176,7 @@ void IEC61850ParseConfig(char *cfgStr) {
                 ln_rec->ln = logicalNode;
 
                 // 报告数据
-                sprintf(rpt_buf, "%s%s", str_buf, "$ST$value$stVal");
+                sprintf(rpt_buf, "%s%s%s%s", str_buf, "$ST$", lnValue, "$stVal");
                 DataSetEntry_create(dataSet, rpt_buf, -1, NULL);
 
                 break;
@@ -165,7 +193,7 @@ void IEC61850ParseConfig(char *cfgStr) {
                 ln_rec->ln = logicalNode;
 
                 // 报告数据
-                sprintf(rpt_buf, "%s%s", str_buf, "$MX$value$instMag");
+                sprintf(rpt_buf, "%s%s%s%s", str_buf, "$MX$", lnValue, "$instMag");
                 DataSetEntry_create(dataSet, rpt_buf, -1, NULL);
 
                 break;
@@ -183,7 +211,7 @@ void IEC61850ParseConfig(char *cfgStr) {
     // 生成报告
     uint8_t rptOptions = RPT_OPT_SEQ_NUM | RPT_OPT_TIME_STAMP | RPT_OPT_REASON_FOR_INCLUSION;
 
-    ReportControlBlock_create("events01", lln0, "events01", false, (char *) dataSet, 1, TRG_OPT_DATA_CHANGED,
+    ReportControlBlock_create(reportName, lln0, reportName, false, dsName, 1, TRG_OPT_DATA_CHANGED,
                               rptOptions, 50, 0);
     //ReportControlBlock_create("events01", lln0, "events01", false, NULL, 1, TRG_OPT_DATA_CHANGED, rptOptions, 50, 0);
     //ReportControlBlock_create("events02", lln0, "events02", false, dataSet, 1, TRG_OPT_DATA_CHANGED, rptOptions, 50, 0);
@@ -254,7 +282,7 @@ void IEC61850Start() {
     iedServer = IedServer_create(model);
 
     /* MMS server will be instructed to start listening to client connections. */
-    IedServer_start(iedServer, tcpPort);
+    IedServer_start(iedServer, iedPort);
 
     if (!IedServer_isRunning(iedServer)) {
         printf("Starting server failed! Exit.\n");

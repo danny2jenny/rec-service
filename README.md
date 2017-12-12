@@ -57,10 +57,10 @@ iot.eclipse.org 1883
 
 # Linux 服务
 
+```
 [Unit]
 Description=MQTT Service
 After=network.target
-
 [Service]
 User=rytec
 Restart=always
@@ -68,9 +68,13 @@ Type=forking
 ExecStart=/home/rytec/data/moquette/bin/moquette.sh
 
 [Install]
-WantedBy=multi-user.targe
+WantedBy=multi-user.target
+
+```
 
 连接到 /etc/systemd/system/mu  mlti-user.target.wants
+
+mqtt缺省端口是1883
 
 # 依赖包
 build-essential

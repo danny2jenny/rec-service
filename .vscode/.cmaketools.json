@@ -13,15 +13,15 @@
         "name": "Debug",
         "projects": [
           {
-            "buildDirectory": "/home/danny/workspace/RY-Service/build",
+            "buildDirectory": "/home/danny/projects/rec-service/build",
             "name": "RY_Service",
-            "sourceDirectory": "/home/danny/workspace/RY-Service",
+            "sourceDirectory": "/home/danny/projects/rec-service",
             "targets": [
               {
                 "artifacts": [
-                  "/home/danny/workspace/RY-Service/bin/test_dny"
+                  "/home/danny/projects/rec-service/bin/test_dny"
                 ],
-                "buildDirectory": "/home/danny/workspace/RY-Service/build",
+                "buildDirectory": "/home/danny/projects/rec-service/build",
                 "fileGroups": [
                   {
                     "compileFlags": "-g  ",
@@ -30,10 +30,10 @@
                     ],
                     "includePath": [
                       {
-                        "path": "/home/danny/workspace/RY-Service/include"
+                        "path": "/home/danny/projects/rec-service/include"
                       },
                       {
-                        "path": "/home/danny/workspace/RY-Service/src"
+                        "path": "/home/danny/projects/rec-service/src"
                       }
                     ],
                     "isGenerated": false,
@@ -46,18 +46,18 @@
                 "fullName": "test_dny",
                 "linkFlags": "-Wl,-rpath,'$ORIGIN'",
                 "linkLanguageFlags": "-g",
-                "linkLibraries": "-Wl,-rpath,/home/danny/workspace/RY-Service/bin:/home/danny/workspace/RY-Service/lib -ldl -luv -lmosquitto -lhcnetsdk -liec61850 -lpthread",
-                "linkPath": "-L/home/danny/workspace/RY-Service/bin  -L/home/danny/workspace/RY-Service/lib",
+                "linkLibraries": "-Wl,-rpath,/home/danny/projects/rec-service/bin -ldl -luv -lmosquitto -lhcnetsdk -liec61850 -lpthread",
+                "linkPath": "-L/home/danny/projects/rec-service/bin",
                 "linkerLanguage": "C",
                 "name": "test_dny",
-                "sourceDirectory": "/home/danny/workspace/RY-Service",
+                "sourceDirectory": "/home/danny/projects/rec-service",
                 "type": "EXECUTABLE"
               },
               {
                 "artifacts": [
-                  "/home/danny/workspace/RY-Service/bin/RY_Service"
+                  "/home/danny/projects/rec-service/bin/RY_Service"
                 ],
-                "buildDirectory": "/home/danny/workspace/RY-Service/build",
+                "buildDirectory": "/home/danny/projects/rec-service/build",
                 "fileGroups": [
                   {
                     "compileFlags": "-g  ",
@@ -66,19 +66,19 @@
                     ],
                     "includePath": [
                       {
-                        "path": "/home/danny/workspace/RY-Service/include"
+                        "path": "/home/danny/projects/rec-service/include"
                       },
                       {
-                        "path": "/home/danny/workspace/RY-Service/src"
+                        "path": "/home/danny/projects/rec-service/src"
                       }
                     ],
                     "isGenerated": false,
                     "language": "C",
                     "sources": [
                       "src/main.c",
-                      "src/mqtt.c",
-                      "src/video_adapter.c",
-                      "src/iec61850.c",
+                      "src/ry_mqtt.c",
+                      "src/ry_nvr_mgr.c",
+                      "src/ry_iec61850.c",
                       "src/parson/parson.c"
                     ]
                   }
@@ -86,18 +86,18 @@
                 "fullName": "RY_Service",
                 "linkFlags": "-Wl,-rpath,'$ORIGIN'",
                 "linkLanguageFlags": "-g",
-                "linkLibraries": "-Wl,-rpath,/home/danny/workspace/RY-Service/bin:/home/danny/workspace/RY-Service/lib -ldl -luv -lmosquitto -lhcnetsdk -liec61850 -lpthread",
-                "linkPath": "-L/home/danny/workspace/RY-Service/bin  -L/home/danny/workspace/RY-Service/lib",
+                "linkLibraries": "-Wl,-rpath,/home/danny/projects/rec-service/bin -ldl -luv -lmosquitto -lhcnetsdk -liec61850 -lpthread",
+                "linkPath": "-L/home/danny/projects/rec-service/bin",
                 "linkerLanguage": "C",
                 "name": "RY_Service",
-                "sourceDirectory": "/home/danny/workspace/RY-Service",
+                "sourceDirectory": "/home/danny/projects/rec-service",
                 "type": "EXECUTABLE"
               },
               {
                 "artifacts": [
-                  "/home/danny/workspace/RY-Service/bin/libnvr2001.so"
+                  "/home/danny/projects/rec-service/bin/libnvr2001.so"
                 ],
-                "buildDirectory": "/home/danny/workspace/RY-Service/build",
+                "buildDirectory": "/home/danny/projects/rec-service/build",
                 "fileGroups": [
                   {
                     "compileFlags": " -O0 -Wall -g2 -ggdb -fPIC  ",
@@ -107,26 +107,26 @@
                     ],
                     "includePath": [
                       {
-                        "path": "/home/danny/workspace/RY-Service/include"
+                        "path": "/home/danny/projects/rec-service/include"
                       },
                       {
-                        "path": "/home/danny/workspace/RY-Service/src"
+                        "path": "/home/danny/projects/rec-service/src"
                       }
                     ],
                     "isGenerated": false,
                     "language": "CXX",
                     "sources": [
-                      "src/hk_nvr/hk_nvr.cpp"
+                      "src/nvr_adps/hk_nvr.cpp"
                     ]
                   }
                 ],
                 "fullName": "libnvr2001.so",
                 "linkFlags": "-Wl,-rpath,'$ORIGIN'",
-                "linkLibraries": "-Wl,-rpath,/home/danny/workspace/RY-Service/bin:/home/danny/workspace/RY-Service/lib -ldl -luv -lmosquitto -lhcnetsdk -liec61850 -lpthread",
-                "linkPath": "-L/home/danny/workspace/RY-Service/bin  -L/home/danny/workspace/RY-Service/lib",
+                "linkLibraries": "-Wl,-rpath,/home/danny/projects/rec-service/bin -ldl -luv -lmosquitto -lhcnetsdk -liec61850 -lpthread",
+                "linkPath": "-L/home/danny/projects/rec-service/bin",
                 "linkerLanguage": "CXX",
                 "name": "nvr2001",
-                "sourceDirectory": "/home/danny/workspace/RY-Service",
+                "sourceDirectory": "/home/danny/projects/rec-service",
                 "type": "SHARED_LIBRARY"
               }
             ]
@@ -134,7 +134,7 @@
         ]
       }
     ],
-    "cookie": "0.7499815255043207",
+    "cookie": "0.08928945367137464",
     "inReplyTo": "codemodel",
     "type": "reply"
   }

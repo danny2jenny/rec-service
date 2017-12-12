@@ -6,17 +6,21 @@
  * http://luohaha.github.io/Chinese-uvbook/
  */
 #include <uv.h>
+#include <unistd.h>
 #include "ry_mqtt.h"
 #include "ry_nvr_mgr.h"
 #include "ry_iec61850.h"
+#include "ini.h"
 
 
 //-------------------全局变量---------------------------
 uv_loop_t *ry_loop;             // livuv 事件循环
 
-char *mqtt_ip;                  // 服务URL
+char mqtt_host[100];            // 服务URL
 int mqtt_port;                  // 服务端口
 uv_timer_t timer_req;           // 定时器
+
+char ini_file_path[1024];       // 当前路径
 //----------------------------------------------------
 
 /**
@@ -24,10 +28,9 @@ uv_timer_t timer_req;           // 定时器
  * @param signalId
  */
 void SigintHandler(int signalId) {
-
-    MqttClean();                 // 清理 MQTT 通讯
-    NvrClearAdps();         // 清理 video adapter
-    IEC61850Cleanup();             // 清理61850
+    MqttClean();                    // 清理 MQTT 通讯
+    NvrClearAdps();                 // 清理 video adapter
+    IEC61850Cleanup();              // 清理 61850
     uv_stop(ry_loop);               // 停止消息循环
 }
 
@@ -56,23 +59,34 @@ void TimerStop() {
 
 //主函数入口
 int main(int argc, char *argv[]) {
-    // ---------------------设置运行参数-----------------------------
-    if (argc < 3) {
-        printf("%s\n", "you shoud define MQTT ip and port in commanline!");
-        return 0;
+
+    // 得到配置文件
+    if (getcwd(ini_file_path, sizeof(ini_file_path)) != NULL){
+
+    }
+    else {
+        perror("getcwd() error");
+        return 1;
     }
 
-    mqtt_ip = argv[1];
-    mqtt_port = atoi(argv[2]);
+    // ---------------------设置运行参数-----------------------------
+    sprintf(ini_file_path, "%s%s", ini_file_path, "/cfg.ini");
+    ini_t *config = ini_load(ini_file_path);
+
+    ini_sget(config, "mqtt", "host", "%s", mqtt_host);
+    ini_sget(config, "mqtt", "port", "%d", &mqtt_port);
+
+    ini_free(config);
+    // ------------------------------------------------------------
 
 
-    signal(SIGINT, SigintHandler);             // 系统信号
+    signal(SIGINT, SigintHandler);              // 系统信号
     ry_loop = uv_default_loop();                // 初始化消息循环
 
 
     uv_timer_init(ry_loop, &timer_req);         // 定时器
     TimerStart();
 
-    MqttInit(mqtt_ip, mqtt_port);            // MQTT 消息客户端链接  todo 不应该这样写，应该放在定时任务中。强迫症!!!
+    MqttInit(mqtt_host, mqtt_port);             // MQTT 消息客户端链接  todo 不应该这样写，应该放在定时任务中。强迫症!!!
     uv_run(ry_loop, UV_RUN_DEFAULT);            // 运行消息循环
 }

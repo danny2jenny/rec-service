@@ -41,6 +41,7 @@ link_libraries(
 )
 
 set(SOURCE_FILES
+        src/ini.c
         src/main.c
         src/ry_mqtt.c
         src/ry_nvr_mgr.c

@@ -2,9 +2,7 @@
     "configurations": [
         {
             "name": "null",
-            "includePath": [
-                "${workspaceRoot}/src"
-            ],
+            "includePath": [],
             "defines": [],
             "browse": {
                 "path": [
