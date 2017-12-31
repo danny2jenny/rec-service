@@ -6,6 +6,8 @@
         "video_adapter.h": "c",
         "uthash.h": "c",
         "iec61850_server.h": "c",
-        "ry_nvr_mgr.h": "c"
-    }
+        "ry_nvr_mgr.h": "c",
+        "parson.h": "c"
+    },
+    "C_Cpp.intelliSenseEngineFallback": "Enabled"
 }

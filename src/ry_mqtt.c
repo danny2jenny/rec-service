@@ -60,7 +60,7 @@ void MqttOnMsgReceive(struct mosquitto *mosq, void *userdata, const struct mosqu
 
     if (cmd <= 100) {
         // 小于100是NVR消息
-        NvrOnMqttMsg(cmd, message->payload, message->payloadlen);
+        // NvrOnMqttMsg(cmd, message->payload, message->payloadlen);
     } else {
         // 大于100是61850消息
         IEC61850OnMqttMsg(cmd, message->payload, message->payloadlen);
@@ -150,7 +150,7 @@ int MqttInit(char *host, int port) {
     mosquitto_log_callback_set(mqtt, MqttOnLog);                      // 日志回调
     mosquitto_connect_callback_set(mqtt, MqttOnConnect);              // 连接回调
     mosquitto_disconnect_callback_set(mqtt, MqttOnDisconnect);        // 断开连接
-    mosquitto_message_callback_set(mqtt, MqttOnMsgReceive);       // 收到消息
+    mosquitto_message_callback_set(mqtt, MqttOnMsgReceive);           // 收到消息
     mosquitto_subscribe_callback_set(mqtt, MqttOnSubscribe);          // 订阅回调
 
     // 链接代理

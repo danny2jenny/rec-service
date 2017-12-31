@@ -5,14 +5,10 @@
             "includePath": [],
             "defines": [],
             "browse": {
-                "path": [
-                    "${workspaceRoot}"
-                ],
+                "path": [],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
-            },
-            "intelliSenseMode": "clang-x64"
+            }
         }
-    ],
-    "version": 3
+    ]
 }

@@ -6,7 +6,6 @@
  * http://luohaha.github.io/Chinese-uvbook/
  */
 #include <uv.h>
-#include <unistd.h>
 #include "ry_mqtt.h"
 #include "ry_nvr_mgr.h"
 #include "ry_iec61850.h"
@@ -20,7 +19,7 @@ char mqtt_host[100];            // 服务URL
 int mqtt_port;                  // 服务端口
 uv_timer_t timer_req;           // 定时器
 
-char ini_file_path[1024];       // 当前路径
+char * ini_file_path;       // 当前路径
 //----------------------------------------------------
 
 /**
@@ -38,7 +37,7 @@ void SigintHandler(int signalId) {
  * 定时事件，在这里循环执行各个功能模块的定时功能
  */
 static void OnTimer(uv_timer_t *handle) {
-    NvrOnTimer();               // video adapter 定时任务
+    //NvrOnTimer();               // video adapter 定时任务
     IEC61850OnTimer();              // 61850 定时任务
 }
 
@@ -60,17 +59,9 @@ void TimerStop() {
 //主函数入口
 int main(int argc, char *argv[]) {
 
-    // 得到配置文件
-    if (getcwd(ini_file_path, sizeof(ini_file_path)) != NULL){
-
-    }
-    else {
-        perror("getcwd() error");
-        return 1;
-    }
+    ini_file_path = argv[1];
 
     // ---------------------设置运行参数-----------------------------
-    sprintf(ini_file_path, "%s%s", ini_file_path, "/cfg.ini");
     ini_t *config = ini_load(ini_file_path);
 
     ini_sget(config, "mqtt", "host", "%s", mqtt_host);

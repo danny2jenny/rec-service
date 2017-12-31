@@ -38,15 +38,18 @@ IedServer iedServer = NULL;
 
 // -----------------节点配置--------------------
 
-char iedName[100] = "RYTEC";
-char dsName[100] = "dsIAS";
-char ldName[100] = "SENSOR";
+char iedName[100] = "QQ1101";
 
-char lnValue[100] = "value";
-char lnValueInput[100] = "value";
-char lnValueAnalog[100] = "value";
+char dsNameState[100] = "dsStateA";
+char dsNameMeasure[100] = "dsMeasureA";
 
-char reportName[100] = "ryReport";
+char ldName[100] = "MONT";
+
+char reportNameState[100] = "brdbStateA";
+char reportNameMeasure[100] = "urdbMeasureA";
+
+char lnState[100]="GGIO1";
+char lnMeasure[100]="MMXN1";
 // --------------------------------------------
 
 /**
@@ -102,37 +105,43 @@ void IEC61850ParseConfig(char *cfgStr) {
     ini_t *config = ini_load(ini_file_path);
 
     ini_sget(config, "61850", "iedName", "%s", iedName);
-    ini_sget(config, "61850", "dsName", "%s", dsName);
+
+    ini_sget(config, "61850", "dsInputName", "%s", dsNameState);
+    ini_sget(config, "61850", "dsAnalogName", "%s", dsNameMeasure);
+
     ini_sget(config, "61850", "ldName", "%s", ldName);
-    ini_sget(config, "61850", "lnValue", "%s", lnValue);
-    ini_sget(config, "61850", "lnValueInput", "%s", lnValueInput);
-    ini_sget(config, "61850", "lnValueAnalog", "%s", lnValueAnalog);
-    ini_sget(config, "61850", "reportName", "%s", reportName);
+
+    ini_sget(config, "61850", "reportName", "%s", reportNameState);
+    ini_sget(config, "61850", "reportName", "%s", reportNameMeasure);
+
     ini_sget(config, "61850", "port", "%d", &iedPort);
 
     ini_free(config);
-    // ---------------------------------------------
 
+
+    // --------------清理以前的61850配置---------------
     IEC61850Cleanup();
     IEC61850CleanConfig();
 
+
+    // ------------------- 61850 节点变量 -----------------
     RY_61850_LN *ln_rec;    // 建立的新的配置文件的节点
 
+
     // --------------------------- 61850 模型-------------------------------------
-    model = IedModel_create(iedName);
+    model = IedModel_create(iedName);                                   // 新建61850模型
 
-    LogicalDevice *logic_device = LogicalDevice_create(ldName, model);
+    LogicalDevice *logic_device = LogicalDevice_create(ldName, model);  // 61850 逻辑设备
 
-    LogicalNode *lln0 = LogicalNode_create("LLN0", logic_device);
-
-    DataObject *lln0_mod = CDC_ENS_create("Mod", (ModelNode *) lln0, 0);
-    DataObject *lln0_health = CDC_ENS_create("Health", (ModelNode *) lln0, 0);
+    LogicalNode *lln0 = LogicalNode_create("LLN0", logic_device);       // LL0 控制节点
 
     SettingGroupControlBlock_create(lln0, 1, 1);
 
 
-    // 生成报告
-    DataSet *dataSet = DataSet_create(dsName, lln0);
+    // 数据集
+    DataSet *dataSetInput = DataSet_create(dsNameState, lln0);
+    DataSet *dataSetAnalog = DataSet_create(dsNameMeasure, lln0);
+
 
     // 新的节点变量
     LogicalNode *logicalNode;             // 逻辑节点
@@ -177,7 +186,7 @@ void IEC61850ParseConfig(char *cfgStr) {
 
                 // 报告数据
                 sprintf(rpt_buf, "%s%s%s%s", str_buf, "$ST$", lnValue, "$stVal");
-                DataSetEntry_create(dataSet, rpt_buf, -1, NULL);
+                DataSetEntry_create(dataSetInput, rpt_buf, -1, NULL);
 
                 break;
             case LN_TYPE_ANALOG:            // 模拟量节点
@@ -193,8 +202,8 @@ void IEC61850ParseConfig(char *cfgStr) {
                 ln_rec->ln = logicalNode;
 
                 // 报告数据
-                sprintf(rpt_buf, "%s%s%s%s", str_buf, "$MX$", lnValue, "$instMag");
-                DataSetEntry_create(dataSet, rpt_buf, -1, NULL);
+                sprintf(rpt_buf, "%s%s%s%s", str_buf, "$MX$", lnValue, "$instMag$f");
+                DataSetEntry_create(dataSetAnalog, rpt_buf, -1, NULL);
 
                 break;
             case LN_TYPE_SWITCH:            // 开关节点
@@ -209,10 +218,10 @@ void IEC61850ParseConfig(char *cfgStr) {
 
 
     // 生成报告
-    uint8_t rptOptions = RPT_OPT_SEQ_NUM | RPT_OPT_TIME_STAMP | RPT_OPT_REASON_FOR_INCLUSION;
+    uint8_t rptOptions = RPT_OPT_SEQ_NUM | RPT_OPT_TIME_STAMP | RPT_OPT_REASON_FOR_INCLUSION | RPT_OPT_DATA_SET |RPT_OPT_DATA_REFERENCE;
 
-    ReportControlBlock_create(reportName, lln0, reportName, false, dsName, 1, TRG_OPT_DATA_CHANGED,
-                              rptOptions, 50, 0);
+    ReportControlBlock_create(reportNameState, lln0, reportNameState, false, dsNameState, 1, TRG_OPT_DATA_CHANGED, rptOptions, 50, 0);
+    ReportControlBlock_create(reportNameMeasure, lln0, reportNameMeasure, false, dsNameMeasure, 1, TRG_OPT_DATA_CHANGED, rptOptions, 50, 0);
     //ReportControlBlock_create("events01", lln0, "events01", false, NULL, 1, TRG_OPT_DATA_CHANGED, rptOptions, 50, 0);
     //ReportControlBlock_create("events02", lln0, "events02", false, dataSet, 1, TRG_OPT_DATA_CHANGED, rptOptions, 50, 0);
 
@@ -334,7 +343,10 @@ void IEC61850UpdateDevice(char *str) {
             IEC61850UpdateAnalog(ln_rec->ln, timestamp, state_float);
             break;
     }
+
+
     IedServer_unlockDataModel(iedServer);
+
 
     // 释放资源
     json_value_free(root_value);
