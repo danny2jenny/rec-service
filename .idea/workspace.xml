@@ -16,16 +16,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="985c589a-e1df-4a86-bdf7-7f14cbd05596" name="Default" comment="">
+    <list default="true" id="985c589a-e1df-4a86-bdf7-7f14cbd05596" name="Default" comment="代码测试&#10;没有实际的控制">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" afterPath="$PROJECT_DIR$/CMakeLists.txt" />
-      <change beforePath="$PROJECT_DIR$/bin/RY_Service" afterPath="$PROJECT_DIR$/bin/RY_Service" />
-      <change beforePath="$PROJECT_DIR$/bin/cfg.ini" afterPath="$PROJECT_DIR$/bin/cfg.ini" />
-      <change beforePath="$PROJECT_DIR$/src/61850-cfg.c" afterPath="$PROJECT_DIR$/src/test/61850-cfg.c" />
-      <change beforePath="$PROJECT_DIR$/src/61850_static.c" afterPath="$PROJECT_DIR$/src/test/61850_static.c" />
-      <change beforePath="$PROJECT_DIR$/src/ry_config.h" afterPath="$PROJECT_DIR$/src/ry_config.h" />
-      <change beforePath="$PROJECT_DIR$/src/ry_iec61850.c" afterPath="$PROJECT_DIR$/src/ry_iec61850.c" />
-      <change beforePath="$PROJECT_DIR$/src/test_dynamic.c" afterPath="$PROJECT_DIR$/src/test/test_dynamic.c" />
+      <change beforePath="$PROJECT_DIR$/src/dny-model/XJ-61850.c" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/dny-model/XJ-61850.h" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/test/61850_static.c" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/cmake-build-relwithdebinfo/" />
@@ -252,6 +247,11 @@
             <path>
               <item name="RY_Service" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
               <item name="rec-service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RY_Service" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
+              <item name="rec-service" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -617,7 +617,7 @@
       <workItem from="1514519310875" duration="100000" />
       <workItem from="1514519505188" duration="15591000" />
       <workItem from="1514594785051" duration="4442000" />
-      <workItem from="1514685917832" duration="17641000" />
+      <workItem from="1514685917832" duration="17858000" />
     </task>
     <task id="LOCAL-00001" summary="初始化版本">
       <created>1490217132985</created>
@@ -759,11 +759,18 @@
       <option name="project" value="LOCAL" />
       <updated>1514692612349</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="代码测试&#10;没有实际的控制">
+      <created>1514724806721</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1514724806721</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="375509000" />
+    <option name="totallyTimeSpent" value="375726000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -890,7 +897,8 @@
     <MESSAGE value="静态哭不能放在 lib 中，不知道为什么" />
     <MESSAGE value="增加配置文件，不用命令行指定参数了。" />
     <MESSAGE value="使用 config 模式。&#10;ivs.cid 文件已经验证过，可以作为以后的模板使用。" />
-    <option name="LAST_COMMIT_MESSAGE" value="使用 config 模式。&#10;ivs.cid 文件已经验证过，可以作为以后的模板使用。" />
+    <MESSAGE value="代码测试&#10;没有实际的控制" />
+    <option name="LAST_COMMIT_MESSAGE" value="代码测试&#10;没有实际的控制" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -939,13 +947,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/test_dynamic.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="60" column="23" lean-forward="false" selection-start-line="60" selection-start-column="23" selection-end-line="60" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -1080,9 +1081,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="63" column="34" lean-forward="false" selection-start-line="63" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#37#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1094,20 +1093,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/ry_inc.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="6" lean-forward="true" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/61850_static.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="325">
           <caret line="102" column="86" lean-forward="false" selection-start-line="102" selection-start-column="60" selection-end-line="102" selection-end-column="86" />
-          <folding>
-            <element signature="e#123#160#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1131,14 +1121,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="235">
           <caret line="23" column="6" lean-forward="true" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/parson/parson.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="1101" column="4" lean-forward="false" selection-start-line="1101" selection-start-column="4" selection-end-line="1101" selection-end-column="4" />
           <folding />
         </state>
       </provider>
@@ -1259,6 +1241,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="214">
           <caret line="260" column="40" lean-forward="false" selection-start-line="260" selection-start-column="35" selection-end-line="260" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/parson/parson.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="1101" column="4" lean-forward="false" selection-start-line="1101" selection-start-column="4" selection-end-line="1101" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/ry_inc.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="6" lean-forward="true" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/test_dynamic.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="900">
+          <caret line="53" column="31" lean-forward="true" selection-start-line="53" selection-start-column="31" selection-end-line="53" selection-end-column="31" />
           <folding />
         </state>
       </provider>
