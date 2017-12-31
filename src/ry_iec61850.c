@@ -22,13 +22,8 @@
 #include "ry_mqtt.h"
 #include "ini.h"
 
-// 服务端口号
-int iedPort = RY_61850_PORT;
-
-volatile int inited_61850 = 0; // 是否得到过61850的配置
-
-// 61850 设备配置列表
-RY_61850_LN *ry_ln_list = NULL;
+// 是否得到过61850的配置
+volatile int inited_61850 = 0;
 
 // 61850 模型
 IedModel *model = NULL;
@@ -36,21 +31,39 @@ IedModel *model = NULL;
 // 61850 服务
 IedServer iedServer = NULL;
 
-// -----------------节点配置--------------------
+// -----------------61850 配置信息--------------------
+// 服务端口号
+int iedPort = RY_61850_PORT;
 
+// 配置文件
+char cfgFile[200] = "/home/danny/ivs.cfg";
+
+// IED 和 LD 名称
 char iedName[100] = "QQ1101";
-
-char dsNameState[100] = "dsStateA";
-char dsNameMeasure[100] = "dsMeasureA";
-
 char ldName[100] = "MONT";
 
-char reportNameState[100] = "brdbStateA";
-char reportNameMeasure[100] = "urdbMeasureA";
+// 遥测节点
+char stateValue[100] = "GGIO1.Ind%d.stVal";
+char stateTime[100] = "GGIO1.Ind%d.t";
+char stateQ[100] = "GGIO1.Ind%d.q";
 
-char lnState[100]="GGIO1";
-char lnMeasure[100]="MMXN1";
+// 遥信节点
+char mesureValue[100] = "MMXN1.AnIn%d.mag.f";
+char mesureTime[100] = "MMXN1.AnIn%d.t";
+char mesureQ[100] = "MMXN1.AnIn%d.q";
+
+// 开关节点
+char swValue[100] = "CSWI1.SW%d.stVal";
+char swTime[100] = "CSWI1.SW%d.t";
+char swQ[100] = "CSWI1.SW%d.q";
+
+// 单点控制节点
+char swControl[100] = "CSWI1.SW%d";
+
 // --------------------------------------------
+
+char strBuf[500];                   // 字符串buffer
+char nodStr[200];                   // node 节点的字符串
 
 /**
  * 释放资源
@@ -68,33 +81,122 @@ void IEC61850Cleanup() {
  * 清除配置
  */
 void IEC61850CleanConfig() {
-    RY_61850_LN *device_ln, *tmp_nvr;
-    // 遍历 NVR 记录，删除所有的
-    HASH_ITER(hh, ry_ln_list, device_ln, tmp_nvr) {
-        HASH_DEL(ry_ln_list, device_ln);
-        free(device_ln);
-    }
 }
 
 /**
- * 更新数据
+ * 更新一个节点的值
+ * @param type
+ * @param val
  */
+void updateNodeValue(int type, int device_id, char *val) {
 
-void IEC61850UpdateBoolean(LogicalNode *ln, uint64_t timestamp, bool value) {
-    DataAttribute *dataAttribute;
-    dataAttribute = (DataAttribute *) ModelNode_getChild((ModelNode *) ln, "value.stVal");
-    IedServer_updateBooleanAttributeValue(iedServer, dataAttribute, value);
+    uint64_t timestamp = Hal_getTimeInMs();
+    DataAttribute *da;
 
-    dataAttribute = (DataAttribute *) ModelNode_getChild((ModelNode *) ln, "value.t");
-    IedServer_updateUTCTimeAttributeValue(iedServer, dataAttribute, timestamp);
+    // 首先判断val是不是空
+    bool isNull;
+
+    if (strcasecmp(val, "NULL") == 0) {
+        isNull = true;
+    } else {
+        isNull = false;
+    }
+
+    switch (type) {
+        case LN_TYPE_INPUT:
+            // 更新值
+            sprintf(nodStr, stateValue, device_id);
+            sprintf(strBuf, "%s%s/%s", iedName, ldName, nodStr);
+            da = (DataAttribute *) IedModel_getModelNodeByObjectReference(model, strBuf);
+            if (da == NULL) {
+                return;
+            }
+
+            if (isNull) {
+                IedServer_updateBooleanAttributeValue(iedServer, da, false);
+            } else {
+                if (strcasecmp(val, "true") == 0) {
+                    IedServer_updateBooleanAttributeValue(iedServer, da, true);
+                } else {
+                    IedServer_updateBooleanAttributeValue(iedServer, da, false);
+                }
+            }
+
+            // 更新时间
+            sprintf(nodStr, stateTime, device_id);
+            sprintf(strBuf, "%s%s/%s", iedName, ldName, nodStr);
+            da = (DataAttribute *) IedModel_getModelNodeByObjectReference(model, strBuf);
+            if (da == NULL) {
+                return;
+            }
+            IedServer_updateUTCTimeAttributeValue(iedServer, da, timestamp);
+
+            break;
+        case LN_TYPE_ANALOG:
+            // 更新值
+            sprintf(nodStr, mesureValue, device_id);
+            sprintf(strBuf, "%s%s/%s", iedName, ldName, nodStr);
+            da = (DataAttribute *) IedModel_getModelNodeByObjectReference(model, strBuf);
+            if (da == NULL) {
+                return;
+            }
+            if (isNull) {
+                IedServer_updateFloatAttributeValue(iedServer, da, 0);
+            } else {
+                IedServer_updateFloatAttributeValue(iedServer, da, atof(val));
+
+            }
+
+            // 更新时间
+            sprintf(nodStr, mesureTime, device_id);
+            sprintf(strBuf, "%s%s/%s", iedName, ldName, nodStr);
+            da = (DataAttribute *) IedModel_getModelNodeByObjectReference(model, strBuf);
+            if (da == NULL) {
+                return;
+            }
+            IedServer_updateUTCTimeAttributeValue(iedServer, da, timestamp);
+
+            break;
+        case LN_TYPE_SWITCH:
+            // 更新值
+            sprintf(nodStr, swValue, device_id);
+            sprintf(strBuf, "%s%s/%s", iedName, ldName, nodStr);
+            da = (DataAttribute *) IedModel_getModelNodeByObjectReference(model, strBuf);
+            if (da == NULL) {
+                return;
+            }
+            if (isNull) {
+                IedServer_updateFloatAttributeValue(iedServer, da, 0);
+            } else {
+                IedServer_updateFloatAttributeValue(iedServer, da, atoi(val));
+
+            }
+
+            // 更新时间
+            sprintf(nodStr, swTime, device_id);
+            sprintf(strBuf, "%s%s/%s", iedName, ldName, nodStr);
+            da = (DataAttribute *) IedModel_getModelNodeByObjectReference(model, strBuf);
+            if (da == NULL) {
+                return;
+            }
+            IedServer_updateUTCTimeAttributeValue(iedServer, da, timestamp);
+
+            break;
+    }
 }
 
-void IEC61850UpdateAnalog(LogicalNode *ln, uint64_t timestamp, float value) {
-    DataAttribute *dataAttribute;
-    dataAttribute = (DataAttribute *) ModelNode_getChild((ModelNode *) ln, "value.instMag.f");
-    IedServer_updateFloatAttributeValue(iedServer, dataAttribute, value);
-    dataAttribute = (DataAttribute *) ModelNode_getChild((ModelNode *) ln, "value.t");
-    IedServer_updateUTCTimeAttributeValue(iedServer, dataAttribute, timestamp);
+
+/**
+ * 控制回调
+ * @param parameter
+ * @param value
+ * @param test
+ * @return
+ */
+static ControlHandlerResult controlHandlerForBinaryOutput(void *parameter, MmsValue *value, bool test) {
+    uint64_t timestamp = Hal_getTimeInMs();
+    printf("Receive Control Message!!!!!%s \n", parameter);
+
 }
 
 /**
@@ -104,51 +206,58 @@ void IEC61850ParseConfig(char *cfgStr) {
     //-----------------读取配置-----------------------
     ini_t *config = ini_load(ini_file_path);
 
-    ini_sget(config, "61850", "iedName", "%s", iedName);
-
-    ini_sget(config, "61850", "dsInputName", "%s", dsNameState);
-    ini_sget(config, "61850", "dsAnalogName", "%s", dsNameMeasure);
-
-    ini_sget(config, "61850", "ldName", "%s", ldName);
-
-    ini_sget(config, "61850", "reportName", "%s", reportNameState);
-    ini_sget(config, "61850", "reportName", "%s", reportNameMeasure);
-
+    // 端口号
     ini_sget(config, "61850", "port", "%d", &iedPort);
 
-    ini_free(config);
+    // 配置文件
+    ini_sget(config, "61850", "cfgFile", "%s", cfgFile);
 
+    // IED 和 LD
+    ini_sget(config, "61850", "iedName", "%s", iedName);
+    ini_sget(config, "61850", "ldName", "%s", ldName);
+
+    // 遥信
+    ini_sget(config, "61850", "stateValue", "%s", mesureValue);
+    ini_sget(config, "61850", "stateTime", "%s", mesureValue);
+    ini_sget(config, "61850", "stateQ", "%s", mesureValue);
+
+    // 遥测
+    ini_sget(config, "61850", "mesureValue", "%s", mesureValue);
+    ini_sget(config, "61850", "mesureTime", "%s", mesureTime);
+    ini_sget(config, "61850", "mesureQ", "%s", mesureQ);
+
+    // 遥测
+    ini_sget(config, "61850", "mesureValue", "%s", mesureValue);
+    ini_sget(config, "61850", "mesureTime", "%s", mesureTime);
+    ini_sget(config, "61850", "mesureQ", "%s", mesureQ);
+
+    // 单点控制节点
+    ini_sget(config, "61850", "swControl", "%s", swControl);
+
+    ini_free(config);
 
     // --------------清理以前的61850配置---------------
     IEC61850Cleanup();
     IEC61850CleanConfig();
 
+    // ------------------读取模型配置-----------------------
+    /* open configuration file */
+    FileHandle configFile = FileSystem_openFile(cfgFile, false);
 
-    // ------------------- 61850 节点变量 -----------------
-    RY_61850_LN *ln_rec;    // 建立的新的配置文件的节点
+    if (configFile == NULL) {
+        printf("Error opening config file!\n");
+        return;
+    }
 
+    /* parse the configuration file and create the data model */
+    model = ConfigFileParser_createModelFromConfigFile(configFile);
 
-    // --------------------------- 61850 模型-------------------------------------
-    model = IedModel_create(iedName);                                   // 新建61850模型
+    FileSystem_closeFile(configFile);
 
-    LogicalDevice *logic_device = LogicalDevice_create(ldName, model);  // 61850 逻辑设备
-
-    LogicalNode *lln0 = LogicalNode_create("LLN0", logic_device);       // LL0 控制节点
-
-    SettingGroupControlBlock_create(lln0, 1, 1);
-
-
-    // 数据集
-    DataSet *dataSetInput = DataSet_create(dsNameState, lln0);
-    DataSet *dataSetAnalog = DataSet_create(dsNameMeasure, lln0);
-
-
-    // 新的节点变量
-    LogicalNode *logicalNode;             // 逻辑节点
-    char str_buf[100];                    // 字符串buffer
-    char rpt_buf[500];                    // 报告相关的字符串
-
-    // ---------------------------------------------------------------------------
+    if (model == NULL) {
+        printf("Error parsing config file!\n");
+        return;
+    }
 
     // *************json处理 生成61850模型*******************
     JSON_Value *root_value;
@@ -161,93 +270,18 @@ void IEC61850ParseConfig(char *cfgStr) {
     json_array = json_object_get_array(root_object, "payload");     //json payload 数组
 
 
-    int i;
-    for (i = 0; i < json_array_get_count(json_array); i++) {
-        device_all_object = json_array_get_object(json_array, i);
-
-        device_object = json_object_get_object(device_all_object, "device");
-
-        ln_rec = malloc(sizeof(RY_61850_LN));
-        ln_rec->id = json_object_get_number(device_object, "id");
-        ln_rec->type = json_object_get_number(device_object, "type");
-
-        switch (ln_rec->type) {
-            case LN_TYPE_INPUT:             // 输入节点
-                // 得到逻辑节点的名称
-                strcpy(str_buf, LN_NAME_INPUT);                                     //LN_NAME_INPUT = CALH
-                sprintf(str_buf + strlen(LN_NAME_INPUT), "%d", ln_rec->id);
-
-                // 创建逻辑节点了数据
-                logicalNode = LogicalNode_create(str_buf, logic_device);
-                CDC_SPC_create("value", (ModelNode *) logicalNode, 0, false);
-
-                // 逻辑节点保存在配置文件
-                ln_rec->ln = logicalNode;
-
-                // 报告数据
-                sprintf(rpt_buf, "%s%s%s%s", str_buf, "$ST$", lnValue, "$stVal");
-                DataSetEntry_create(dataSetInput, rpt_buf, -1, NULL);
-
-                break;
-            case LN_TYPE_ANALOG:            // 模拟量节点
-                // 得到逻辑节点的名称
-                strcpy(str_buf, LN_NAME_ANALOG);                                    //LN_NAME_INPUT = MMXU
-                sprintf(str_buf + strlen(LN_NAME_ANALOG), "%d", ln_rec->id);
-
-                // 创建逻辑节点和数据
-                logicalNode = LogicalNode_create(str_buf, logic_device);
-                CDC_SAV_create("value", (ModelNode *) logicalNode, 0, false);
-
-                // 逻辑节点保存在配置文件
-                ln_rec->ln = logicalNode;
-
-                // 报告数据
-                sprintf(rpt_buf, "%s%s%s%s", str_buf, "$MX$", lnValue, "$instMag$f");
-                DataSetEntry_create(dataSetAnalog, rpt_buf, -1, NULL);
-
-                break;
-            case LN_TYPE_SWITCH:            // 开关节点
-                // 用于开关控制，暂时没有实现
-                //LN_NAME_INPUT = GGIO
-
-                break;
-        }
-
-        HASH_ADD_INT(ry_ln_list, id, ln_rec);
-    }
-
-
-    // 生成报告
-    uint8_t rptOptions = RPT_OPT_SEQ_NUM | RPT_OPT_TIME_STAMP | RPT_OPT_REASON_FOR_INCLUSION | RPT_OPT_DATA_SET |RPT_OPT_DATA_REFERENCE;
-
-    ReportControlBlock_create(reportNameState, lln0, reportNameState, false, dsNameState, 1, TRG_OPT_DATA_CHANGED, rptOptions, 50, 0);
-    ReportControlBlock_create(reportNameMeasure, lln0, reportNameMeasure, false, dsNameMeasure, 1, TRG_OPT_DATA_CHANGED, rptOptions, 50, 0);
-    //ReportControlBlock_create("events01", lln0, "events01", false, NULL, 1, TRG_OPT_DATA_CHANGED, rptOptions, 50, 0);
-    //ReportControlBlock_create("events02", lln0, "events02", false, dataSet, 1, TRG_OPT_DATA_CHANGED, rptOptions, 50, 0);
-
-    /**
-     * todo: 开启Goose
-     * 需要指定网卡，并要使用特权用户
-     */
-
-    // GSEControlBlock_create("gse01", lln0, "events01", "events", 1, false, 200, 3000);
-
-
     // 启动服务器
     IEC61850Start();
 
     // -------------------- 为模型填充初始值 ---------------------
 
     IedServer_lockDataModel(iedServer);
+    char *val;                  // 值
+    int device_type, device_id;
+    DataObject *ctlNode;        // 控制节点
+    //遍历 json
+    int i;
 
-    bool state_bool;            // 逻辑量
-    float state_float;          // 浮点数
-    uint64_t timestamp;         // 更新时间
-    timestamp = Hal_getTimeInMs();
-
-    int device_id;
-
-    // 再次遍历 json
     for (i = 0; i < json_array_get_count(json_array); i++) {
         device_all_object = json_array_get_object(json_array, i);
 
@@ -255,26 +289,30 @@ void IEC61850ParseConfig(char *cfgStr) {
         runtime_object = json_object_get_object(device_all_object, "runtime");
 
         device_id = json_object_get_number(device_object, "id");
+        device_type = json_object_get_number(device_object, "type");
 
-        // 通过device id 查找列表中的对象
-        HASH_FIND_INT(ry_ln_list, &device_id, ln_rec);
-
-        if (ln_rec == NULL) {
-            continue;
-        }
-
-        switch (ln_rec->type) {
+        // 设置值
+        switch (device_type) {
             case LN_TYPE_INPUT:             // 输入节点
-                state_bool = json_object_get_boolean(runtime_object, "state");
-                IEC61850UpdateBoolean(ln_rec->ln, timestamp, state_bool);
+                val = json_object_get_string(runtime_object, "state");
                 break;
             case LN_TYPE_ANALOG:            // 模拟量节点
-                state_float = json_object_dotget_number(runtime_object, "state.value");
-                IEC61850UpdateAnalog(ln_rec->ln, timestamp, state_float);
+                val = json_object_get_string(runtime_object, "state.value");
                 break;
             case LN_TYPE_SWITCH:            // 开关节点
+                val = json_object_get_string(runtime_object, "state.output");
+
+                // 设置回调
+                sprintf(nodStr, swControl, device_id);
+                sprintf(strBuf, "%s%s/%s", iedName, ldName, nodStr);
+                ctlNode = IedModel_getModelNodeByObjectReference(model, strBuf);
+                if (ctlNode) {
+                    IedServer_setControlHandler(iedServer, ctlNode, (ControlHandler) controlHandlerForBinaryOutput,
+                                                device_id);
+                }
                 break;
         }
+        updateNodeValue(device_type, device_id, val);
 
     }
 
@@ -319,31 +357,21 @@ void IEC61850UpdateDevice(char *str) {
     device_type = json_object_dotget_number(runtime_object, "device.type");
     device_id = json_object_dotget_number(runtime_object, "device.id");
 
-
-    // 通过device id 查找列表中的对象
-    HASH_FIND_INT(ry_ln_list, &device_id, ln_rec);
-
-    if (ln_rec == NULL) {
-        return;
-    }
-
-    bool state_bool;            // 逻辑量
-    float state_float;          // 浮点数
-
-    timestamp = Hal_getTimeInMs();
-
+    char *val;
     IedServer_lockDataModel(iedServer);
+    // 设置值
     switch (device_type) {
-        case LN_TYPE_INPUT:
-            state_bool = json_object_dotget_boolean(runtime_object, "runtime.state");
-            IEC61850UpdateBoolean(ln_rec->ln, timestamp, state_bool);
+        case LN_TYPE_INPUT:             // 输入节点
+            val = json_object_get_string(runtime_object, "state");
             break;
-        case LN_TYPE_ANALOG:
-            state_float = json_object_dotget_number(runtime_object, "runtime.state.value");
-            IEC61850UpdateAnalog(ln_rec->ln, timestamp, state_float);
+        case LN_TYPE_ANALOG:            // 模拟量节点
+            val = json_object_get_string(runtime_object, "state.value");
+            break;
+        case LN_TYPE_SWITCH:            // 开关节点
+            val = json_object_get_string(runtime_object, "state.output");
             break;
     }
-
+    updateNodeValue(device_type, device_id, val);
 
     IedServer_unlockDataModel(iedServer);
 

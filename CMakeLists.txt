@@ -47,12 +47,12 @@ set(SOURCE_FILES
         src/ry_nvr_mgr.c
         src/ry_iec61850.c
         src/parson/parson.c
-        src/dny-model/XJ-61850.c src/61850-cfg.c)
+        )
 
 # 测试程序
-add_executable(test_dny "src/test_dynamic.c")
+add_executable(test_dny "src/test/test_dynamic.c")
 
-add_executable(61850-cfg src/61850-cfg.c)
+add_executable(61850-cfg src/test/61850-cfg.c)
 
 # 主程序
 add_executable(RY_Service ${SOURCE_FILES})
