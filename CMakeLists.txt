@@ -50,12 +50,12 @@ set(SOURCE_FILES
         )
 
 # 测试程序
-add_executable(test_dny "src/test/test_dynamic.c")
+# add_executable(test_dny "src/test/test_dynamic.c")
 
-add_executable(61850-cfg src/test/61850-cfg.c)
+# add_executable(61850-cfg src/test/61850-cfg.c)
 
 # 主程序
-add_executable(RY_Service ${SOURCE_FILES})
+add_executable(rec-srv ${SOURCE_FILES})
 
 # 海康的接口
 ADD_LIBRARY(nvr2001 SHARED src/nvr_adps/hk_nvr.cpp)

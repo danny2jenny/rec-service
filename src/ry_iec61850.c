@@ -78,29 +78,14 @@ void IEC61850Cleanup() {
 }
 
 /**
- * 清除配置
- */
-void IEC61850CleanConfig() {
-}
-
-/**
  * 更新一个节点的值
  * @param type
  * @param val
  */
-void updateNodeValue(int type, int device_id, char *val) {
+void updateNodeValue(int type, int device_id, float val) {
 
     uint64_t timestamp = Hal_getTimeInMs();
     DataAttribute *da;
-
-    // 首先判断val是不是空
-    bool isNull;
-
-    if (strcasecmp(val, "NULL") == 0) {
-        isNull = true;
-    } else {
-        isNull = false;
-    }
 
     switch (type) {
         case LN_TYPE_INPUT:
@@ -112,14 +97,12 @@ void updateNodeValue(int type, int device_id, char *val) {
                 return;
             }
 
-            if (isNull) {
+            if (val>0) {
+                IedServer_updateBooleanAttributeValue(iedServer, da, true);
+            }
+
+            if (val<=0){
                 IedServer_updateBooleanAttributeValue(iedServer, da, false);
-            } else {
-                if (strcasecmp(val, "true") == 0) {
-                    IedServer_updateBooleanAttributeValue(iedServer, da, true);
-                } else {
-                    IedServer_updateBooleanAttributeValue(iedServer, da, false);
-                }
             }
 
             // 更新时间
@@ -140,12 +123,8 @@ void updateNodeValue(int type, int device_id, char *val) {
             if (da == NULL) {
                 return;
             }
-            if (isNull) {
-                IedServer_updateFloatAttributeValue(iedServer, da, 0);
-            } else {
-                IedServer_updateFloatAttributeValue(iedServer, da, atof(val));
 
-            }
+                IedServer_updateFloatAttributeValue(iedServer, da, val);
 
             // 更新时间
             sprintf(nodStr, mesureTime, device_id);
@@ -165,12 +144,15 @@ void updateNodeValue(int type, int device_id, char *val) {
             if (da == NULL) {
                 return;
             }
-            if (isNull) {
-                IedServer_updateFloatAttributeValue(iedServer, da, 0);
-            } else {
-                IedServer_updateFloatAttributeValue(iedServer, da, atoi(val));
 
+            if (val>0) {
+                IedServer_updateBooleanAttributeValue(iedServer, da, true);
             }
+
+            if (val<=0){
+                IedServer_updateBooleanAttributeValue(iedServer, da, false);
+            }
+
 
             // 更新时间
             sprintf(nodStr, swTime, device_id);
@@ -195,7 +177,7 @@ void updateNodeValue(int type, int device_id, char *val) {
  */
 static ControlHandlerResult controlHandlerForBinaryOutput(void *parameter, MmsValue *value, bool test) {
     uint64_t timestamp = Hal_getTimeInMs();
-    printf("Receive Control Message!!!!!%s \n", parameter);
+    printf("Receive Control Message!!!!! \n");
 
 }
 
@@ -208,29 +190,23 @@ void IEC61850ParseConfig(char *cfgStr) {
 
     // 端口号
     ini_sget(config, "61850", "port", "%d", &iedPort);
-
     // 配置文件
     ini_sget(config, "61850", "cfgFile", "%s", cfgFile);
-
     // IED 和 LD
     ini_sget(config, "61850", "iedName", "%s", iedName);
     ini_sget(config, "61850", "ldName", "%s", ldName);
-
     // 遥信
     ini_sget(config, "61850", "stateValue", "%s", mesureValue);
     ini_sget(config, "61850", "stateTime", "%s", mesureValue);
     ini_sget(config, "61850", "stateQ", "%s", mesureValue);
-
     // 遥测
     ini_sget(config, "61850", "mesureValue", "%s", mesureValue);
     ini_sget(config, "61850", "mesureTime", "%s", mesureTime);
     ini_sget(config, "61850", "mesureQ", "%s", mesureQ);
-
     // 遥测
     ini_sget(config, "61850", "mesureValue", "%s", mesureValue);
     ini_sget(config, "61850", "mesureTime", "%s", mesureTime);
     ini_sget(config, "61850", "mesureQ", "%s", mesureQ);
-
     // 单点控制节点
     ini_sget(config, "61850", "swControl", "%s", swControl);
 
@@ -238,7 +214,6 @@ void IEC61850ParseConfig(char *cfgStr) {
 
     // --------------清理以前的61850配置---------------
     IEC61850Cleanup();
-    IEC61850CleanConfig();
 
     // ------------------读取模型配置-----------------------
     /* open configuration file */
@@ -276,7 +251,7 @@ void IEC61850ParseConfig(char *cfgStr) {
     // -------------------- 为模型填充初始值 ---------------------
 
     IedServer_lockDataModel(iedServer);
-    char *val;                  // 值
+    float val;                  // 值
     int device_type, device_id;
     DataObject *ctlNode;        // 控制节点
     //遍历 json
@@ -294,18 +269,18 @@ void IEC61850ParseConfig(char *cfgStr) {
         // 设置值
         switch (device_type) {
             case LN_TYPE_INPUT:             // 输入节点
-                val = json_object_get_string(runtime_object, "state");
+                val = json_object_dotget_boolean(runtime_object, "state");
                 break;
             case LN_TYPE_ANALOG:            // 模拟量节点
-                val = json_object_get_string(runtime_object, "state.value");
+                val = json_object_dotget_number(runtime_object, "state.value");
                 break;
             case LN_TYPE_SWITCH:            // 开关节点
-                val = json_object_get_string(runtime_object, "state.output");
+                val = json_object_dotget_boolean(runtime_object, "state.output");
 
                 // 设置回调
                 sprintf(nodStr, swControl, device_id);
                 sprintf(strBuf, "%s%s/%s", iedName, ldName, nodStr);
-                ctlNode = IedModel_getModelNodeByObjectReference(model, strBuf);
+                ctlNode = (DataObject *) IedModel_getModelNodeByObjectReference(model, strBuf);
                 if (ctlNode) {
                     IedServer_setControlHandler(iedServer, ctlNode, (ControlHandler) controlHandlerForBinaryOutput,
                                                 device_id);
@@ -357,18 +332,18 @@ void IEC61850UpdateDevice(char *str) {
     device_type = json_object_dotget_number(runtime_object, "device.type");
     device_id = json_object_dotget_number(runtime_object, "device.id");
 
-    char *val;
+    float val;
     IedServer_lockDataModel(iedServer);
     // 设置值
     switch (device_type) {
         case LN_TYPE_INPUT:             // 输入节点
-            val = json_object_get_string(runtime_object, "state");
+            val = json_object_dotget_boolean(runtime_object, "state");
             break;
         case LN_TYPE_ANALOG:            // 模拟量节点
-            val = json_object_get_string(runtime_object, "state.value");
+            val = json_object_dotget_number(runtime_object, "state.value");
             break;
         case LN_TYPE_SWITCH:            // 开关节点
-            val = json_object_get_string(runtime_object, "state.output");
+            val = json_object_dotget_boolean(runtime_object, "state.output");
             break;
     }
     updateNodeValue(device_type, device_id, val);
