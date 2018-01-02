@@ -58,6 +58,7 @@ void updateNodeValue(int type, int device_id, float val) {
 
     uint64_t timestamp = Hal_getTimeInMs();
     ModelNode *mn;
+    int stateVal = 20;
 
     switch (type) {
         case LN_TYPE_INPUT:
@@ -115,17 +116,16 @@ void updateNodeValue(int type, int device_id, float val) {
 
             break;
         case LN_TYPE_SWITCH:
+            stateVal = val;
             // 更新值
             mn = IedModel_getModelNodeByShortAddress(model, device_id);
             if (mn == NULL) {
                 return;
             }
 
-            if (val > 0) {
+            if (stateVal == DEVICE_ON) {
                 IedServer_updateBooleanAttributeValue(iedServer, mn, true);
-            }
-
-            if (val <= 0) {
+            } else {
                 IedServer_updateBooleanAttributeValue(iedServer, mn, false);
             }
 
@@ -140,8 +140,6 @@ void updateNodeValue(int type, int device_id, float val) {
             if (mn){
                 IedServer_updateUTCTimeAttributeValue(iedServer, mn, timestamp);
             }
-
-
             break;
     }
 }
@@ -155,9 +153,35 @@ void updateNodeValue(int type, int device_id, float val) {
  * @return
  */
 static ControlHandlerResult controlHandlerForBinaryOutput(void *parameter, MmsValue *value, bool test) {
-    uint64_t timestamp = Hal_getTimeInMs();
-    printf("Receive Control Message!!!!! \n");
+    bool state = false;
+    state = MmsValue_getBoolean(value);
+    int device = parameter;
 
+    // 生成 Json 字符串
+    JSON_Value *root_value = json_value_init_object();
+    JSON_Object *root_object = json_value_get_object(root_value);
+    char *serialized_string = NULL;
+
+    json_object_set_number(root_object, "cmd", MQTT_CMD_61850_SWITCH);
+    json_object_set_null(root_object, "payload");
+
+
+    json_object_set_number(root_object, "device", (double)device);
+
+    if (state){
+        json_object_set_boolean(root_object, "val", true);
+    } else {
+        json_object_set_boolean(root_object, "val", false);
+    }
+
+    serialized_string = json_serialize_to_string_pretty(root_value);
+
+    // 发送请求
+    MqttPublish(RY_VIDEO_PUB_TOPIC, serialized_string, strlen(serialized_string));
+
+    // 释放资源
+    json_free_serialized_string(serialized_string);
+    json_value_free(root_value);
 }
 
 /**
@@ -237,7 +261,7 @@ void IEC61850ParseConfig(char *cfgStr) {
                 val = json_object_dotget_number(runtime_object, "state.value");
                 break;
             case LN_TYPE_SWITCH:            // 开关节点
-                val = json_object_dotget_boolean(runtime_object, "state.output");
+                val = json_object_dotget_number(runtime_object, "state.output");
 
                 // 设置回调
                 // 找到开关的ST
@@ -286,9 +310,6 @@ void IEC61850UpdateDevice(char *str) {
     JSON_Value *root_value;
     JSON_Object *root_object, *runtime_object;
     int device_type, device_id;
-    RY_61850_LN *ln_rec;        // 设备的节点
-    uint64_t timestamp;         // 更新时间
-
 
     root_value = json_parse_string(str);
     root_object = json_value_get_object(root_value);
@@ -302,19 +323,19 @@ void IEC61850UpdateDevice(char *str) {
     // 设置值
     switch (device_type) {
         case LN_TYPE_INPUT:             // 输入节点
-            val = json_object_dotget_boolean(runtime_object, "state");
+            val = json_object_dotget_boolean(runtime_object, "runtime.state");
             break;
         case LN_TYPE_ANALOG:            // 模拟量节点
-            val = json_object_dotget_number(runtime_object, "state.value");
+            val = json_object_dotget_number(runtime_object, "runtime.state.value");
             break;
         case LN_TYPE_SWITCH:            // 开关节点
-            val = json_object_dotget_boolean(runtime_object, "state.output");
+            val = json_object_dotget_number(runtime_object, "runtime.state.output");
             break;
     }
+
     updateNodeValue(device_type, device_id, val);
 
     IedServer_unlockDataModel(iedServer);
-
 
     // 释放资源
     json_value_free(root_value);

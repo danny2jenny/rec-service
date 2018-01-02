@@ -21,6 +21,9 @@ extern "C" {
 #define LN_TYPE_ANALOG   201
 #define LN_TYPE_SWITCH   101
 
+// device 常量
+#define DEVICE_ON       21
+#define DEVICE_OFF      20
 //------------------------------------
 #ifdef __cplusplus
 }

@@ -17,6 +17,7 @@ extern char * ini_file_path;                  // 当前路径
 #define MQTT_CMD_61850_UPDATE         102     // Update
 
 #define MQTT_CMD_61850_INIT_REQUEST   111     // 请求初始化
+#define MQTT_CMD_61850_SWITCH         120     // 开关控制
 
 
 // 61850 逻辑节点
