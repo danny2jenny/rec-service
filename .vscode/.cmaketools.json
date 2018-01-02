@@ -14,86 +14,9 @@
         "projects": [
           {
             "buildDirectory": "/home/danny/projects/rec-service/build",
-            "name": "RY_Service",
+            "name": "RY_SERVICE",
             "sourceDirectory": "/home/danny/projects/rec-service",
             "targets": [
-              {
-                "artifacts": [
-                  "/home/danny/projects/rec-service/bin/test_dny"
-                ],
-                "buildDirectory": "/home/danny/projects/rec-service/build",
-                "fileGroups": [
-                  {
-                    "compileFlags": "-g  ",
-                    "defines": [
-                      "_TEST"
-                    ],
-                    "includePath": [
-                      {
-                        "path": "/home/danny/projects/rec-service/include"
-                      },
-                      {
-                        "path": "/home/danny/projects/rec-service/src"
-                      }
-                    ],
-                    "isGenerated": false,
-                    "language": "C",
-                    "sources": [
-                      "src/test_dynamic.c"
-                    ]
-                  }
-                ],
-                "fullName": "test_dny",
-                "linkFlags": "-Wl,-rpath,'$ORIGIN'",
-                "linkLanguageFlags": "-g",
-                "linkLibraries": "-Wl,-rpath,/home/danny/projects/rec-service/bin -ldl -luv -lmosquitto -lhcnetsdk -liec61850 -lpthread",
-                "linkPath": "-L/home/danny/projects/rec-service/bin",
-                "linkerLanguage": "C",
-                "name": "test_dny",
-                "sourceDirectory": "/home/danny/projects/rec-service",
-                "type": "EXECUTABLE"
-              },
-              {
-                "artifacts": [
-                  "/home/danny/projects/rec-service/bin/RY_Service"
-                ],
-                "buildDirectory": "/home/danny/projects/rec-service/build",
-                "fileGroups": [
-                  {
-                    "compileFlags": "-g  ",
-                    "defines": [
-                      "_TEST"
-                    ],
-                    "includePath": [
-                      {
-                        "path": "/home/danny/projects/rec-service/include"
-                      },
-                      {
-                        "path": "/home/danny/projects/rec-service/src"
-                      }
-                    ],
-                    "isGenerated": false,
-                    "language": "C",
-                    "sources": [
-                      "src/ini.c",
-                      "src/main.c",
-                      "src/ry_mqtt.c",
-                      "src/ry_nvr_mgr.c",
-                      "src/ry_iec61850.c",
-                      "src/parson/parson.c"
-                    ]
-                  }
-                ],
-                "fullName": "RY_Service",
-                "linkFlags": "-Wl,-rpath,'$ORIGIN'",
-                "linkLanguageFlags": "-g",
-                "linkLibraries": "-Wl,-rpath,/home/danny/projects/rec-service/bin -ldl -luv -lmosquitto -lhcnetsdk -liec61850 -lpthread",
-                "linkPath": "-L/home/danny/projects/rec-service/bin",
-                "linkerLanguage": "C",
-                "name": "RY_Service",
-                "sourceDirectory": "/home/danny/projects/rec-service",
-                "type": "EXECUTABLE"
-              },
               {
                 "artifacts": [
                   "/home/danny/projects/rec-service/bin/libnvr2001.so"
@@ -129,13 +52,54 @@
                 "name": "nvr2001",
                 "sourceDirectory": "/home/danny/projects/rec-service",
                 "type": "SHARED_LIBRARY"
+              },
+              {
+                "artifacts": [
+                  "/home/danny/projects/rec-service/bin/rec-srv"
+                ],
+                "buildDirectory": "/home/danny/projects/rec-service/build",
+                "fileGroups": [
+                  {
+                    "compileFlags": "-g  ",
+                    "defines": [
+                      "_TEST"
+                    ],
+                    "includePath": [
+                      {
+                        "path": "/home/danny/projects/rec-service/include"
+                      },
+                      {
+                        "path": "/home/danny/projects/rec-service/src"
+                      }
+                    ],
+                    "isGenerated": false,
+                    "language": "C",
+                    "sources": [
+                      "src/ini.c",
+                      "src/main.c",
+                      "src/ry_mqtt.c",
+                      "src/ry_nvr_mgr.c",
+                      "src/ry_iec61850.c",
+                      "src/parson/parson.c"
+                    ]
+                  }
+                ],
+                "fullName": "rec-srv",
+                "linkFlags": "-Wl,-rpath,'$ORIGIN'",
+                "linkLanguageFlags": "-g",
+                "linkLibraries": "-Wl,-rpath,/home/danny/projects/rec-service/bin -ldl -luv -lmosquitto -lhcnetsdk -liec61850 -lpthread",
+                "linkPath": "-L/home/danny/projects/rec-service/bin",
+                "linkerLanguage": "C",
+                "name": "rec-srv",
+                "sourceDirectory": "/home/danny/projects/rec-service",
+                "type": "EXECUTABLE"
               }
             ]
           }
         ]
       }
     ],
-    "cookie": "0.019595654789871908",
+    "cookie": "0.48878669105046346",
     "inReplyTo": "codemodel",
     "type": "reply"
   }

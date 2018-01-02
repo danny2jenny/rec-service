@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.6)
-project(RY_Service)
+project(RY_SERVICE)
 
 # windows的 msys 环境需要
 SET(CMAKE_GENERATOR “MSYS Makefiles”)
