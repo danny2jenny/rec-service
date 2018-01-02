@@ -34,36 +34,8 @@ IedServer iedServer = NULL;
 // -----------------61850 配置信息--------------------
 // 服务端口号
 int iedPort = RY_61850_PORT;
-
 // 配置文件
 char cfgFile[200] = "/home/danny/ivs.cfg";
-
-// IED 和 LD 名称
-char iedName[100] = "QQ1101";
-char ldName[100] = "MONT";
-
-// 遥测节点
-char stateValue[100] = "GGIO1.Ind%d.stVal";
-char stateTime[100] = "GGIO1.Ind%d.t";
-char stateQ[100] = "GGIO1.Ind%d.q";
-
-// 遥信节点
-char mesureValue[100] = "MMXN1.AnIn%d.mag.f";
-char mesureTime[100] = "MMXN1.AnIn%d.t";
-char mesureQ[100] = "MMXN1.AnIn%d.q";
-
-// 开关节点
-char swValue[100] = "CSWI1.SW%d.stVal";
-char swTime[100] = "CSWI1.SW%d.t";
-char swQ[100] = "CSWI1.SW%d.q";
-
-// 单点控制节点
-char swControl[100] = "CSWI1.SW%d";
-
-// --------------------------------------------
-
-char strBuf[500];                   // 字符串buffer
-char nodStr[200];                   // node 节点的字符串
 
 /**
  * 释放资源
@@ -85,83 +57,90 @@ void IEC61850Cleanup() {
 void updateNodeValue(int type, int device_id, float val) {
 
     uint64_t timestamp = Hal_getTimeInMs();
-    DataAttribute *da;
+    ModelNode *mn;
 
     switch (type) {
         case LN_TYPE_INPUT:
             // 更新值
-            sprintf(nodStr, stateValue, device_id);
-            sprintf(strBuf, "%s%s/%s", iedName, ldName, nodStr);
-            da = (DataAttribute *) IedModel_getModelNodeByObjectReference(model, strBuf);
-            if (da == NULL) {
+            mn = IedModel_getModelNodeByShortAddress(model, device_id);
+            if (mn == NULL) {
                 return;
             }
 
-            if (val>0) {
-                IedServer_updateBooleanAttributeValue(iedServer, da, true);
+            if (val > 0) {
+                IedServer_updateBooleanAttributeValue(iedServer, mn, true);
             }
 
-            if (val<=0){
-                IedServer_updateBooleanAttributeValue(iedServer, da, false);
+            if (val <= 0) {
+                IedServer_updateBooleanAttributeValue(iedServer, mn, false);
             }
 
             // 更新时间
-            sprintf(nodStr, stateTime, device_id);
-            sprintf(strBuf, "%s%s/%s", iedName, ldName, nodStr);
-            da = (DataAttribute *) IedModel_getModelNodeByObjectReference(model, strBuf);
-            if (da == NULL) {
+            mn = mn->parent;
+            if (mn){
+                mn = ModelNode_getChild(mn, "t");
+            } else {
                 return;
             }
-            IedServer_updateUTCTimeAttributeValue(iedServer, da, timestamp);
+            if (mn){
+                IedServer_updateUTCTimeAttributeValue(iedServer, mn, timestamp);
+            }
 
             break;
         case LN_TYPE_ANALOG:
             // 更新值
-            sprintf(nodStr, mesureValue, device_id);
-            sprintf(strBuf, "%s%s/%s", iedName, ldName, nodStr);
-            da = (DataAttribute *) IedModel_getModelNodeByObjectReference(model, strBuf);
-            if (da == NULL) {
+            mn = IedModel_getModelNodeByShortAddress(model, device_id);
+            if (mn == NULL) {
                 return;
             }
-
-                IedServer_updateFloatAttributeValue(iedServer, da, val);
+            IedServer_updateFloatAttributeValue(iedServer, mn, val);
 
             // 更新时间
-            sprintf(nodStr, mesureTime, device_id);
-            sprintf(strBuf, "%s%s/%s", iedName, ldName, nodStr);
-            da = (DataAttribute *) IedModel_getModelNodeByObjectReference(model, strBuf);
-            if (da == NULL) {
+            mn = mn->parent;   // mag 节点
+            if (mn){
+                mn = mn->parent;  // MMXN 节点
+            } else {
                 return;
             }
-            IedServer_updateUTCTimeAttributeValue(iedServer, da, timestamp);
+
+            if (mn){
+                mn = mn = ModelNode_getChild(mn, "t");
+            } else {
+                return;
+            }
+
+            if (mn){
+                IedServer_updateUTCTimeAttributeValue(iedServer, mn, timestamp);
+            }
 
             break;
         case LN_TYPE_SWITCH:
             // 更新值
-            sprintf(nodStr, swValue, device_id);
-            sprintf(strBuf, "%s%s/%s", iedName, ldName, nodStr);
-            da = (DataAttribute *) IedModel_getModelNodeByObjectReference(model, strBuf);
-            if (da == NULL) {
+            mn = IedModel_getModelNodeByShortAddress(model, device_id);
+            if (mn == NULL) {
                 return;
             }
 
-            if (val>0) {
-                IedServer_updateBooleanAttributeValue(iedServer, da, true);
+            if (val > 0) {
+                IedServer_updateBooleanAttributeValue(iedServer, mn, true);
             }
 
-            if (val<=0){
-                IedServer_updateBooleanAttributeValue(iedServer, da, false);
+            if (val <= 0) {
+                IedServer_updateBooleanAttributeValue(iedServer, mn, false);
             }
-
 
             // 更新时间
-            sprintf(nodStr, swTime, device_id);
-            sprintf(strBuf, "%s%s/%s", iedName, ldName, nodStr);
-            da = (DataAttribute *) IedModel_getModelNodeByObjectReference(model, strBuf);
-            if (da == NULL) {
+            mn = mn->parent;
+            if (mn){
+                mn = ModelNode_getChild(mn, "t");
+            } else {
                 return;
             }
-            IedServer_updateUTCTimeAttributeValue(iedServer, da, timestamp);
+
+            if (mn){
+                IedServer_updateUTCTimeAttributeValue(iedServer, mn, timestamp);
+            }
+
 
             break;
     }
@@ -192,23 +171,6 @@ void IEC61850ParseConfig(char *cfgStr) {
     ini_sget(config, "61850", "port", "%d", &iedPort);
     // 配置文件
     ini_sget(config, "61850", "cfgFile", "%s", cfgFile);
-    // IED 和 LD
-    ini_sget(config, "61850", "iedName", "%s", iedName);
-    ini_sget(config, "61850", "ldName", "%s", ldName);
-    // 遥信
-    ini_sget(config, "61850", "stateValue", "%s", mesureValue);
-    ini_sget(config, "61850", "stateTime", "%s", mesureValue);
-    ini_sget(config, "61850", "stateQ", "%s", mesureValue);
-    // 遥测
-    ini_sget(config, "61850", "mesureValue", "%s", mesureValue);
-    ini_sget(config, "61850", "mesureTime", "%s", mesureTime);
-    ini_sget(config, "61850", "mesureQ", "%s", mesureQ);
-    // 遥测
-    ini_sget(config, "61850", "mesureValue", "%s", mesureValue);
-    ini_sget(config, "61850", "mesureTime", "%s", mesureTime);
-    ini_sget(config, "61850", "mesureQ", "%s", mesureQ);
-    // 单点控制节点
-    ini_sget(config, "61850", "swControl", "%s", swControl);
 
     ini_free(config);
 
@@ -253,7 +215,7 @@ void IEC61850ParseConfig(char *cfgStr) {
     IedServer_lockDataModel(iedServer);
     float val;                  // 值
     int device_type, device_id;
-    DataObject *ctlNode;        // 控制节点
+    ModelNode *ctlNodeST, *ctlNode;      // 控制节点
     //遍历 json
     int i;
 
@@ -278,12 +240,15 @@ void IEC61850ParseConfig(char *cfgStr) {
                 val = json_object_dotget_boolean(runtime_object, "state.output");
 
                 // 设置回调
-                sprintf(nodStr, swControl, device_id);
-                sprintf(strBuf, "%s%s/%s", iedName, ldName, nodStr);
-                ctlNode = (DataObject *) IedModel_getModelNodeByObjectReference(model, strBuf);
-                if (ctlNode) {
-                    IedServer_setControlHandler(iedServer, ctlNode, (ControlHandler) controlHandlerForBinaryOutput,
-                                                device_id);
+                // 找到开关的ST
+                ctlNodeST = IedModel_getModelNodeByShortAddress(model, device_id);
+                if (ctlNodeST) {
+                    // 通过 ST 找到开关的父节点
+                    ctlNode = ctlNodeST->parent;
+                    if (ctlNode) {
+                        IedServer_setControlHandler(iedServer, ctlNode, (ControlHandler) controlHandlerForBinaryOutput,
+                                                    device_id);
+                    }
                 }
                 break;
         }

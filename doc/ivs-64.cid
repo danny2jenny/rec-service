@@ -1,0 +1,2470 @@
+<?xml version = '1.0' encoding = 'utf-8'?>
+<SCL xmlns="http://www.iec.ch/61850/2003/SCL" xsi:schemaLocation="http://www.iec.ch/61850/2003/SCL
+E:\SCLschema\SCL.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+    <Header nameStructure="IEDName" version="1.1" id="SANWAY_SCL" >
+        <History>
+        </History>
+    </Header>
+    <Communication>
+        <SubNetwork type="8-MMS" name="MMS_A" >
+            <ConnectedAP iedName="RYIVS" apName="S1" >
+                <Address>
+                    <P type="OSI-AP-Title" >1,3,9999,33</P>
+                    <P type="OSI-AE-Qualifier" >33</P>
+                    <P type="OSI-PSEL" >00 00 00 01</P>
+                    <P type="OSI-SSEL" >00 01</P>
+                    <P type="OSI-TSEL" >00 01</P>
+                    <P type="IP-SUBNET" >255.255.255.0</P>
+                    <P type="IP" >192.168.1.113</P>
+                </Address>
+            </ConnectedAP>
+        </SubNetwork>
+        <SubNetwork type="8-MMS" name="MMS_B" >
+            <ConnectedAP iedName="RYIVS" apName="S1" >
+                <Address>
+                    <P type="OSI-AP-Title" >1,3,9999,33</P>
+                    <P type="OSI-AE-Qualifier" >33</P>
+                    <P type="OSI-PSEL" >00 00 00 01</P>
+                    <P type="OSI-SSEL" >00 01</P>
+                    <P type="OSI-TSEL" >00 01</P>
+                    <P type="IP-SUBNET" >255.255.255.0</P>
+                    <P type="IP" >192.168.2.113</P>
+                </Address>
+            </ConnectedAP>
+        </SubNetwork>
+    </Communication>
+    <IED desc="辅助控制系统" configVersion="v1.00" manufacturer="成都荣耀科技" type="RY-REC" name="RYIVS" >
+        <Services>
+            <DynAssociation/>
+            <GetDirectory/>
+            <GetDataObjectDefinition/>
+            <DataObjectDirectory/>
+            <GetDataSetValue/>
+            <SetDataSetValue/>
+            <DataSetDirectory/>
+            <ConfDataSet maxAttributes="200" max="16" />
+            <ReadWrite/>
+            <ConfReportControl max="16" />
+            <GetCBValues/>
+            <ReportSettings optFields="Dyn" cbName="Conf" trgOps="Dyn" rptID="Dyn" intgPd="Dyn" datSet="Dyn" bufTime="Fix" />
+            <FileHandling/>
+            <ConfLNs fixLnInst="true" fixPrefix="true" />
+        </Services>
+        <AccessPoint clock="false" router="false" name="S1" >
+            <Server>
+                <Authentication/>
+                <LDevice inst="MONT" >
+                    <LN0 inst="" lnClass="LLN0" lnType="IVS_LLN0" >
+                        <DataSet desc="遥信数据集" name="dsStateA" >
+                            <FCDA doName="Ind1" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind2" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind3" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind4" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind5" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind6" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind7" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind8" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind9" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind10" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind11" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind12" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind13" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind14" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind15" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind16" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind17" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind18" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind19" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind20" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind21" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind22" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind23" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind24" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind25" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind26" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind27" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind28" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind29" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind30" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind31" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind32" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind33" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind34" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind35" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind36" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind37" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind38" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind39" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind40" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind41" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind42" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind43" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind44" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind45" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind46" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind47" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind48" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind49" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind50" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind51" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind52" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind53" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind54" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind55" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind56" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind57" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind58" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind59" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind60" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind61" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind62" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind63" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                            <FCDA doName="Ind64" lnInst="1" lnClass="GGIO" ldInst="MONT" fc="ST" />
+                        </DataSet>
+                        <DataSet desc="遥测数据集" name="dsMeasureA" >
+                            <FCDA doName="AnIn1" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn2" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn3" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn4" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn5" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn6" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn7" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn8" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn9" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn10" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn11" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn12" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn13" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn14" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn15" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn16" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn17" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn18" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn19" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn20" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn21" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn22" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn23" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn24" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn25" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn26" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn27" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn28" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn29" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn30" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn31" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn32" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn33" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn34" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn35" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn36" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn37" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn38" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn39" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn40" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn41" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn42" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn43" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn44" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn45" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn46" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn47" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn48" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn49" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn50" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn51" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn52" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn53" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn54" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn55" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn56" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn57" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn58" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn59" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn60" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn61" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn62" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn63" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                            <FCDA doName="AnIn64" lnInst="1" lnClass="MMXN" ldInst="MONT" fc="MX" />
+                        </DataSet>
+                        <DataSet desc="开关控制状态" name="dsStateB" >
+                            <FCDA doName="SW1" lnInst="1" lnClass="CSWI" ldInst="MONT" fc="ST" />
+                            <FCDA doName="SW2" lnInst="1" lnClass="CSWI" ldInst="MONT" fc="ST" />
+                            <FCDA doName="SW3" lnInst="1" lnClass="CSWI" ldInst="MONT" fc="ST" />
+                            <FCDA doName="SW4" lnInst="1" lnClass="CSWI" ldInst="MONT" fc="ST" />
+                            <FCDA doName="SW5" lnInst="1" lnClass="CSWI" ldInst="MONT" fc="ST" />
+                            <FCDA doName="SW6" lnInst="1" lnClass="CSWI" ldInst="MONT" fc="ST" />
+                            <FCDA doName="SW7" lnInst="1" lnClass="CSWI" ldInst="MONT" fc="ST" />
+                            <FCDA doName="SW8" lnInst="1" lnClass="CSWI" ldInst="MONT" fc="ST" />
+                            <FCDA doName="SW9" lnInst="1" lnClass="CSWI" ldInst="MONT" fc="ST" />
+                            <FCDA doName="SW10" lnInst="1" lnClass="CSWI" ldInst="MONT" fc="ST" />
+                            <FCDA doName="SW11" lnInst="1" lnClass="CSWI" ldInst="MONT" fc="ST" />
+                            <FCDA doName="SW12" lnInst="1" lnClass="CSWI" ldInst="MONT" fc="ST" />
+                            <FCDA doName="SW13" lnInst="1" lnClass="CSWI" ldInst="MONT" fc="ST" />
+                            <FCDA doName="SW14" lnInst="1" lnClass="CSWI" ldInst="MONT" fc="ST" />
+                            <FCDA doName="SW15" lnInst="1" lnClass="CSWI" ldInst="MONT" fc="ST" />
+                            <FCDA doName="SW16" lnInst="1" lnClass="CSWI" ldInst="MONT" fc="ST" />                      
+                        </DataSet>
+                        <ReportControl confRev="1" desc="遥信报告控制块" rptID="MONT/LLN0$RP$brcbStateA" intgPd="20000" name="brcbStateA" datSet="dsStateA" buffered="true" bufTime="100" >
+                            <TrgOps qchg="true" period="true" dchg="true" />
+                            <OptFields reasonCode="true" dataRef="false" dataSet="true" configRef="true" entryID="true" timeStamp="true" />
+                            <RptEnabled max="12" />
+                        </ReportControl>
+                        <ReportControl confRev="1" desc="遥测报告控制块" rptID="MONT/LLN0$RP$urcbMeasureA" intgPd="20000" name="urcbMeasureA" datSet="dsMeasureA" buffered="false" >
+                            <TrgOps qchg="true" period="true" dchg="true" />
+                            <OptFields reasonCode="true" dataRef="false" dataSet="true" configRef="true" entryID="true" timeStamp="true" />
+                            <RptEnabled max="12" />
+                        </ReportControl>
+                        <ReportControl confRev="1" desc="开关报告控制块" rptID="MONT/LLN0$RP$brcbStateB" intgPd="20000" name="brcbStateB" datSet="dsStateB" buffered="true" bufTime="100" >
+                            <TrgOps qchg="true" period="true" dchg="true" />
+                            <OptFields reasonCode="true" dataRef="false" dataSet="true" configRef="true" entryID="true" timeStamp="true" />
+                            <RptEnabled max="12" />
+                        </ReportControl>
+                    </LN0>
+                    <LN desc="装置参数" inst="1" lnClass="LPHD" lnType="IVS_LPHD" />
+                    <LN desc="遥信" inst="1" lnClass="GGIO" lnType="IVS_GGIO" >
+                        <DOI desc="第1路" name="Ind1" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第1路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第2路" name="Ind2" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第2路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第3路" name="Ind3" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第3路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第4路" name="Ind4" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第4路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第5路" name="Ind5" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第5路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第6路" name="Ind6" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第6路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第7路" name="Ind7" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第7路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第8路" name="Ind8" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第8路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第9路" name="Ind9" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第9路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第10路" name="Ind10" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第10路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第11路" name="Ind11" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第11路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第12路" name="Ind12" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第12路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第13路" name="Ind13" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第13路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第14路" name="Ind14" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第14路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第15路" name="Ind15" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第15路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第16路" name="Ind16" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第16路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第17路" name="Ind17" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第17路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第18路" name="Ind18" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第18路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第19路" name="Ind19" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第19路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第20路" name="Ind20" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第20路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第21路" name="Ind21" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第21路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第22路" name="Ind22" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第22路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第23路" name="Ind23" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第23路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第24路" name="Ind24" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第24路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第25路" name="Ind25" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第25路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第26路" name="Ind26" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第26路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第27路" name="Ind27" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第27路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第28路" name="Ind28" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第28路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第29路" name="Ind29" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第29路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="第30路" name="Ind30" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>第30路</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="母线" name="Ind31" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>母线</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="Ind32" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="档位到头" name="Ind33" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>档位到头</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="母联" name="Ind34" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>母联</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="Ind35" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="调档失败" name="Ind36" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>调档失败</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="单相接地" name="Ind37" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>单相接地</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="自动状态" name="Ind38" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>自动状态</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="容量不适" name="Ind39" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>容量不适</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="位移过限" name="Ind40" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>位移过限</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="Ind41" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="Ind42" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="Ind43" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="Ind44" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="Ind45" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="Ind46" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="Ind47" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="Ind48" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="Ind49" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="Ind50" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="Ind51" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="Ind52" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="Ind53" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="Ind54" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="Ind55" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="Ind56" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="Ind57" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="Ind58" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="Ind59" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="Ind60" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="Ind61" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="Ind62" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="Ind63" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="Ind64" >
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                    </LN>                    
+                    <LN desc="遥测" inst="1" lnClass="MMXN" lnType="IVS_MMXN" >
+                        <DOI desc="模拟量1" name="AnIn1" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>位移电压</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="模拟量2" name="AnIn2" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>电容电流</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="残流" name="AnIn3" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>残流</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="档位" name="AnIn4" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>档位</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn5" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn6" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn7" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn8" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn9" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn10" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn11" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn12" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn13" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn14" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn15" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn16" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn17" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn18" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn19" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn20" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="模拟量1" name="AnIn21" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>位移电压</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="模拟量2" name="AnIn22" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>电容电流</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="残流" name="AnIn23" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>残流</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="档位" name="AnIn24" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>档位</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn25" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn26" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn27" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn28" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn29" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn30" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="模拟量1" name="AnIn31" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>位移电压</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="模拟量2" name="AnIn32" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>电容电流</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="残流" name="AnIn33" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>残流</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="档位" name="AnIn34" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>档位</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn35" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn36" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn37" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn38" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn9" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn40" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="模拟量1" name="AnIn41" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>位移电压</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="模拟量2" name="AnIn42" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>电容电流</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="残流" name="AnIn43" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>残流</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="档位" name="AnIn44" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>档位</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn45" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn46" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn47" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn48" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn49" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn50" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="模拟量1" name="AnIn51" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>位移电压</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="模拟量2" name="AnIn52" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>电容电流</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="残流" name="AnIn53" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>残流</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="档位" name="AnIn54" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>档位</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn55" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn56" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn57" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn58" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn59" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="备用" name="AnIn60" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>备用</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="模拟量1" name="AnIn61" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>位移电压</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="模拟量2" name="AnIn62" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>电容电流</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="残流" name="AnIn63" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>残流</Val>
+                            </DAI>
+                        </DOI>
+                        <DOI desc="档位" name="AnIn64" >
+                            <SDI name="mag" >
+                                <DAI name="f" />
+                            </SDI>
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="dU" >
+                                <Val>档位</Val>
+                            </DAI>
+                        </DOI>
+                    </LN>
+                    <LN desc="远程开关" inst="1" lnClass="CSWI" lnType="IVS_CSWI" >
+                        <DOI name="SW1" >
+                            <SDI name="Oper" />
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="ctlModel" >
+                                <Val>direct-with-normal-security</Val>
+                            </DAI>
+                            <DAI name="dU" >
+                                <Val>第1路</Val>
+                            </DAI>                                
+                        </DOI>
+                        <DOI name="SW2" >
+                            <SDI name="Oper" />
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="ctlModel" >
+                                <Val>direct-with-normal-security</Val>
+                            </DAI>
+                             <DAI name="dU" >
+                                <Val>第2路</Val>
+                            </DAI>   
+                        </DOI>
+                        <DOI name="SW3" >
+                            <SDI name="Oper" />
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="ctlModel" >
+                                <Val>direct-with-normal-security</Val>
+                            </DAI>
+                             <DAI name="dU" >
+                                <Val>第2路</Val>
+                            </DAI>   
+                        </DOI>
+                        <DOI name="SW4" >
+                            <SDI name="Oper" />
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="ctlModel" >
+                                <Val>direct-with-normal-security</Val>
+                            </DAI>
+                             <DAI name="dU" >
+                                <Val>第2路</Val>
+                            </DAI>   
+                        </DOI>
+                        <DOI name="SW5" >
+                            <SDI name="Oper" />
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="ctlModel" >
+                                <Val>direct-with-normal-security</Val>
+                            </DAI>
+                             <DAI name="dU" >
+                                <Val>第2路</Val>
+                            </DAI>   
+                        </DOI>
+                        <DOI name="SW6" >
+                            <SDI name="Oper" />
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="ctlModel" >
+                                <Val>direct-with-normal-security</Val>
+                            </DAI>
+                             <DAI name="dU" >
+                                <Val>第2路</Val>
+                            </DAI>   
+                        </DOI>
+                        <DOI name="SW7" >
+                            <SDI name="Oper" />
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="ctlModel" >
+                                <Val>direct-with-normal-security</Val>
+                            </DAI>
+                             <DAI name="dU" >
+                                <Val>第2路</Val>
+                            </DAI>   
+                        </DOI>
+                        <DOI name="SW8" >
+                            <SDI name="Oper" />
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="ctlModel" >
+                                <Val>direct-with-normal-security</Val>
+                            </DAI>
+                             <DAI name="dU" >
+                                <Val>第2路</Val>
+                            </DAI>   
+                        </DOI>
+                        <DOI name="SW9" >
+                            <SDI name="Oper" />
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="ctlModel" >
+                                <Val>direct-with-normal-security</Val>
+                            </DAI>
+                             <DAI name="dU" >
+                                <Val>第2路</Val>
+                            </DAI>   
+                        </DOI>
+                        <DOI name="SW10" >
+                            <SDI name="Oper" />
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="ctlModel" >
+                                <Val>direct-with-normal-security</Val>
+                            </DAI>
+                             <DAI name="dU" >
+                                <Val>第2路</Val>
+                            </DAI>   
+                        </DOI>
+                        <DOI name="SW11" >
+                            <SDI name="Oper" />
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="ctlModel" >
+                                <Val>direct-with-normal-security</Val>
+                            </DAI>
+                             <DAI name="dU" >
+                                <Val>第2路</Val>
+                            </DAI>   
+                        </DOI>
+                        <DOI name="SW12" >
+                            <SDI name="Oper" />
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="ctlModel" >
+                                <Val>direct-with-normal-security</Val>
+                            </DAI>
+                             <DAI name="dU" >
+                                <Val>第2路</Val>
+                            </DAI>   
+                        </DOI>
+                        <DOI name="SW13" >
+                            <SDI name="Oper" />
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="ctlModel" >
+                                <Val>direct-with-normal-security</Val>
+                            </DAI>
+                             <DAI name="dU" >
+                                <Val>第2路</Val>
+                            </DAI>   
+                        </DOI>
+                        <DOI name="SW14" >
+                            <SDI name="Oper" />
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="ctlModel" >
+                                <Val>direct-with-normal-security</Val>
+                            </DAI>
+                             <DAI name="dU" >
+                                <Val>第2路</Val>
+                            </DAI>   
+                        </DOI>
+                        <DOI name="SW15" >
+                            <SDI name="Oper" />
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="ctlModel" >
+                                <Val>direct-with-normal-security</Val>
+                            </DAI>
+                             <DAI name="dU" >
+                                <Val>第2路</Val>
+                            </DAI>   
+                        </DOI>
+                        <DOI name="SW16" >
+                            <SDI name="Oper" />
+                            <DAI name="stVal" />
+                            <DAI name="q" />
+                            <DAI name="t" />
+                            <DAI name="ctlModel" >
+                                <Val>direct-with-normal-security</Val>
+                            </DAI>
+                             <DAI name="dU" >
+                                <Val>第2路</Val>
+                            </DAI>   
+                        </DOI>
+                    </LN>
+                </LDevice>
+            </Server>
+        </AccessPoint>
+    </IED>
+    <DataTypeTemplates>
+        <LNodeType lnClass="LLN0" id="IVS_LLN0" >
+            <DO desc="Mode" type="CN_INC_Mod" name="Mod" />
+            <DO desc="Behaviour" type="CN_INS_Beh" name="Beh" />
+            <DO desc="Health" type="CN_INS_Health" name="Health" />
+            <DO desc="Name Plate" type="CN_LPL_LN0" name="NamPlt" />
+        </LNodeType>
+        <LNodeType lnClass="LPHD" id="IVS_LPHD" >
+            <DO desc="Physical device name plate" type="CN_DPL" name="PhyNam" />
+            <DO desc="Physical device health" type="CN_INS_Health" name="PhyHealth" />
+            <DO desc="Indicates if this LN is a proxy" type="CN_SPS" name="Proxy" />
+        </LNodeType>        
+        <LNodeType desc="遥信" lnClass="GGIO" id="IVS_GGIO" >
+            <DO desc="Mode" type="CN_INC_Mod" name="Mod" />
+            <DO desc="Behaviour" type="CN_INS_Beh" name="Beh" />
+            <DO desc="Health" type="CN_INS_Health" name="Health" />
+            <DO desc="Name Plate" type="CN_LPL" name="NamPlt" />
+            <DO type="CN_SPS" name="Ind1" />
+            <DO type="CN_SPS" name="Ind2" />
+            <DO type="CN_SPS" name="Ind3" />
+            <DO type="CN_SPS" name="Ind4" />
+            <DO type="CN_SPS" name="Ind5" />
+            <DO type="CN_SPS" name="Ind6" />
+            <DO type="CN_SPS" name="Ind7" />
+            <DO type="CN_SPS" name="Ind8" />
+            <DO type="CN_SPS" name="Ind9" />
+            <DO type="CN_SPS" name="Ind10" />
+            <DO type="CN_SPS" name="Ind11" />
+            <DO type="CN_SPS" name="Ind12" />
+            <DO type="CN_SPS" name="Ind13" />
+            <DO type="CN_SPS" name="Ind14" />
+            <DO type="CN_SPS" name="Ind15" />
+            <DO type="CN_SPS" name="Ind16" />
+            <DO type="CN_SPS" name="Ind17" />
+            <DO type="CN_SPS" name="Ind18" />
+            <DO type="CN_SPS" name="Ind19" />
+            <DO type="CN_SPS" name="Ind20" />
+            <DO type="CN_SPS" name="Ind21" />
+            <DO type="CN_SPS" name="Ind22" />
+            <DO type="CN_SPS" name="Ind23" />
+            <DO type="CN_SPS" name="Ind24" />
+            <DO type="CN_SPS" name="Ind25" />
+            <DO type="CN_SPS" name="Ind26" />
+            <DO type="CN_SPS" name="Ind27" />
+            <DO type="CN_SPS" name="Ind28" />
+            <DO type="CN_SPS" name="Ind29" />
+            <DO type="CN_SPS" name="Ind30" />
+            <DO type="CN_SPS" name="Ind31" />
+            <DO type="CN_SPS" name="Ind32" />
+            <DO type="CN_SPS" name="Ind33" />
+            <DO type="CN_SPS" name="Ind34" />
+            <DO type="CN_SPS" name="Ind35" />
+            <DO type="CN_SPS" name="Ind36" />
+            <DO type="CN_SPS" name="Ind37" />
+            <DO type="CN_SPS" name="Ind38" />
+            <DO type="CN_SPS" name="Ind39" />
+            <DO type="CN_SPS" name="Ind40" />
+            <DO type="CN_SPS" name="Ind41" />
+            <DO type="CN_SPS" name="Ind42" />
+            <DO type="CN_SPS" name="Ind43" />
+            <DO type="CN_SPS" name="Ind44" />
+            <DO type="CN_SPS" name="Ind45" />
+            <DO type="CN_SPS" name="Ind46" />
+            <DO type="CN_SPS" name="Ind47" />
+            <DO type="CN_SPS" name="Ind48" />
+            <DO type="CN_SPS" name="Ind49" />
+            <DO type="CN_SPS" name="Ind50" />
+            <DO type="CN_SPS" name="Ind51" />
+            <DO type="CN_SPS" name="Ind52" />
+            <DO type="CN_SPS" name="Ind53" />
+            <DO type="CN_SPS" name="Ind54" />
+            <DO type="CN_SPS" name="Ind55" />
+            <DO type="CN_SPS" name="Ind56" />
+            <DO type="CN_SPS" name="Ind57" />
+            <DO type="CN_SPS" name="Ind58" />
+            <DO type="CN_SPS" name="Ind59" />
+            <DO type="CN_SPS" name="Ind60" />
+            <DO type="CN_SPS" name="Ind61" />
+            <DO type="CN_SPS" name="Ind62" />
+            <DO type="CN_SPS" name="Ind63" />
+            <DO type="CN_SPS" name="Ind64" />
+        </LNodeType>
+        <LNodeType desc="遥测" lnClass="MMXN" id="IVS_MMXN" >
+            <DO desc="Mode" type="CN_INC_Mod" name="Mod" />
+            <DO desc="Behaviour" type="CN_INS_Beh" name="Beh" />
+            <DO desc="Health" type="CN_INS_Health" name="Health" />
+            <DO desc="Name Plate" type="CN_LPL" name="NamPlt" />
+            <DO type="CN_MV" name="AnIn1" />
+            <DO type="CN_MV" name="AnIn2" />
+            <DO type="CN_MV" name="AnIn3" />
+            <DO type="CN_MV" name="AnIn4" />
+            <DO type="CN_MV" name="AnIn5" />
+            <DO type="CN_MV" name="AnIn6" />
+            <DO type="CN_MV" name="AnIn7" />
+            <DO type="CN_MV" name="AnIn8" />
+            <DO type="CN_MV" name="AnIn9" />
+            <DO type="CN_MV" name="AnIn10" />
+            <DO type="CN_MV" name="AnIn11" />
+            <DO type="CN_MV" name="AnIn12" />
+            <DO type="CN_MV" name="AnIn13" />
+            <DO type="CN_MV" name="AnIn14" />
+            <DO type="CN_MV" name="AnIn15" />
+            <DO type="CN_MV" name="AnIn16" />
+            <DO type="CN_MV" name="AnIn17" />
+            <DO type="CN_MV" name="AnIn18" />
+            <DO type="CN_MV" name="AnIn19" />
+            <DO type="CN_MV" name="AnIn20" />
+            <DO type="CN_MV" name="AnIn21" />
+            <DO type="CN_MV" name="AnIn22" />
+            <DO type="CN_MV" name="AnIn23" />
+            <DO type="CN_MV" name="AnIn24" />
+            <DO type="CN_MV" name="AnIn25" />
+            <DO type="CN_MV" name="AnIn26" />
+            <DO type="CN_MV" name="AnIn27" />
+            <DO type="CN_MV" name="AnIn28" />
+            <DO type="CN_MV" name="AnIn29" />
+            <DO type="CN_MV" name="AnIn30" />
+            <DO type="CN_MV" name="AnIn31" />
+            <DO type="CN_MV" name="AnIn32" />
+            <DO type="CN_MV" name="AnIn33" />
+            <DO type="CN_MV" name="AnIn34" />
+            <DO type="CN_MV" name="AnIn35" />
+            <DO type="CN_MV" name="AnIn36" />
+            <DO type="CN_MV" name="AnIn37" />
+            <DO type="CN_MV" name="AnIn38" />
+            <DO type="CN_MV" name="AnIn39" />
+            <DO type="CN_MV" name="AnIn40" />
+            <DO type="CN_MV" name="AnIn41" />
+            <DO type="CN_MV" name="AnIn42" />
+            <DO type="CN_MV" name="AnIn43" />
+            <DO type="CN_MV" name="AnIn44" />
+            <DO type="CN_MV" name="AnIn45" />
+            <DO type="CN_MV" name="AnIn46" />
+            <DO type="CN_MV" name="AnIn47" />
+            <DO type="CN_MV" name="AnIn48" />
+            <DO type="CN_MV" name="AnIn49" />
+            <DO type="CN_MV" name="AnIn50" />
+            <DO type="CN_MV" name="AnIn51" />
+            <DO type="CN_MV" name="AnIn52" />
+            <DO type="CN_MV" name="AnIn53" />
+            <DO type="CN_MV" name="AnIn54" />
+            <DO type="CN_MV" name="AnIn55" />
+            <DO type="CN_MV" name="AnIn56" />
+            <DO type="CN_MV" name="AnIn57" />
+            <DO type="CN_MV" name="AnIn58" />
+            <DO type="CN_MV" name="AnIn59" />
+            <DO type="CN_MV" name="AnIn60" />
+            <DO type="CN_MV" name="AnIn61" />
+            <DO type="CN_MV" name="AnIn62" />
+            <DO type="CN_MV" name="AnIn63" />
+            <DO type="CN_MV" name="AnIn64" />            
+        </LNodeType>
+        <LNodeType desc="开关" lnClass="CSWI" id="IVS_CSWI" >
+            <DO desc="Mode" type="CN_INC_Mod" name="Mod" />
+            <DO desc="Behaviour" type="CN_INS_Beh" name="Beh" />
+            <DO desc="Health" type="CN_INS_Health" name="Health" />
+            <DO desc="Name Plate" type="CN_LPL" name="NamPlt" />
+            <DO type="CN_SPC" name="SW1" />
+            <DO type="CN_SPC" name="SW2" />
+            <DO type="CN_SPC" name="SW3" />
+            <DO type="CN_SPC" name="SW4" />
+            <DO type="CN_SPC" name="SW5" />
+            <DO type="CN_SPC" name="SW6" />
+            <DO type="CN_SPC" name="SW7" />
+            <DO type="CN_SPC" name="SW8" />
+            <DO type="CN_SPC" name="SW9" />
+            <DO type="CN_SPC" name="SW10" />
+            <DO type="CN_SPC" name="SW11" />
+            <DO type="CN_SPC" name="SW12" />
+            <DO type="CN_SPC" name="SW13" />
+            <DO type="CN_SPC" name="SW14" />
+            <DO type="CN_SPC" name="SW15" />
+            <DO type="CN_SPC" name="SW16" />
+        </LNodeType>
+        <DOType id="CN_ACD" cdc="ACD" >
+            <DA qchg="false" valKind="Set" dupd="false" bType="BOOLEAN" count="0" name="general" fc="ST" dchg="true" />
+            <DA qchg="false" valKind="Set" dupd="false" bType="Enum" count="0" type="dir" name="dirGeneral" fc="ST" dchg="true" />
+            <DA qchg="true" valKind="Set" dupd="false" bType="Quality" count="0" name="q" fc="ST" dchg="false" />
+            <DA qchg="false" valKind="Set" dupd="false" bType="Timestamp" count="0" name="t" fc="ST" dchg="false" />
+            <DA qchg="false" valKind="Set" dupd="false" bType="Unicode255" count="0" name="dU" fc="DC" dchg="false" />
+        </DOType>
+        <DOType id="CN_ACT" cdc="ACT" >
+            <DA qchg="false" valKind="Set" dupd="false" bType="BOOLEAN" count="0" name="general" fc="ST" dchg="true" />
+            <DA qchg="true" valKind="Set" dupd="false" bType="Quality" count="0" name="q" fc="ST" dchg="false" />
+            <DA qchg="false" valKind="Set" dupd="false" bType="Timestamp" count="0" name="t" fc="ST" dchg="false" />
+            <DA qchg="false" valKind="Set" dupd="false" bType="Unicode255" count="0" name="dU" fc="DC" dchg="false" />
+        </DOType>
+        <DOType desc="模拟定值" id="CN_ASG_SG" cdc="ASG" >
+            <DA bType="Struct" type="CN_AnalogueValue" name="setMag" fc="SG" />
+            <DA bType="Struct" type="CN_Units" name="units" fc="CF" />
+            <DA bType="Struct" type="CN_ScaledValueConfig" name="sVC" fc="CF" />
+            <DA bType="Struct" type="CN_AnalogueValue" name="minVal" fc="CF" />
+            <DA bType="Struct" type="CN_AnalogueValue" name="maxVal" fc="CF" />
+            <DA bType="Struct" type="CN_AnalogueValue" name="stepSize" fc="CF" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+        </DOType>
+        <DOType desc="扩展模拟定值" id="CN_ASG_SG_EX" cdc="ASG" >
+            <DA bType="Struct" type="CN_AnalogueValue" name="setMag" fc="SG" />
+            <DA bType="Struct" type="CN_Units" name="units" fc="CF" />
+            <DA bType="Struct" type="CN_ScaledValueConfig" name="sVC" fc="CF" />
+            <DA bType="Struct" type="CN_AnalogueValue" name="minVal" fc="CF" />
+            <DA bType="Struct" type="CN_AnalogueValue" name="maxVal" fc="CF" />
+            <DA bType="Struct" type="CN_AnalogueValue" name="stepSize" fc="CF" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+            <DA bType="VisString255" name="dataNs" fc="EX" />
+        </DOType>
+        <DOType desc="模拟定值(取代)" id="CN_ASG_SP" cdc="ASG" >
+            <DA bType="Struct" type="CN_AnalogueValue" name="setMag" fc="SP" />
+            <DA bType="Struct" type="CN_Units" name="units" fc="CF" />
+            <DA bType="Struct" type="CN_ScaledValueConfig" name="sVC" fc="CF" />
+            <DA bType="Struct" type="CN_AnalogueValue" name="minVal" fc="CF" />
+            <DA bType="Struct" type="CN_AnalogueValue" name="maxVal" fc="CF" />
+            <DA bType="Struct" type="CN_AnalogueValue" name="stepSize" fc="CF" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+        </DOType>
+        <DOType desc="扩展模拟定值(取代)" id="CN_ASG_SP_EX" cdc="ASG" >
+            <DA bType="Struct" type="CN_AnalogueValue" name="setMag" fc="SP" />
+            <DA bType="Struct" type="CN_Units" name="units" fc="CF" />
+            <DA bType="Struct" type="CN_ScaledValueConfig" name="sVC" fc="CF" />
+            <DA bType="Struct" type="CN_AnalogueValue" name="minVal" fc="CF" />
+            <DA bType="Struct" type="CN_AnalogueValue" name="maxVal" fc="CF" />
+            <DA bType="Struct" type="CN_AnalogueValue" name="stepSize" fc="CF" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+            <DA bType="VisString255" name="dataNs" fc="EX" />
+        </DOType>
+        <DOType desc="复数测量值" id="CN_CMV" cdc="CMV" >
+            <DA bType="Struct" type="CN_Vector" name="instcVal" fc="MX" dchg="true" />
+            <DA bType="Struct" type="CN_Vector" name="cVal" fc="MX" dchg="true" />
+            <DA qchg="true" bType="Quality" name="q" fc="MX" />
+            <DA bType="Timestamp" name="t" fc="MX" />
+            <DA bType="BOOLEAN" name="subEna" fc="SV" />
+            <DA bType="Struct" type="CN_Vector" name="subCVal" fc="SV" />
+            <DA bType="Quality" name="subQ" fc="SV" />
+            <DA bType="VisString64" name="subID" fc="SV" />
+            <DA bType="Struct" type="CN_Units" name="units" fc="CF" />
+            <DA bType="Enum" type="angidCMV" name="angRef" fc="CF" />
+            <DA bType="INT32U" name="smpRate" fc="CF" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+        </DOType>
+        <DOType desc="扩展复数测量值" id="CN_CMV_EX" cdc="CMV" >
+            <DA bType="Struct" type="CN_Vector" name="cVal" fc="MX" dchg="true" />
+            <DA qchg="true" bType="Quality" name="q" fc="MX" />
+            <DA bType="Timestamp" name="t" fc="MX" />
+            <DA bType="BOOLEAN" name="subEna" fc="SV" />
+            <DA bType="Struct" type="CN_Vector" name="subCVal" fc="SV" />
+            <DA bType="Quality" name="subQ" fc="SV" />
+            <DA bType="VisString64" name="subID" fc="SV" />
+            <DA bType="Struct" type="CN_Units" name="units" fc="CF" />
+            <DA bType="INT32U" name="db" fc="CF" />
+            <DA bType="INT32U" name="zeroDb" fc="CF" />
+            <DA bType="Struct" type="CN_RangeConfig" name="rangeC" fc="CF" />
+            <DA bType="Struct" type="CN_ScaledValueConfig" name="magSVC" fc="CF" />
+            <DA bType="Struct" type="CN_ScaledValueConfig" name="angSVC" fc="CF" />
+            <DA bType="Enum" type="angidCMV" name="angRef" fc="CF" />
+            <DA bType="INT32U" name="smpRate" fc="CF" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+            <DA bType="VisString255" name="dataNs" fc="EX" />
+        </DOType>
+        <DOType desc="三相系统相对相地测量值" id="CN_DEL" cdc="DEL" >
+            <DA bType="Enum" type="angid" name="angRef" fc="CF" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+            <SDO type="CN_CMV" name="phsAB" />
+            <SDO type="CN_CMV" name="phsBC" />
+            <SDO type="CN_CMV" name="phsCA" />
+        </DOType>
+        <DOType desc="三相系统相对相地测量值" id="CN_DEL_EX" cdc="DEL" >
+            <DA bType="Enum" type="angid" name="angRef" fc="CF" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+            <DA bType="VisString255" name="dataNs" fc="EX" />
+            <SDO type="CN_CMV" name="phsAB" />
+            <SDO type="CN_CMV" name="phsBC" />
+            <SDO type="CN_CMV" name="phsCA" />
+        </DOType>
+        <DOType desc="可控的双点" id="CN_DPC" cdc="DPC" >
+            <DA bType="Struct" type="CN_SBOw_Oper_SDPC" name="SBOw" fc="CO" />
+            <DA bType="Struct" type="CN_SBOw_Oper_SDPC" name="Oper" fc="CO" />
+            <DA bType="Struct" type="CN_Cancel_SDPC" name="Cancel" fc="CO" />
+            <DA bType="Dbpos" type="Dbpos" name="stVal" fc="ST" dchg="true" />
+            <DA qchg="true" bType="Quality" name="q" fc="ST" />
+            <DA bType="Timestamp" name="t" fc="ST" />
+            <DA bType="BOOLEAN" name="stSeld" fc="ST" dchg="true" />
+            <DA bType="BOOLEAN" name="subEna" fc="SV" />
+            <DA bType="Dbpos" type="Dbpos" name="subVal" fc="SV" />
+            <DA bType="Quality" name="subQ" fc="SV" />
+            <DA bType="VisString64" name="subID" fc="SV" />
+            <DA bType="Struct" type="CN_PulseConfig" name="pulseConfig" fc="CF" />
+            <DA bType="Enum" type="ctlModel" name="ctlModel" fc="CF" />
+            <DA qchg="false" dupd="false" bType="INT32U" name="sboTimeout" fc="CF" dchg="false" />
+            <DA bType="Enum" type="sboClass" name="sboClass" fc="CF" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+        </DOType>
+        <DOType desc="可控的双点" id="CN_DPC_EX" cdc="DPC" >
+            <DA bType="Struct" type="CN_SBOw_Oper_SDPC" name="SBOw" fc="CO" />
+            <DA bType="Struct" type="CN_SBOw_Oper_SDPC" name="Oper" fc="CO" />
+            <DA bType="Struct" type="CN_Cancel_SDPC" name="Cancel" fc="CO" />
+            <DA bType="Dbpos" type="Dbpos" name="stVal" fc="ST" dchg="true" />
+            <DA qchg="true" bType="Quality" name="q" fc="ST" />
+            <DA bType="Timestamp" name="t" fc="ST" />
+            <DA bType="BOOLEAN" name="stSeld" fc="ST" dchg="true" />
+            <DA bType="BOOLEAN" name="subEna" fc="SV" />
+            <DA bType="Dbpos" type="Dbpos" name="subVal" fc="SV" />
+            <DA bType="Quality" name="subQ" fc="SV" />
+            <DA bType="VisString64" name="subID" fc="SV" />
+            <DA bType="Struct" type="CN_PulseConfig" name="pulseConfig" fc="CF" />
+            <DA bType="Enum" type="ctlModel" name="ctlModel" fc="CF" />
+            <DA qchg="false" dupd="false" bType="INT32U" name="sboTimeout" fc="CF" dchg="false" />
+            <DA bType="Enum" type="sboClass" name="sboClass" fc="CF" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+            <DA bType="VisString255" name="dataNs" fc="EX" />
+        </DOType>
+        <DOType desc="设备铭牌" id="CN_DPL" cdc="DPL" >
+            <DA bType="VisString255" name="vendor" fc="DC" />
+            <DA bType="VisString255" name="hwRev" fc="DC" />
+            <DA bType="VisString255" name="swRev" fc="DC" />
+            <DA bType="VisString255" name="serNum" fc="DC" />
+            <DA bType="VisString255" name="model" fc="DC" />
+            <DA bType="VisString255" name="location" fc="DC" />
+        </DOType>
+        <DOType desc="扩展设备铭牌" id="CN_DPL_EX" cdc="DPL" >
+            <DA bType="VisString255" name="vendor" fc="DC" />
+            <DA bType="VisString255" name="hwRev" fc="DC" />
+            <DA bType="VisString255" name="swRev" fc="DC" />
+            <DA bType="VisString255" name="serNum" fc="DC" />
+            <DA bType="VisString255" name="model" fc="DC" />
+            <DA bType="VisString255" name="location" fc="DC" />
+            <DA bType="VisString255" name="dataNs" fc="EX" />
+        </DOType>
+        <DOType desc="三相系统相对相地测量值" id="CN_HDEL" cdc="DEL" >
+            <DA qchg="true" bType="Quality" name="q" fc="MX" />
+            <DA bType="Timestamp" name="t" fc="MX" />
+            <DA bType="Struct" count="50" type="CN_Vector" name="phsABHar" fc="MX" />
+            <DA bType="Struct" count="50" type="CN_Vector" name="phsBCHar" fc="MX" />
+            <DA bType="Struct" count="50" type="CN_Vector" name="phsCAHar" fc="MX" />
+            <DA bType="Enum" type="angid" name="angRef" fc="CF" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+        </DOType>
+        <DOType desc="测量值" id="CN_HMV" cdc="HMV" >
+            <DA qchg="true" bType="Quality" name="q" fc="MX" />
+            <DA bType="Timestamp" name="t" fc="MX" />
+            <DA bType="Struct" count="50" type="CN_AnalogueValue" name="har" fc="MX" dchg="true" />
+            <DA bType="INT16U" name="numHar" fc="CF" dchg="true" />
+            <DA bType="INT16U" name="numCyc" fc="CF" dchg="true" />
+            <DA bType="INT16U" name="evalTm" fc="CF" />
+            <DA bType="FLOAT32" name="frequency" fc="CF" />
+            <DA bType="VisString255" name="d" fc="DC" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+        </DOType>
+        <DOType id="CN_HST" cdc="HST" >
+            <DA dupd="true" bType="Struct" count="50" type="CN_AnalogueValue_I" name="hstVal" fc="ST" dchg="true" />
+            <DA qchg="true" bType="Quality" name="q" fc="ST" />
+            <DA bType="Timestamp" name="t" fc="ST" />
+            <DA bType="INT16U" name="numPts" fc="ST" dchg="true" />
+            <DA bType="Struct" count="50" type="CN_AnalogueValue" name="hstRangeC" fc="CF" dchg="true" />
+            <DA bType="Struct" type="CN_Units" name="xUnits" fc="CF" dchg="true" />
+            <DA bType="Struct" type="CN_Units" name="yUnits" fc="CF" dchg="true" />
+            <DA bType="INT16U" name="maxPts" fc="CF" />
+            <DA bType="VisString255" name="xD" fc="DC" />
+            <DA bType="VisString255" name="d" fc="DC" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+        </DOType>
+        <DOType id="CN_HWYE" cdc="HWYE" >
+            <DA qchg="true" bType="Quality" name="q" fc="MX" />
+            <DA bType="Timestamp" name="t" fc="MX" />
+            <DA bType="Struct" count="50" type="CN_Vector" name="phsAHar" fc="MX" />
+            <DA bType="Struct" count="50" type="CN_Vector" name="phsBHar" fc="MX" />
+            <DA bType="Struct" count="50" type="CN_Vector" name="phsCHar" fc="MX" />
+            <DA bType="VisString255" name="d" fc="DC" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+        </DOType>
+        <DOType id="CN_HWYE_EX" cdc="HWYE" >
+            <DA qchg="true" bType="Quality" name="q" fc="MX" />
+            <DA bType="Timestamp" name="t" fc="MX" />
+            <DA bType="Struct" count="50" type="CN_Vector" name="phsAHar" fc="MX" />
+            <DA bType="Struct" count="50" type="CN_Vector" name="phsBHar" fc="MX" />
+            <DA bType="Struct" count="50" type="CN_Vector" name="phsCHar" fc="MX" />
+            <DA bType="VisString255" name="d" fc="DC" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+            <DA bType="VisString255" name="dataNs" fc="EX" />
+        </DOType>
+        <DOType desc="可控整数状态(模式)" id="CN_INC_Mod" cdc="INC" >
+            <DA bType="Enum" type="Mod" name="stVal" fc="ST" dchg="true" />
+            <DA qchg="true" bType="Quality" name="q" fc="ST" />
+            <DA bType="Timestamp" name="t" fc="ST" />
+            <DA bType="Enum" type="ctlModel" name="ctlModel" fc="CF" />
+        </DOType>
+        <DOType desc="整数状态定值" id="CN_ING_SG" cdc="ING" >
+            <DA qchg="false" valKind="Set" dupd="false" bType="INT32" count="0" name="setVal" fc="SG" dchg="false" />
+            <DA qchg="false" valKind="Set" dupd="false" bType="INT32" count="0" name="minVal" fc="CF" dchg="false" />
+            <DA qchg="false" valKind="Set" dupd="false" bType="INT32" count="0" name="maxVal" fc="CF" dchg="false" />
+            <DA qchg="false" valKind="Set" dupd="false" bType="INT32U" count="0" name="stepSize" fc="CF" dchg="false" />
+            <DA qchg="false" valKind="Set" dupd="false" bType="Unicode255" count="0" name="dU" fc="DC" dchg="false" />
+        </DOType>
+        <DOType desc="整数状态定值(取代)" id="CN_ING_SP" cdc="ING" >
+            <DA qchg="false" valKind="Set" dupd="false" bType="INT32" count="0" name="setVal" fc="SP" dchg="false" />
+            <DA qchg="false" valKind="Set" dupd="false" bType="INT32" count="0" name="minVal" fc="CF" dchg="false" />
+            <DA qchg="false" valKind="Set" dupd="false" bType="INT32" count="0" name="maxVal" fc="CF" dchg="false" />
+            <DA qchg="false" valKind="Set" dupd="false" bType="INT32U" count="0" name="stepSize" fc="CF" dchg="false" />
+            <DA qchg="false" valKind="Set" dupd="false" bType="Unicode255" count="0" name="dU" fc="DC" dchg="false" />
+        </DOType>
+        <DOType desc="整数状态" id="CN_INS" cdc="INS" >
+            <DA bType="INT32" name="stVal" fc="ST" dchg="true" />
+            <DA qchg="true" bType="Quality" name="q" fc="ST" />
+            <DA bType="Timestamp" name="t" fc="ST" />
+            <DA bType="BOOLEAN" name="subEna" fc="SV" />
+            <DA bType="INT32" name="subVal" fc="SV" />
+            <DA bType="Quality" name="subQ" fc="SV" />
+            <DA bType="VisString64" name="subID" fc="SV" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+        </DOType>
+        <DOType desc="整数状态(自动重合闸)" id="CN_INS_ARST" cdc="INS" >
+            <DA bType="Enum" type="AutoRecSt" name="stVal" fc="ST" dchg="true" />
+            <DA qchg="true" bType="Quality" name="q" fc="ST" />
+            <DA bType="Timestamp" name="t" fc="ST" />
+            <DA bType="BOOLEAN" name="subEna" fc="SV" />
+            <DA bType="Enum" type="AutoRecSt" name="subVal" fc="SV" />
+            <DA bType="Quality" name="subQ" fc="SV" />
+            <DA bType="VisString64" name="subID" fc="SV" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+        </DOType>
+        <DOType desc="整数状态类(用于数据对象Beh)" id="CN_INS_Beh" cdc="INS" >
+            <DA bType="Enum" type="Beh" name="stVal" fc="ST" dchg="true" />
+            <DA qchg="true" bType="Quality" name="q" fc="ST" />
+            <DA bType="Timestamp" name="t" fc="ST" />
+        </DOType>
+        <DOType desc="扩展整数状态" id="CN_INS_EX" cdc="INS" >
+            <DA bType="INT32" name="stVal" fc="ST" dchg="true" />
+            <DA qchg="true" bType="Quality" name="q" fc="ST" />
+            <DA bType="Timestamp" name="t" fc="ST" />
+            <DA bType="BOOLEAN" name="subEna" fc="SV" />
+            <DA bType="INT32" name="subVal" fc="SV" />
+            <DA bType="Quality" name="subQ" fc="SV" />
+            <DA bType="VisString64" name="subID" fc="SV" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+            <DA bType="VisString255" name="dataNs" fc="EX" />
+        </DOType>
+        <DOType desc="整数状态类(用于数据对象Health)" id="CN_INS_Health" cdc="INS" >
+            <DA bType="Enum" type="Health" name="stVal" fc="ST" dchg="true" />
+            <DA qchg="true" bType="Quality" name="q" fc="ST" />
+            <DA bType="Timestamp" name="t" fc="ST" />
+        </DOType>
+        <DOType desc="逻辑节点铭牌" id="CN_LPL" cdc="LPL" >
+            <DA bType="VisString255" name="vendor" fc="DC" />
+            <DA bType="VisString255" name="swRev" fc="DC" />
+            <DA bType="VisString255" name="d" fc="DC" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+        </DOType>
+        <DOType desc="逻辑节点铭牌(LN0)" id="CN_LPL_LN0" cdc="LPL" >
+            <DA bType="VisString255" name="vendor" fc="DC" />
+            <DA bType="VisString255" name="swRev" fc="DC" />
+            <DA bType="VisString255" name="d" fc="DC" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+            <DA bType="VisString255" name="configRev" fc="DC" />
+            <DA bType="VisString255" name="ldNs" fc="EX" />
+        </DOType>
+        <DOType desc="测量值" id="CN_MV" cdc="MV" >
+            <DA bType="Struct" type="CN_AnalogueValue" name="mag" fc="MX" dchg="true" />
+            <DA qchg="true" bType="Quality" name="q" fc="MX" />
+            <DA bType="Timestamp" name="t" fc="MX" />
+            <DA bType="BOOLEAN" name="subEna" fc="SV" />
+            <DA bType="Struct" type="CN_AnalogueValue" name="subMag" fc="SV" />
+            <DA bType="Quality" name="subQ" fc="SV" />
+            <DA bType="VisString64" name="subID" fc="SV" />
+            <DA bType="Struct" type="CN_Units" name="units" fc="CF" />
+            <DA bType="INT32U" name="db" fc="CF" />
+            <DA bType="INT32U" name="zeroDb" fc="CF" />
+            <DA bType="Struct" type="CN_ScaledValueConfig" name="sVC" fc="CF" />
+            <DA bType="Struct" type="CN_RangeConfig" name="rangeC" fc="CF" />
+            <DA bType="INT32U" name="smpRate" fc="CF" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+        </DOType>
+        <DOType desc="扩展测量值" id="CN_MV_EX" cdc="MV" >
+            <DA bType="Struct" type="CN_AnalogueValue" name="mag" fc="MX" dchg="true" />
+            <DA qchg="true" bType="Quality" name="q" fc="MX" />
+            <DA bType="Timestamp" name="t" fc="MX" />
+            <DA bType="BOOLEAN" name="subEna" fc="SV" />
+            <DA bType="Struct" type="CN_AnalogueValue" name="subMag" fc="SV" />
+            <DA bType="Quality" name="subQ" fc="SV" />
+            <DA bType="VisString64" name="subID" fc="SV" />
+            <DA bType="Struct" type="CN_Units" name="units" fc="CF" />
+            <DA bType="INT32U" name="db" fc="CF" />
+            <DA bType="INT32U" name="zeroDb" fc="CF" />
+            <DA bType="Struct" type="CN_ScaledValueConfig" name="sVC" fc="CF" />
+            <DA bType="Struct" type="CN_RangeConfig" name="rangeC" fc="CF" />
+            <DA bType="INT32U" name="smpRate" fc="CF" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+            <DA bType="VisString255" name="dataNs" fc="EX" />
+        </DOType>
+        <DOType desc="测量值" id="CN_MV_I" cdc="MV" >
+            <DA bType="Struct" type="CN_AnalogueValue_I" name="mag" fc="MX" dchg="true" />
+            <DA qchg="true" bType="Quality" name="q" fc="MX" />
+            <DA bType="Timestamp" name="t" fc="MX" />
+            <DA bType="BOOLEAN" name="subEna" fc="SV" />
+            <DA bType="Struct" type="CN_AnalogueValue" name="subMag" fc="SV" />
+            <DA bType="Quality" name="subQ" fc="SV" />
+            <DA bType="VisString64" name="subID" fc="SV" />
+            <DA bType="Struct" type="CN_Units" name="units" fc="CF" />
+            <DA bType="INT32U" name="db" fc="CF" />
+            <DA bType="INT32U" name="zeroDb" fc="CF" />
+            <DA bType="Struct" type="CN_ScaledValueConfig" name="sVC" fc="CF" />
+            <DA bType="Struct" type="CN_RangeConfig" name="rangeC" fc="CF" />
+            <DA bType="INT32U" name="smpRate" fc="CF" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+        </DOType>
+        <DOType desc="序分量值" id="CN_SEQ" cdc="SEQ" >
+            <DA bType="Enum" type="seqT" name="seqT" fc="MX" />
+            <DA bType="Enum" type="phsid" name="phsRef" fc="CF" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+            <SDO type="CN_CMV" name="c1" />
+            <SDO type="CN_CMV" name="c2" />
+            <SDO type="CN_CMV" name="c3" />
+        </DOType>
+        <DOType desc="可控的单点" id="CN_SPC" cdc="SPC" >
+            <DA bType="Struct" type="CN_SBOw_Oper_SDPC" name="SBOw" fc="CO" />
+            <DA bType="Struct" type="CN_SBOw_Oper_SDPC" name="Oper" fc="CO" />
+            <DA bType="Struct" type="CN_Cancel_SDPC" name="Cancel" fc="CO" />
+            <DA bType="BOOLEAN" name="stVal" fc="ST" dchg="true" />
+            <DA qchg="true" bType="Quality" name="q" fc="ST" />
+            <DA bType="Timestamp" name="t" fc="ST" />
+            <DA bType="BOOLEAN" name="subEna" fc="SV" />
+            <DA bType="BOOLEAN" name="subVal" fc="SV" />
+            <DA bType="Quality" name="subQ" fc="SV" />
+            <DA bType="VisString64" name="subID" fc="SV" />
+            <DA bType="Struct" type="CN_PulseConfig" name="pulseConfig" fc="CF" />
+            <DA bType="Enum" type="ctlModel" name="ctlModel" fc="CF" />
+            <DA bType="INT32U" name="sboTimeout" fc="CF" />
+            <DA bType="Enum" type="sboClass" name="sboClass" fc="CF" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+        </DOType>
+        <DOType desc="可控的单点(复归)" id="CN_SPC_DC" cdc="SPC" >
+            <DA bType="Struct" type="CN_SBOw_Oper_SDPC" name="Oper" fc="CO" />
+            <DA bType="BOOLEAN" name="stVal" fc="ST" dchg="true" />
+            <DA qchg="true" bType="Quality" name="q" fc="ST" />
+            <DA bType="Timestamp" name="t" fc="ST" />
+            <DA bType="BOOLEAN" name="subEna" fc="SV" />
+            <DA bType="BOOLEAN" name="subVal" fc="SV" />
+            <DA bType="Quality" name="subQ" fc="SV" />
+            <DA bType="VisString64" name="subID" fc="SV" />
+            <DA bType="Enum" type="ctlModel" name="ctlModel" fc="CF" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+        </DOType>
+        <DOType desc="扩展可控的单点" id="CN_SPC_EX" cdc="SPC" >
+            <DA bType="Struct" type="CN_SBOw_Oper_SDPC" name="SBOw" fc="CO" />
+            <DA bType="Struct" type="CN_SBOw_Oper_SDPC" name="Oper" fc="CO" />
+            <DA bType="Struct" type="CN_Cancel_SDPC" name="Cancel" fc="CO" />
+            <DA bType="BOOLEAN" name="stVal" fc="ST" dchg="true" />
+            <DA qchg="true" bType="Quality" name="q" fc="ST" />
+            <DA bType="Timestamp" name="t" fc="ST" />
+            <DA bType="BOOLEAN" name="subEna" fc="SV" />
+            <DA bType="BOOLEAN" name="subVal" fc="SV" />
+            <DA bType="Quality" name="subQ" fc="SV" />
+            <DA bType="VisString64" name="subID" fc="SV" />
+            <DA bType="Struct" type="CN_PulseConfig" name="pulseConfig" fc="CF" />
+            <DA bType="Enum" type="ctlModel" name="ctlModel" fc="CF" />
+            <DA bType="INT32U" name="sboTimeout" fc="CF" />
+            <DA bType="Enum" type="sboClass" name="sboClass" fc="CF" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+            <DA bType="VisString255" name="dataNs" fc="EX" />
+        </DOType>
+        <DOType desc="单点状态信息类" id="CN_SPS" cdc="SPS" >
+            <DA bType="BOOLEAN" name="stVal" fc="ST" dchg="true" />
+            <DA qchg="true" bType="Quality" name="q" fc="ST" />
+            <DA bType="Timestamp" name="t" fc="ST" />
+            <DA bType="BOOLEAN" name="subEna" fc="SV" />
+            <DA bType="BOOLEAN" name="subVal" fc="SV" />
+            <DA bType="Quality" name="subQ" fc="SV" />
+            <DA bType="VisString64" name="subID" fc="SV" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+        </DOType>
+        <DOType desc="扩展单点状态信息类" id="CN_SPS_EX" cdc="SPS" >
+            <DA bType="BOOLEAN" name="stVal" fc="ST" dchg="true" />
+            <DA qchg="true" bType="Quality" name="q" fc="ST" />
+            <DA bType="Timestamp" name="t" fc="ST" />
+            <DA bType="BOOLEAN" name="subEna" fc="SV" />
+            <DA bType="BOOLEAN" name="subVal" fc="SV" />
+            <DA bType="Quality" name="subQ" fc="SV" />
+            <DA bType="VisString64" name="subID" fc="SV" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+            <DA bType="VisString255" name="dataNs" fc="EX" />
+        </DOType>
+        <DOType desc="三相对地" id="CN_WYE" cdc="WYE" >
+            <DA bType="Enum" type="angid" name="angRef" fc="CF" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+            <SDO type="CN_CMV" name="phsA" />
+            <SDO type="CN_CMV" name="phsB" />
+            <SDO type="CN_CMV" name="phsC" />
+            <SDO type="CN_CMV" name="neut" />
+        </DOType>
+        <DOType desc="扩展三相对地" id="CN_WYE_EX" cdc="WYE" >
+            <DA bType="Enum" type="angid" name="angRef" fc="CF" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+            <DA bType="VisString255" name="dataNs" fc="EX" />
+            <SDO type="CN_CMV" name="phsA" />
+            <SDO type="CN_CMV" name="phsB" />
+            <SDO type="CN_CMV" name="phsC" />
+        </DOType>
+        <DOType id="JZ_CSD" cdc="CSD" >
+            <DA bType="Struct" type="JZ_Unit" name="xUnit" fc="DC" />
+            <DA bType="VisString255" name="xD" fc="DC" />
+            <DA bType="Struct" type="JZ_Unit" name="yUnit" fc="DC" />
+            <DA bType="VisString255" name="yD" fc="DC" />
+            <DA bType="INT16U" name="numPts" fc="DC" />
+            <DA bType="Struct" type="JZ_Point" name="crvPts" fc="DC" />
+            <DA bType="VisString255" name="d" fc="DC" />
+            <DA bType="Unicode255" name="dU" fc="DC" />
+        </DOType>
+        <DOType desc="单点状态信息" id="JZ_SPS" cdc="SPS" >
+            <DA bType="BOOLEAN" name="stVal" fc="ST" dchg="true" />
+            <DA qchg="true" bType="Quality" name="q" fc="ST" />
+            <DA bType="Timestamp" name="t" fc="ST" />
+        </DOType>
+        <DAType id="CN_AnalogueValue" >
+            <BDA bType="FLOAT32" name="f" />
+        </DAType>
+        <DAType id="CN_AnalogueValue_I" >
+            <BDA bType="INT32" name="i" />
+        </DAType>
+        <DAType id="CN_Cancel_BSC" >
+            <BDA bType="Tcmd" name="ctlVal" />
+            <BDA bType="Struct" type="CN_Originator" name="origin" />
+            <BDA bType="INT8U" name="ctlNum" />
+            <BDA bType="Timestamp" name="T" />
+            <BDA bType="BOOLEAN" name="Test" />
+        </DAType>
+        <DAType id="CN_Cancel_INC" >
+            <BDA bType="INT32" name="ctlVal" />
+            <BDA bType="Struct" type="CN_Originator" name="origin" />
+            <BDA bType="INT8U" name="ctlNum" />
+            <BDA bType="Timestamp" name="T" />
+            <BDA bType="BOOLEAN" name="Test" />
+        </DAType>
+        <DAType id="CN_Cancel_SDPC" >
+            <BDA bType="BOOLEAN" name="ctlVal" />
+            <BDA bType="Struct" type="CN_Originator" name="origin" />
+            <BDA bType="INT8U" name="ctlNum" />
+            <BDA bType="Timestamp" name="T" />
+            <BDA bType="BOOLEAN" name="Test" />
+            <BDA bType="Check" name="Check" />
+        </DAType>
+        <DAType id="CN_Originator" >
+            <BDA bType="Enum" type="orCategory" name="orCat" />
+            <BDA bType="Octet64" name="orIdent" />
+        </DAType>
+        <DAType id="CN_PulseConfig" >
+            <BDA bType="Enum" type="PulseConfigCmdQual" name="cmdQual" />
+            <BDA bType="INT32U" name="onDur" />
+            <BDA bType="INT32U" name="offDur" />
+            <BDA bType="INT32U" name="numPls" />
+        </DAType>
+        <DAType id="CN_RangeConfig" >
+            <BDA bType="Struct" type="CN_AnalogueValue" name="hhLim" />
+            <BDA bType="Struct" type="CN_AnalogueValue" name="hLim" />
+            <BDA bType="Struct" type="CN_AnalogueValue" name="lLim" />
+            <BDA bType="Struct" type="CN_AnalogueValue" name="llLim" />
+            <BDA bType="Struct" type="CN_AnalogueValue" name="min" />
+            <BDA bType="Struct" type="CN_AnalogueValue" name="max" />
+        </DAType>
+        <DAType id="CN_SBOw_Oper_BSC" >
+            <BDA bType="Tcmd" name="ctlVal" />
+            <BDA bType="Struct" type="CN_Originator" name="origin" />
+            <BDA bType="INT8U" name="ctlNum" />
+            <BDA bType="Timestamp" name="T" />
+            <BDA bType="BOOLEAN" name="Test" />
+            <BDA bType="Check" name="Check" />
+        </DAType>
+        <DAType id="CN_SBOw_Oper_INC" >
+            <BDA bType="INT32" name="ctlVal" />
+            <BDA bType="Struct" type="CN_Originator" name="origin" />
+            <BDA bType="INT8U" name="ctlNum" />
+            <BDA bType="Timestamp" name="T" />
+            <BDA bType="BOOLEAN" name="Test" />
+            <BDA bType="Check" name="Check" />
+        </DAType>
+        <DAType id="CN_SBOw_Oper_SDPC" >
+            <BDA bType="BOOLEAN" name="ctlVal" />
+            <BDA bType="Struct" type="CN_Originator" name="origin" />
+            <BDA bType="INT8U" name="ctlNum" />
+            <BDA bType="Timestamp" name="T" />
+            <BDA bType="BOOLEAN" name="Test" />
+            <BDA bType="Check" name="Check" />
+        </DAType>
+        <DAType id="CN_ScaledValueConfig" >
+            <BDA bType="FLOAT32" name="scaleFactor" />
+            <BDA bType="FLOAT32" name="offset" />
+        </DAType>
+        <DAType id="CN_Units" >
+            <BDA bType="Enum" type="SIUnit" name="SIUnit" />
+            <BDA bType="Enum" type="multiplier" name="multiplier" />
+        </DAType>
+        <DAType id="CN_Vector" >
+            <BDA bType="Struct" type="CN_AnalogueValue" name="mag" />
+            <BDA bType="Struct" type="CN_AnalogueValue" name="ang" />
+        </DAType>
+        <EnumType id="AutoRecSt" >
+            <EnumVal ord="1" >Ready</EnumVal>
+            <EnumVal ord="2" >InProgress</EnumVal>
+            <EnumVal ord="3" >Successful</EnumVal>
+        </EnumType>
+        <EnumType id="Beh" >
+            <EnumVal ord="1" >on</EnumVal>
+            <EnumVal ord="2" >blocked</EnumVal>
+            <EnumVal ord="3" >test</EnumVal>
+            <EnumVal ord="4" >test/blocked</EnumVal>
+            <EnumVal ord="5" >off</EnumVal>
+        </EnumType>
+        <EnumType id="CBOpCap" >
+            <EnumVal ord="1" >None</EnumVal>
+            <EnumVal ord="2" >Open</EnumVal>
+            <EnumVal ord="3" >Close-Open</EnumVal>
+            <EnumVal ord="4" >Open-Close-Open</EnumVal>
+            <EnumVal ord="5" >Close-Open-Close-Open</EnumVal>
+        </EnumType>
+        <EnumType id="Dbpos" >
+            <EnumVal ord="0" >intermediate</EnumVal>
+            <EnumVal ord="1" >off</EnumVal>
+            <EnumVal ord="2" >on</EnumVal>
+            <EnumVal ord="3" >bad</EnumVal>
+        </EnumType>
+        <EnumType id="Health" >
+            <EnumVal ord="1" >Ok</EnumVal>
+            <EnumVal ord="2" >Warning</EnumVal>
+            <EnumVal ord="3" >Alarm</EnumVal>
+        </EnumType>
+        <EnumType id="Mod" >
+            <EnumVal ord="1" >on</EnumVal>
+            <EnumVal ord="2" >blocked</EnumVal>
+            <EnumVal ord="3" >test</EnumVal>
+            <EnumVal ord="4" >test/blocked</EnumVal>
+            <EnumVal ord="5" >off</EnumVal>
+        </EnumType>
+        <EnumType id="PulseConfigCmdQual" >
+            <EnumVal ord="0" >pulse</EnumVal>
+            <EnumVal ord="1" >persistent</EnumVal>
+        </EnumType>
+        <EnumType id="SIUnit" >
+            <EnumVal ord="1" ></EnumVal>
+            <EnumVal ord="2" >m</EnumVal>
+            <EnumVal ord="3" >kg</EnumVal>
+            <EnumVal ord="4" >s</EnumVal>
+            <EnumVal ord="5" >A</EnumVal>
+            <EnumVal ord="6" >K</EnumVal>
+            <EnumVal ord="7" >mol</EnumVal>
+            <EnumVal ord="8" >cd</EnumVal>
+            <EnumVal ord="9" >deg</EnumVal>
+            <EnumVal ord="10" >rad</EnumVal>
+            <EnumVal ord="11" >sr</EnumVal>
+            <EnumVal ord="21" >Gy</EnumVal>
+            <EnumVal ord="22" >q</EnumVal>
+            <EnumVal ord="23" >°C</EnumVal>
+            <EnumVal ord="24" >Sv</EnumVal>
+            <EnumVal ord="25" >F</EnumVal>
+            <EnumVal ord="26" >C</EnumVal>
+            <EnumVal ord="27" >S</EnumVal>
+            <EnumVal ord="28" >H</EnumVal>
+            <EnumVal ord="29" >V</EnumVal>
+            <EnumVal ord="30" >ohm</EnumVal>
+            <EnumVal ord="31" >J</EnumVal>
+            <EnumVal ord="32" >N</EnumVal>
+            <EnumVal ord="33" >Hz</EnumVal>
+            <EnumVal ord="34" >lx</EnumVal>
+            <EnumVal ord="35" >Lm</EnumVal>
+            <EnumVal ord="36" >Wb</EnumVal>
+            <EnumVal ord="37" >T</EnumVal>
+            <EnumVal ord="38" >W</EnumVal>
+            <EnumVal ord="39" >Pa</EnumVal>
+            <EnumVal ord="41" >m²</EnumVal>
+            <EnumVal ord="42" >m³</EnumVal>
+            <EnumVal ord="43" >m/s</EnumVal>
+            <EnumVal ord="44" >m/s²</EnumVal>
+            <EnumVal ord="45" >m³/s</EnumVal>
+            <EnumVal ord="46" >m/m³</EnumVal>
+            <EnumVal ord="47" >M</EnumVal>
+            <EnumVal ord="48" >kg/m³</EnumVal>
+            <EnumVal ord="49" >m²/s</EnumVal>
+            <EnumVal ord="50" >W/m K</EnumVal>
+            <EnumVal ord="51" >J/K</EnumVal>
+            <EnumVal ord="52" >ppm</EnumVal>
+            <EnumVal ord="53" >1/s</EnumVal>
+            <EnumVal ord="54" >rad/s</EnumVal>
+            <EnumVal ord="61" >VA</EnumVal>
+            <EnumVal ord="62" >Watts</EnumVal>
+            <EnumVal ord="63" >VAr</EnumVal>
+            <EnumVal ord="64" >phi</EnumVal>
+            <EnumVal ord="65" >cos_phi </EnumVal>
+            <EnumVal ord="66" >Vs</EnumVal>
+            <EnumVal ord="67" >V²</EnumVal>
+            <EnumVal ord="68" >As</EnumVal>
+            <EnumVal ord="69" >A²</EnumVal>
+            <EnumVal ord="70" >A²t</EnumVal>
+            <EnumVal ord="71" >VAh</EnumVal>
+            <EnumVal ord="72" >Wh</EnumVal>
+            <EnumVal ord="73" >VArh</EnumVal>
+            <EnumVal ord="74" >V/Hz</EnumVal>
+            <EnumVal ord="75" >b/s</EnumVal>
+        </EnumType>
+        <EnumType id="ShOpCap" >
+            <EnumVal ord="1" >None</EnumVal>
+            <EnumVal ord="2" >Open</EnumVal>
+            <EnumVal ord="3" >Close</EnumVal>
+            <EnumVal ord="4" >Open and Close</EnumVal>
+        </EnumType>
+        <EnumType id="SwTyp" >
+            <EnumVal ord="1" >Load Break</EnumVal>
+            <EnumVal ord="2" >Disconnector</EnumVal>
+            <EnumVal ord="3" >Earthing Switch</EnumVal>
+            <EnumVal ord="4" >High Speed Earthing Switch</EnumVal>
+        </EnumType>
+        <EnumType id="Tcmd" >
+            <EnumVal ord="0" >stop</EnumVal>
+            <EnumVal ord="1" >lower</EnumVal>
+            <EnumVal ord="2" >higher</EnumVal>
+            <EnumVal ord="3" >reserved</EnumVal>
+        </EnumType>
+        <EnumType id="angid" >
+            <EnumVal ord="0" >Va</EnumVal>
+            <EnumVal ord="1" >Vb</EnumVal>
+            <EnumVal ord="2" >Vc</EnumVal>
+            <EnumVal ord="3" >Aa</EnumVal>
+            <EnumVal ord="4" >Ab</EnumVal>
+            <EnumVal ord="5" >Ac</EnumVal>
+            <EnumVal ord="6" >Vab</EnumVal>
+            <EnumVal ord="7" >Vbc</EnumVal>
+            <EnumVal ord="8" >Vca</EnumVal>
+            <EnumVal ord="9" >Vother</EnumVal>
+            <EnumVal ord="10" >Aother</EnumVal>
+        </EnumType>
+        <EnumType id="angidCMV" >
+            <EnumVal ord="0" >V</EnumVal>
+            <EnumVal ord="1" >A</EnumVal>
+            <EnumVal ord="2" >other</EnumVal>
+        </EnumType>
+        <EnumType id="ctlModel" >
+            <EnumVal ord="0" >status-only</EnumVal>
+            <EnumVal ord="1" >direct-with-normal-security</EnumVal>
+            <EnumVal ord="2" >sbo-with-normal-security</EnumVal>
+            <EnumVal ord="3" >direct-with-enhanced-security</EnumVal>
+            <EnumVal ord="4" >sbo-with-enhanced-security</EnumVal>
+        </EnumType>
+        <EnumType id="dir" >
+            <EnumVal ord="0" >unknown</EnumVal>
+            <EnumVal ord="1" >forward</EnumVal>
+            <EnumVal ord="2" >backward</EnumVal>
+            <EnumVal ord="3" >both</EnumVal>
+        </EnumType>
+        <EnumType id="multiplier" >
+            <EnumVal ord="-24" >y</EnumVal>
+            <EnumVal ord="-21" >z</EnumVal>
+            <EnumVal ord="-18" >a</EnumVal>
+            <EnumVal ord="-15" >f</EnumVal>
+            <EnumVal ord="-12" >p</EnumVal>
+            <EnumVal ord="-9" >n</EnumVal>
+            <EnumVal ord="-6" >μ</EnumVal>
+            <EnumVal ord="-3" >m</EnumVal>
+            <EnumVal ord="-2" >c</EnumVal>
+            <EnumVal ord="-1" >d</EnumVal>
+            <EnumVal ord="0" ></EnumVal>
+            <EnumVal ord="1" >da</EnumVal>
+            <EnumVal ord="2" >h</EnumVal>
+            <EnumVal ord="3" >k</EnumVal>
+            <EnumVal ord="6" >M</EnumVal>
+            <EnumVal ord="9" >G</EnumVal>
+            <EnumVal ord="12" >T</EnumVal>
+            <EnumVal ord="15" >P</EnumVal>
+            <EnumVal ord="18" >E</EnumVal>
+            <EnumVal ord="21" >Z</EnumVal>
+            <EnumVal ord="24" >Y</EnumVal>
+        </EnumType>
+        <EnumType id="orCategory" >
+            <EnumVal ord="0" >not-supported</EnumVal>
+            <EnumVal ord="1" >bay-control</EnumVal>
+            <EnumVal ord="2" >station-control</EnumVal>
+            <EnumVal ord="3" >remote-control</EnumVal>
+            <EnumVal ord="4" >automatic-bay</EnumVal>
+            <EnumVal ord="5" >automatic-station</EnumVal>
+            <EnumVal ord="6" >automatic-remote</EnumVal>
+            <EnumVal ord="7" >maintenance</EnumVal>
+            <EnumVal ord="8" >process</EnumVal>
+        </EnumType>
+        <EnumType id="phsid" >
+            <EnumVal ord="0" >A</EnumVal>
+            <EnumVal ord="1" >B</EnumVal>
+            <EnumVal ord="2" >C</EnumVal>
+        </EnumType>
+        <EnumType id="sboClass" >
+            <EnumVal ord="0" >operate-once</EnumVal>
+            <EnumVal ord="1" >operate-many</EnumVal>
+        </EnumType>
+        <EnumType id="seqT" >
+            <EnumVal ord="0" >pos-neg-zero</EnumVal>
+            <EnumVal ord="1" >dir-quad-zero</EnumVal>
+        </EnumType>
+    </DataTypeTemplates>
+</SCL>
