@@ -64,7 +64,7 @@ After=network.target
 [Service]
 User=rytec
 Restart=always
-Type=forking
+Type=simple
 ExecStart=/home/rytec/data/moquette/bin/moquette.sh
 
 [Install]

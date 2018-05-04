@@ -43,7 +43,14 @@
             "includePath": [
                 "/usr/include",
                 "/usr/local/include",
-                "${workspaceRoot}"
+                "${workspaceRoot}",
+                "${workspaceRoot}/include",
+                "/usr/include/c++/5/tr1",
+                "/usr/include/c++/5",
+                "/usr/include/linux",
+                "/usr/include/x86_64-linux-gnu/c++/5",
+                "/usr/include/x86_64-linux-gnu",
+                "${workspaceRoot}/src"
             ],
             "defines": [],
             "intelliSenseMode": "clang-x64",
@@ -55,7 +62,9 @@
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
-            }
+            },
+            "cStandard": "c11",
+            "cppStandard": "c++17"
         },
         {
             "name": "Win32",

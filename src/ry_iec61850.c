@@ -59,7 +59,7 @@ void UpdateNodeValue(int type, int device_id, float val)
 
     switch (type)
     {
-    case LN_TYPE_INPUT:
+    case LN_TYPE_INPUT:         // 遥信
         // 更新值
         mn = IedModel_getModelNodeByShortAddress(model, device_id);
         if (mn == NULL)
@@ -93,7 +93,7 @@ void UpdateNodeValue(int type, int device_id, float val)
         }
 
         break;
-    case LN_TYPE_ANALOG:
+    case LN_TYPE_ANALOG:        // 遥测
         // 更新值
         mn = IedModel_getModelNodeByShortAddress(model, device_id);
         if (mn == NULL)
@@ -128,7 +128,7 @@ void UpdateNodeValue(int type, int device_id, float val)
         }
 
         break;
-    case LN_TYPE_SWITCH:
+    case LN_TYPE_SWITCH:        // 遥控
         stateVal = val;
         // 更新值
         mn = IedModel_getModelNodeByShortAddress(model, device_id);
