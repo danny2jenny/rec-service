@@ -19,7 +19,7 @@ char mqtt_host[100];            // 服务URL
 int mqtt_port;                  // 服务端口
 uv_timer_t timer_req;           // 定时器
 
-char * ini_file_path;       // 当前路径
+char *ini_file_path;           // 当前路径
 //----------------------------------------------------
 
 /**
@@ -37,7 +37,7 @@ void SigintHandler(int signalId) {
  * 定时事件，在这里循环执行各个功能模块的定时功能
  */
 static void OnTimer(uv_timer_t *handle) {
-    //NvrOnTimer();               // video adapter 定时任务
+    //NvrOnTimer();                 // video adapter 定时任务
     IEC61850OnTimer();              // 61850 定时任务
 }
 
@@ -78,6 +78,6 @@ int main(int argc, char *argv[]) {
     uv_timer_init(ry_loop, &timer_req);         // 定时器
     TimerStart();
 
-    MqttInit(mqtt_host, mqtt_port);             // MQTT 消息客户端链接  todo 不应该这样写，应该放在定时任务中。强迫症!!!
+    MqttInit(mqtt_host, mqtt_port);             // MQTT 消息客户端链接
     uv_run(ry_loop, UV_RUN_DEFAULT);            // 运行消息循环
 }

@@ -34,15 +34,16 @@ char cfgFile[200] = "/home/danny/ivs.cfg";
  * 如果以前Server运行中，就关闭，清理资源。
  * 准备重新初始化服务器
  */
-void IEC61850Cleanup()
-{
-    if (iedServer == NULL)
-    {
+void IEC61850Cleanup() {
+    if (iedServer == NULL) {
         return;
     }
     IedServer_stop(iedServer);
     IedServer_destroy(iedServer);
     IedModel_destroy(model);
+
+    iedServer = NULL;
+    model = NULL;
 }
 
 /**
@@ -50,118 +51,93 @@ void IEC61850Cleanup()
  * @param type
  * @param val
  */
-void UpdateNodeValue(int type, int device_id, float val)
-{
+void UpdateNodeValue(int type, int device_id, float val) {
 
     uint64_t timestamp = Hal_getTimeInMs();
     ModelNode *mn;
     int stateVal = 20;
 
-    switch (type)
-    {
-    case LN_TYPE_INPUT:         // 遥信
-        // 更新值
-        mn = IedModel_getModelNodeByShortAddress(model, device_id);
-        if (mn == NULL)
-        {
-            return;
-        }
+    switch (type) {
+        case LN_TYPE_INPUT:         // 遥信
+            // 更新值
+            mn = IedModel_getModelNodeByShortAddress(model, device_id);
+            if (mn == NULL) {
+                return;
+            }
 
-        if (val > 0)
-        {
-            IedServer_updateBooleanAttributeValue(iedServer, (DataAttribute *)mn, true);
-        }
+            if (val > 0) {
+                IedServer_updateBooleanAttributeValue(iedServer, (DataAttribute *) mn, true);
+            }
 
-        if (val <= 0)
-        {
-            IedServer_updateBooleanAttributeValue(iedServer, (DataAttribute *)mn, false);
-        }
+            if (val <= 0) {
+                IedServer_updateBooleanAttributeValue(iedServer, (DataAttribute *) mn, false);
+            }
 
-        // 更新时间
-        mn = mn->parent;
-        if (mn)
-        {
-            mn = ModelNode_getChild(mn, "t");
-        }
-        else
-        {
-            return;
-        }
-        if (mn)
-        {
-            IedServer_updateUTCTimeAttributeValue(iedServer, (DataAttribute *)mn, timestamp);
-        }
+            // 更新时间
+            mn = mn->parent;
+            if (mn) {
+                mn = ModelNode_getChild(mn, "t");
+            } else {
+                return;
+            }
+            if (mn) {
+                IedServer_updateUTCTimeAttributeValue(iedServer, (DataAttribute *) mn, timestamp);
+            }
 
-        break;
-    case LN_TYPE_ANALOG:        // 遥测
-        // 更新值
-        mn = IedModel_getModelNodeByShortAddress(model, device_id);
-        if (mn == NULL)
-        {
-            return;
-        }
-        IedServer_updateFloatAttributeValue(iedServer, (DataAttribute *)mn, val);
+            break;
+        case LN_TYPE_ANALOG:        // 遥测
+            // 更新值
+            mn = IedModel_getModelNodeByShortAddress(model, device_id);
+            if (mn == NULL) {
+                return;
+            }
+            IedServer_updateFloatAttributeValue(iedServer, (DataAttribute *) mn, val);
 
-        // 更新时间
-        mn = mn->parent; // mag 节点
-        if (mn)
-        {
-            mn = mn->parent; // MMXN 节点
-        }
-        else
-        {
-            return;
-        }
+            // 更新时间
+            mn = mn->parent; // mag 节点
+            if (mn) {
+                mn = mn->parent; // MMXN 节点
+            } else {
+                return;
+            }
 
-        if (mn)
-        {
-            mn = mn = ModelNode_getChild(mn, "t");
-        }
-        else
-        {
-            return;
-        }
+            if (mn) {
+                mn = mn = ModelNode_getChild(mn, "t");
+            } else {
+                return;
+            }
 
-        if (mn)
-        {
-            IedServer_updateUTCTimeAttributeValue(iedServer, (DataAttribute *)mn, timestamp);
-        }
+            if (mn) {
+                IedServer_updateUTCTimeAttributeValue(iedServer, (DataAttribute *) mn, timestamp);
+            }
 
-        break;
-    case LN_TYPE_SWITCH:        // 遥控
-        stateVal = val;
-        // 更新值
-        mn = IedModel_getModelNodeByShortAddress(model, device_id);
-        if (mn == NULL)
-        {
-            return;
-        }
+            break;
+        case LN_TYPE_SWITCH:        // 遥控
+            stateVal = val;
+            // 更新值
+            mn = IedModel_getModelNodeByShortAddress(model, device_id);
+            if (mn == NULL) {
+                return;
+            }
 
-        if (stateVal == DEVICE_ON)
-        {
-            IedServer_updateBooleanAttributeValue(iedServer, (DataAttribute *)mn, true);
-        }
-        else
-        {
-            IedServer_updateBooleanAttributeValue(iedServer, (DataAttribute *)mn, false);
-        }
+            if (stateVal == DEVICE_ON) {
+                IedServer_updateBooleanAttributeValue(iedServer, (DataAttribute *) mn, true);
+            } else {
+                IedServer_updateBooleanAttributeValue(iedServer, (DataAttribute *) mn, false);
+            }
 
-        // 更新时间
-        mn = mn->parent;
-        if (mn)
-        {
-            mn = ModelNode_getChild(mn, "t");
-        }
-        else
-        {
-            return;
-        }
+            // 更新时间
+            mn = mn->parent;
+            if (mn) {
+                mn = ModelNode_getChild(mn, "t");
+            } else {
+                return;
+            }
 
-        if (mn)
-        {
-            IedServer_updateUTCTimeAttributeValue(iedServer, (DataAttribute *)mn, timestamp);
-        }
-        break;
+            if (mn) {
+                IedServer_updateUTCTimeAttributeValue(iedServer, (DataAttribute *) mn, timestamp);
+            }
+            break;
     }
 }
 
@@ -172,11 +148,10 @@ void UpdateNodeValue(int type, int device_id, float val)
  * @param test
  * @return
  */
-static ControlHandlerResult ControlHandlerForSwitch(void *parameter, MmsValue *value, bool test)
-{
+static ControlHandlerResult ControlHandlerForSwitch(void *parameter, MmsValue *value, bool test) {
     bool state = false;
     state = MmsValue_getBoolean(value);
-    long device = (long)parameter;
+    long device = (long) parameter;
 
     // 生成 Json 字符串
     JSON_Value *root_value = json_value_init_object();
@@ -186,14 +161,11 @@ static ControlHandlerResult ControlHandlerForSwitch(void *parameter, MmsValue *v
     json_object_set_number(root_object, "cmd", MQTT_CMD_61850_SWITCH);
     json_object_set_null(root_object, "payload");
 
-    json_object_set_number(root_object, "device", (double)device);
+    json_object_set_number(root_object, "device", (double) device);
 
-    if (state)
-    {
+    if (state) {
         json_object_set_boolean(root_object, "val", true);
-    }
-    else
-    {
+    } else {
         json_object_set_boolean(root_object, "val", false);
     }
 
@@ -210,8 +182,7 @@ static ControlHandlerResult ControlHandlerForSwitch(void *parameter, MmsValue *v
 /**
  * 解析配置
  */
-void IEC61850ParseConfig(char *cfgStr)
-{
+void IEC61850ParseConfig(char *cfgStr) {
     //-----------------读取配置-----------------------
     ini_t *config = ini_load(ini_file_path);
 
@@ -229,8 +200,7 @@ void IEC61850ParseConfig(char *cfgStr)
     /* open configuration file */
     FileHandle configFile = FileSystem_openFile(cfgFile, false);
 
-    if (configFile == NULL)
-    {
+    if (configFile == NULL) {
         printf("Error opening config file!\n");
         return;
     }
@@ -240,8 +210,7 @@ void IEC61850ParseConfig(char *cfgStr)
 
     FileSystem_closeFile(configFile);
 
-    if (model == NULL)
-    {
+    if (model == NULL) {
         printf("Error parsing config file!\n");
         return;
     }
@@ -268,8 +237,7 @@ void IEC61850ParseConfig(char *cfgStr)
     //遍历 json
     int i;
 
-    for (i = 0; i < json_array_get_count(json_array); i++)
-    {
+    for (i = 0; i < json_array_get_count(json_array); i++) {
         device_all_object = json_array_get_object(json_array, i);
 
         device_object = json_object_get_object(device_all_object, "device");
@@ -279,30 +247,28 @@ void IEC61850ParseConfig(char *cfgStr)
         device_type = json_object_get_number(device_object, "type");
 
         // 设置值
-        switch (device_type)
-        {
-        case LN_TYPE_INPUT: // 输入节点
-            val = json_object_dotget_boolean(runtime_object, "state");
-            break;
-        case LN_TYPE_ANALOG: // 模拟量节点
-            val = json_object_dotget_number(runtime_object, "state.value");
-            break;
-        case LN_TYPE_SWITCH: // 开关节点
-            val = json_object_dotget_number(runtime_object, "state.output");
+        switch (device_type) {
+            case LN_TYPE_INPUT: // 输入节点
+                val = json_object_dotget_boolean(runtime_object, "state");
+                break;
+            case LN_TYPE_ANALOG: // 模拟量节点
+                val = json_object_dotget_number(runtime_object, "state.value");
+                break;
+            case LN_TYPE_SWITCH: // 开关节点
+                val = json_object_dotget_number(runtime_object, "state.output");
 
-            // 设置回调
-            // 找到开关的ST
-            ctlNodeST = IedModel_getModelNodeByShortAddress(model, device_id);
-            if (ctlNodeST)
-            {
-                // 通过 ST 找到开关的父节点
-                ctlNode = ctlNodeST->parent;
-                if (ctlNode)
-                {
-                    IedServer_setControlHandler(iedServer, (DataObject *)ctlNode, (ControlHandler)ControlHandlerForSwitch, (void *)device_id);
+                // 设置回调
+                // 找到开关的ST
+                ctlNodeST = IedModel_getModelNodeByShortAddress(model, device_id);
+                if (ctlNodeST) {
+                    // 通过 ST 找到开关的父节点
+                    ctlNode = ctlNodeST->parent;
+                    if (ctlNode) {
+                        IedServer_setControlHandler(iedServer, (DataObject *) ctlNode,
+                                                    (ControlHandler) ControlHandlerForSwitch, (void *) device_id);
+                    }
                 }
-            }
-            break;
+                break;
         }
         UpdateNodeValue(device_type, device_id, val);
     }
@@ -316,15 +282,13 @@ void IEC61850ParseConfig(char *cfgStr)
 /**
 * 运行61850服务
 */
-void IEC61850Start()
-{
+void IEC61850Start() {
     iedServer = IedServer_create(model);
 
     /* MMS server will be instructed to start listening to client connections. */
     IedServer_start(iedServer, iedPort);
 
-    if (!IedServer_isRunning(iedServer))
-    {
+    if (!IedServer_isRunning(iedServer)) {
         printf("Starting server failed! Exit.\n");
         IedServer_destroy(iedServer);
     }
@@ -333,8 +297,7 @@ void IEC61850Start()
 /**
  * 通过json来更新一个设备
  */
-void IEC61850UpdateDevice(char *str)
-{
+void IEC61850UpdateDevice(char *str) {
     // 解析命令
     JSON_Value *root_value;
     JSON_Object *root_object, *runtime_object;
@@ -350,17 +313,16 @@ void IEC61850UpdateDevice(char *str)
     float val;
     IedServer_lockDataModel(iedServer);
     // 设置值
-    switch (device_type)
-    {
-    case LN_TYPE_INPUT: // 输入节点
-        val = json_object_dotget_boolean(runtime_object, "runtime.state");
-        break;
-    case LN_TYPE_ANALOG: // 模拟量节点
-        val = json_object_dotget_number(runtime_object, "runtime.state.value");
-        break;
-    case LN_TYPE_SWITCH: // 开关节点
-        val = json_object_dotget_number(runtime_object, "runtime.state.output");
-        break;
+    switch (device_type) {
+        case LN_TYPE_INPUT: // 输入节点
+            val = json_object_dotget_boolean(runtime_object, "runtime.state");
+            break;
+        case LN_TYPE_ANALOG: // 模拟量节点
+            val = json_object_dotget_number(runtime_object, "runtime.state.value");
+            break;
+        case LN_TYPE_SWITCH: // 开关节点
+            val = json_object_dotget_number(runtime_object, "runtime.state.output");
+            break;
     }
 
     UpdateNodeValue(device_type, device_id, val);
@@ -374,28 +336,27 @@ void IEC61850UpdateDevice(char *str)
 /**
 * 收到61850消息
 */
-void IEC61850OnMqttMsg(int cmd, char *msg, int len)
-{
+void IEC61850OnMqttMsg(int cmd, char *msg, int len) {
 
-    switch (cmd)
-    {
-    case MQTT_CMD_61850_INIT:
-        // 61850 初始化命令
-        inited_61850 = 1;
-        IEC61850ParseConfig(msg);
-        break;
-    case MQTT_CMD_61850_UPDATE:
-        // 61850 节点更新
-        IEC61850UpdateDevice(msg);
-        break;
+    switch (cmd) {
+        case MQTT_CMD_61850_INIT:
+            // 61850 初始化命令
+            inited_61850 = 1;
+            IEC61850ParseConfig(msg);
+            break;
+        case MQTT_CMD_61850_UPDATE:
+            // 61850 节点更新
+            if (inited_61850) {
+                IEC61850UpdateDevice(msg);
+            }
+            break;
     }
 }
 
 /**
  * 请求 61850 配置文件
 */
-void IEC61850RequestCfg()
-{
+void IEC61850RequestCfg() {
     // 生成 Json 字符串
     JSON_Value *root_value = json_value_init_object();
     JSON_Object *root_object = json_value_get_object(root_value);
@@ -416,10 +377,8 @@ void IEC61850RequestCfg()
 /**
  * 定时执行
 */
-void IEC61850OnTimer()
-{
-    if (!inited_61850)
-    {
+void IEC61850OnTimer() {
+    if (!inited_61850) {
         IEC61850RequestCfg();
     }
 }

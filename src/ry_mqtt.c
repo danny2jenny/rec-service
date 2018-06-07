@@ -78,8 +78,8 @@ void MqttOnConnect(struct mosquitto *mosq, void *userdata, int result) {
         // 订阅
         mosquitto_subscribe(mosq, NULL, RY_VIDEO_SUB_TOPIC, 2);     // 订阅视频消息
         // 发送请求
-        NvrRequestCfg();
-        IEC61850RequestCfg();
+        // NvrRequestCfg();
+        // IEC61850RequestCfg();
 
     } else {
         fprintf(stderr, "Connect failed\n");
