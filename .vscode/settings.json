@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "ry_iec61850.h": "c",
+        "uv.h": "c",
+        "ini.h": "c",
+        "uthash.h": "c"
+    }
+}
