@@ -2,9 +2,8 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
     <generated>
-      <config projectName="RY_SERVICE" targetName="nvr2001" />
-      <config projectName="RY_SERVICE" targetName="rec-srv" />
       <config projectName="RY_SERVICE" targetName="testso" />
+      <config projectName="RY_SERVICE" targetName="rec-srv" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
@@ -16,33 +15,40 @@
   <component name="ChangeListManager">
     <list default="true" id="985c589a-e1df-4a86-bdf7-7f14cbd05596" name="Default" comment="稳定版本">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/c_cpp_properties.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/c_cpp_properties.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/HCNetSDKCom/libHCAlarm.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/HCNetSDKCom/libHCCoreDevCfg.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/HCNetSDKCom/libHCDisplay.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/HCNetSDKCom/libHCGeneralCfgMgr.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/HCNetSDKCom/libHCIndustry.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/HCNetSDKCom/libHCPlayBack.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/HCNetSDKCom/libHCPreview.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/HCNetSDKCom/libHCVoiceTalk.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/HCNetSDKCom/libStreamTransClient.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/HCNetSDKCom/libSystemTransform.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/HCNetSDKCom/libanalyzedata.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/HCNetSDKCom/libiconv2.so" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/cfg.ini" beforeDir="false" afterPath="$PROJECT_DIR$/bin/cfg.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/libiec61850.a" beforeDir="false" afterPath="$PROJECT_DIR$/bin/libiec61850.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/libAudioRender.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/libHCCore.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/libPlayCtrl.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/libSuperRender.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/libhcnetsdk.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/libhpr.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/libiec61850.a" beforeDir="false" afterPath="$PROJECT_DIR$/lib/libiec61850.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/libnvr2001.so" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/rec-srv" beforeDir="false" afterPath="$PROJECT_DIR$/bin/rec-srv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/iec61850/goose_receiver.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/iec61850/goose_receiver.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/iec61850/hal_filesystem.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/iec61850/hal_filesystem.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/iec61850/iec61850_cdc.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/iec61850/iec61850_cdc.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/iec61850/iec61850_client.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/iec61850/iec61850_client.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/iec61850/iec61850_common.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/iec61850/iec61850_common.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/iec61850/iec61850_dynamic_model.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/iec61850/iec61850_dynamic_model.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/iec61850/iec61850_model.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/iec61850/iec61850_model.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/iec61850/iec61850_server.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/iec61850/iec61850_server.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/iec61850/iso_connection_parameters.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/iec61850/iso_connection_parameters.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/iec61850/iso_server.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/iec61850/iso_server.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/iec61850/linked_list.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/iec61850/linked_list.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/iec61850/mms_client_connection.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/iec61850/mms_client_connection.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/iec61850/mms_common.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/iec61850/mms_common.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/iec61850/mms_device_model.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/iec61850/mms_device_model.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/iec61850/mms_server.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/iec61850/mms_server.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/iec61850/mms_type_spec.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/iec61850/mms_type_spec.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/iec61850/mms_types.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/iec61850/mms_types.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/iec61850/sv_publisher.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/iec61850/sv_publisher.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/iec61850/sv_subscriber.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/iec61850/sv_subscriber.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ini.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/ini.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ini.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ini.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ry_iec61850.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/ry_iec61850.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/nvr_adps/hk_nvr.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ry_error.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ry_error.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ry_iec61850.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ry_iec61850.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ry_mqtt.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/ry_mqtt.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ry_nvr_mgr.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ry_nvr_mgr.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/61850-cfg.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/test_dynamic.c" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/cmake-build-relwithdebinfo/" />
@@ -62,21 +68,24 @@
     <favorites_list name="RY_Service" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file leaf-file-name="main.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="690">
-              <caret line="80" column="63" selection-start-line="80" selection-start-column="63" selection-end-line="80" selection-end-column="63" />
+            <state relative-caret-position="186">
+              <caret line="68" lean-forward="true" selection-start-line="68" selection-end-line="68" />
+              <folding>
+                <element signature="e#150#165#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ry_nvr_mgr.c" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ry_nvr_mgr.c">
+      <file leaf-file-name="main.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="321" column="15" selection-start-line="321" selection-start-column="15" selection-end-line="321" selection-end-column="15" />
+            <state relative-caret-position="304">
+              <caret line="16" column="6" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -84,20 +93,20 @@
       <file leaf-file-name="ry_mqtt.c" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ry_mqtt.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1368">
-              <caret line="24" column="10" lean-forward="true" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
+            <state relative-caret-position="228">
+              <caret line="78" selection-start-line="78" selection-end-line="78" />
+              <folding>
+                <element signature="e#178#196#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ry_iec61850.c" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ry_iec61850.c">
+      <file leaf-file-name="ry_mqtt.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ry_mqtt.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="174" column="4" selection-start-line="174" selection-start-column="4" selection-end-line="174" selection-end-column="4" />
-              <folding>
-                <element signature="e#71#97#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="148">
+              <caret line="16" selection-start-line="16" selection-end-line="16" />
             </state>
           </provider>
         </entry>
@@ -105,8 +114,38 @@
       <file leaf-file-name="ry_config.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ry_config.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="13" column="44" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="44" />
+            <state relative-caret-position="380">
+              <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ry_error.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ry_error.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="361">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ry_iec61850.c" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ry_iec61850.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2322">
+              <caret line="148" column="10" selection-start-line="148" selection-start-column="10" selection-end-line="148" selection-end-column="10" />
+              <folding>
+                <element signature="e#71#97#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ry_iec61850.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ry_iec61850.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="32">
+              <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -149,11 +188,15 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/include/ut/utlist.h" />
         <option value="$PROJECT_DIR$/include/ry_inc.h" />
         <option value="$PROJECT_DIR$/src/test/test.c" />
         <option value="$PROJECT_DIR$/include/hk/PlayM4.h" />
@@ -181,12 +224,10 @@
         <option value="$PROJECT_DIR$/src/nvr_mgr.h" />
         <option value="$PROJECT_DIR$/src/nvr_mgr.c" />
         <option value="$PROJECT_DIR$/src/config.h" />
-        <option value="$PROJECT_DIR$/src/ry_error.h" />
         <option value="$PROJECT_DIR$/src/ry_mqtt.h" />
         <option value="$PROJECT_DIR$/src/ry_nvr_mgr.h" />
         <option value="$PROJECT_DIR$/.vscode/.cmaketools.json" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/ini.c" />
         <option value="$PROJECT_DIR$/src/dny-model/NR-MOD.c" />
         <option value="$PROJECT_DIR$/src/dny-model/NR-MOD.h" />
         <option value="$PROJECT_DIR$/src/dny-model/XJ-61850.h" />
@@ -194,16 +235,19 @@
         <option value="$PROJECT_DIR$/src/static-model/static_model.c" />
         <option value="$PROJECT_DIR$/src/61850_static.c" />
         <option value="$PROJECT_DIR$/src/61850-cfg.c" />
-        <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/src/test/61850-cfg.c" />
         <option value="$PROJECT_DIR$/src/ry_config.h" />
-        <option value="$PROJECT_DIR$/src/ry_iec61850.h" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/ry_iec61850.c" />
         <option value="$PROJECT_DIR$/src/ry_nvr_mgr.c" />
+        <option value="$PROJECT_DIR$/bin/cfg.ini" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/src/ry_error.h" />
+        <option value="$PROJECT_DIR$/src/ini.c" />
+        <option value="$PROJECT_DIR$/src/ini.h" />
+        <option value="$PROJECT_DIR$/src/ry_iec61850.h" />
         <option value="$PROJECT_DIR$/src/main.c" />
         <option value="$PROJECT_DIR$/src/ry_mqtt.c" />
-        <option value="$PROJECT_DIR$/bin/cfg.ini" />
       </list>
     </option>
   </component>
@@ -225,9 +269,9 @@
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="8" />
-    <option name="width" value="1262" />
-    <option name="height" value="691" />
+    <option name="x" value="12" />
+    <option name="width" value="1252" />
+    <option name="height" value="692" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -317,6 +361,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -326,13 +371,17 @@
             </path>
             <path>
               <item name="RY_SERVICE" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rec-service" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RY_SERVICE" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -341,18 +390,19 @@
     <property name="js-jscs-nodeInterpreter" value="D:\DevTool\node\node.exe" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="nodejs_interpreter_path" value="node" />
-    <property name="settings.editor.selected.configurable" value="CMakeSettings" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/test" />
-      <recent name="$PROJECT_DIR$/bin" />
-      <recent name="D:\Projects\RY-Service\include" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/static-model" />
       <recent name="$PROJECT_DIR$/doc" />
       <recent name="$PROJECT_DIR$/src/dny-model" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib" />
+      <recent name="$PROJECT_DIR$/src/test" />
+      <recent name="$PROJECT_DIR$/bin" />
+      <recent name="D:\Projects\RY-Service\include" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -689,7 +739,8 @@
       <workItem from="1525406471652" duration="824000" />
       <workItem from="1526394144537" duration="79000" />
       <workItem from="1528326051480" duration="355000" />
-      <workItem from="1528333333860" duration="4441000" />
+      <workItem from="1528333333860" duration="6182000" />
+      <workItem from="1528372803013" duration="527000" />
     </task>
     <task id="LOCAL-00001" summary="初始化版本">
       <created>1490217132985</created>
@@ -873,11 +924,18 @@
       <option name="project" value="LOCAL" />
       <updated>1525406578560</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="修复61850模型还没有初始化的时候就处理更新消息的错误&#10;&#10;屏蔽video初始化请求的代码">
+      <created>1528338610189</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1528338610189</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="416933000" />
+    <option name="totallyTimeSpent" value="419201000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -890,13 +948,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1050" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4936306" visible="true" weight="0.19503172" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.23820224" />
       <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.49375" visible="true" weight="0.33932585" />
       <window_info anchor="bottom" id="CMake" order="14" weight="0.26292136" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5029054" side_tool="true" weight="0.29810902" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4981511" weight="0.3247191" />
       <window_info anchor="bottom" id="Version Control" order="12" weight="0.23820224" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49709457" weight="0.2977528" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.17684887" />
@@ -912,6 +970,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Execute Anonymous" order="10" weight="0.32960895" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4981511" weight="0.3247191" />
       <window_info anchor="right" id="Data View" order="3" weight="0.329582" />
     </layout>
     <layout-to-restore>
@@ -919,23 +978,23 @@
       <window_info anchor="bottom" id="Debug Logs" order="9" weight="0.32960895" />
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4936306" visible="true" weight="0.22079314" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.31777778" />
-      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.4978903" weight="0.2522222" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="Data View" order="3" weight="0.329582" />
       <window_info id="Structure" order="1" weight="0.17684887" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.24042553" />
-      <window_info anchor="bottom" id="Version Control" order="12" weight="0.29787233" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32666665" />
+      <window_info anchor="bottom" id="CMake" order="14" weight="0.26666668" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.26222223" />
       <window_info anchor="bottom" id="Execute Anonymous" order="10" weight="0.32960895" />
       <window_info anchor="bottom" id="Terminal" order="13" sideWeight="0.49356914" weight="0.22555555" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50643086" side_tool="true" weight="0.22703274" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="12" weight="0.29787233" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="CMake" order="14" weight="0.26666668" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32666665" />
+      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.4978903" weight="0.2522222" />
       <window_info id="Favorites" order="2" sideWeight="0.5063694" side_tool="true" weight="0.18258575" />
     </layout-to-restore>
   </component>
@@ -986,7 +1045,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="初始化版本" />
     <MESSAGE value="使用开发包的例子" />
     <MESSAGE value="Linux 成功调用 HK 的SDK" />
     <MESSAGE value="PTZ 测试成功" />
@@ -1011,17 +1069,11 @@
     <MESSAGE value="通过sAddr的方式基本成功，但是后续的状态没有更新" />
     <MESSAGE value="遥信、遥测、遥控测试成功" />
     <MESSAGE value="稳定版本" />
-    <option name="LAST_COMMIT_MESSAGE" value="稳定版本" />
+    <MESSAGE value="修复61850模型还没有初始化的时候就处理更新消息的错误&#10;&#10;屏蔽video初始化请求的代码" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复61850模型还没有初始化的时候就处理更新消息的错误&#10;&#10;屏蔽video初始化请求的代码" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/ry_nvr_mgr.c</url>
-          <line>220</line>
-          <option name="timeStamp" value="201" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="210" />
     </breakpoint-manager>
     <watches-manager>
@@ -1041,7 +1093,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///usr/include/mosquitto.h" />
     <entry file="file://$PROJECT_DIR$/.vscode/.cmaketools.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1034">
@@ -1053,13 +1104,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret selection-end-line="2" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ry_mqtt.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-69">
-          <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
         </state>
       </provider>
     </entry>
@@ -1130,13 +1174,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ini.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="12" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/include/ry_inc.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
@@ -1148,13 +1185,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="900">
           <caret line="53" column="31" lean-forward="true" selection-start-line="53" selection-start-column="31" selection-end-line="53" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="597">
-          <caret line="54" column="2" selection-start-line="54" selection-start-column="2" selection-end-line="54" selection-end-column="2" />
         </state>
       </provider>
     </entry>
@@ -1183,13 +1213,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="411">
           <caret line="692" selection-start-line="692" selection-end-line="692" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/61850-cfg.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="57" column="23" selection-start-line="57" selection-start-column="23" selection-end-line="57" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -1226,45 +1249,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ini.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="885">
-          <caret line="260" column="40" selection-start-line="260" selection-start-column="35" selection-end-line="260" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="25" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ry_error.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ry_iec61850.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="19" column="29" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ry_nvr_mgr.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-609">
           <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -1296,33 +1284,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ry_config.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="44" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="80" column="63" selection-start-line="80" selection-start-column="63" selection-end-line="80" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ry_iec61850.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="174" column="4" selection-start-line="174" selection-start-column="4" selection-end-line="174" selection-end-column="4" />
-          <folding>
-            <element signature="e#71#97#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ry_nvr_mgr.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
+        <state relative-caret-position="5778">
           <caret line="321" column="15" selection-start-line="321" selection-start-column="15" selection-end-line="321" selection-end-column="15" />
         </state>
       </provider>
@@ -1334,10 +1298,108 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/LICENSE">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-108" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-180">
+          <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/61850-cfg.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="57" column="23" selection-start-line="57" selection-start-column="23" selection-end-line="57" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="661">
+          <caret line="50" column="39" lean-forward="true" selection-start-line="50" selection-start-column="39" selection-end-line="50" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ini.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="15" selection-start-line="30" selection-start-column="15" selection-end-line="30" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ini.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ry_config.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ry_error.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ry_iec61850.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="32">
+          <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="16" column="6" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="68" lean-forward="true" selection-start-line="68" selection-end-line="68" />
+          <folding>
+            <element signature="e#150#165#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ry_iec61850.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2322">
+          <caret line="148" column="10" selection-start-line="148" selection-start-column="10" selection-end-line="148" selection-end-column="10" />
+          <folding>
+            <element signature="e#71#97#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ry_mqtt.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ry_mqtt.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1368">
-          <caret line="24" column="10" lean-forward="true" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
+        <state relative-caret-position="228">
+          <caret line="78" selection-start-line="78" selection-end-line="78" />
+          <folding>
+            <element signature="e#178#196#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

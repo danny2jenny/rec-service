@@ -7,7 +7,6 @@
  */
 #include <uv.h>
 #include "ry_mqtt.h"
-#include "ry_nvr_mgr.h"
 #include "ry_iec61850.h"
 #include "ini.h"
 
@@ -28,7 +27,6 @@ char *ini_file_path;           // 当前路径
  */
 void SigintHandler(int signalId) {
     MqttClean();                    // 清理 MQTT 通讯
-    NvrClearAdps();                 // 清理 video adapter
     IEC61850Cleanup();              // 清理 61850
     uv_stop(ry_loop);               // 停止消息循环
 }
@@ -37,7 +35,6 @@ void SigintHandler(int signalId) {
  * 定时事件，在这里循环执行各个功能模块的定时功能
  */
 static void OnTimer(uv_timer_t *handle) {
-    //NvrOnTimer();                 // video adapter 定时任务
     IEC61850OnTimer();              // 61850 定时任务
 }
 

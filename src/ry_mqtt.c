@@ -8,7 +8,6 @@
 
 #include "ry_mqtt.h"
 #include "ry_config.h"
-#include "ry_nvr_mgr.h"
 #include "ry_iec61850.h"
 
 struct mosquitto *mqtt = NULL;      // mqtt 控制对象
@@ -77,10 +76,6 @@ void MqttOnConnect(struct mosquitto *mosq, void *userdata, int result) {
     if (!result) {
         // 订阅
         mosquitto_subscribe(mosq, NULL, RY_VIDEO_SUB_TOPIC, 2);     // 订阅视频消息
-        // 发送请求
-        // NvrRequestCfg();
-        // IEC61850RequestCfg();
-
     } else {
         fprintf(stderr, "Connect failed\n");
     }

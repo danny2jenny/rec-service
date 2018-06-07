@@ -27,15 +27,13 @@ include_directories(
 
 # 库文件存放位置
 link_directories(
-        "${PROJECT_SOURCE_DIR}/bin"             # 海康的动态库
+        "${PROJECT_SOURCE_DIR}/lib"
 )
 
 # 需要连接的静态库文件
 link_libraries(
-        "dl"            # linux 动态链接库的操作dlfcn.h的库文件
         "uv"
         "mosquitto"
-        "hcnetsdk"
         "iec61850"
         "pthread"
 )
@@ -44,20 +42,14 @@ set(SOURCE_FILES
         src/ini.c
         src/main.c
         src/ry_mqtt.c
-        src/ry_nvr_mgr.c
         src/ry_iec61850.c
         src/parson/parson.c
         )
 
-# 测试程序
-# add_executable(test_dny "src/test/test_dynamic.c")
-
-# add_executable(61850-cfg src/test/61850-cfg.c)
 
 # 主程序
 add_executable(rec-srv ${SOURCE_FILES})
 
-# 海康的接口
-ADD_LIBRARY(nvr2001 SHARED src/nvr_adps/hk_nvr.cpp)
+
 
 

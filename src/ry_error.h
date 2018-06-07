@@ -10,8 +10,6 @@ extern "C" {
 #endif
 //------------------------------------
 
-#define ERROR_NVR_DLL_INIT 100          // 接口DLL初始化错误
-#define ERROR_NVR_OFF_LINE              // NVR 不在线，通信错误
 
 //------------------------------------
 #ifdef __cplusplus
