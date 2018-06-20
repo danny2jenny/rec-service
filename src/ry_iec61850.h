@@ -20,15 +20,6 @@ extern char *ini_file_path;                  // 当前路径
 #define MQTT_CMD_61850_INIT_REQUEST   111     // 请求初始化
 #define MQTT_CMD_61850_SWITCH         120     // 开关控制
 
-
-// 61850 逻辑节点
-typedef struct {
-    int id;                                     // device id
-    int type;                                   // 节点的类型
-    LogicalNode *ln;                            // 61850 逻辑节点
-    UT_hash_handle hh;                          // Hash控制域
-} RY_61850_LN;
-
 // 函数接口
 void IEC61850OnMqttMsg(int cmd, char *msg, int len);
 

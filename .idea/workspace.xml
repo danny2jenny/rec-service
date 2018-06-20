@@ -2,8 +2,8 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
     <generated>
-      <config projectName="RY_SERVICE" targetName="rec-srv" />
       <config projectName="RY_SERVICE" targetName="testso" />
+      <config projectName="RY_SERVICE" targetName="rec-srv" />
     </generated>
   </component>
   <component name="CMakeSettings" AUTO_RELOAD="true">
@@ -15,16 +15,24 @@
   <component name="ChangeListManager">
     <list default="true" id="985c589a-e1df-4a86-bdf7-7f14cbd05596" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/.cmaketools.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/c_cpp_properties.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/launch.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/rec-srv" beforeDir="false" afterPath="$PROJECT_DIR$/bin/rec-srv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doc/设备网络SDK编程指南（DVR&amp;NVR）.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/hk/DataType.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/hk/DecodeCardSdk.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/hk/HCNetSDK.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/hk/LinuxPlayM4.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/hk/PlayM4.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ry_inc.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ry_inc.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ut/libut.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ut/libut.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ut/ringbuf.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ut/ringbuf.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ut/utarray.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ut/utarray.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ut/uthash.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ut/uthash.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ut/utlist.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ut/utlist.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ut/utmm.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ut/utmm.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ut/utringbuffer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ut/utringbuffer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ut/utstring.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ut/utstring.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/ut/utvector.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ut/utvector.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ini.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/ini/ini.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ini.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ini/ini.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ry_config.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ry_config.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ry_iec61850.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/ry_iec61850.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ry_iec61850.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ry_iec61850.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/cmake-build-relwithdebinfo/" />
@@ -44,7 +52,17 @@
     <favorites_list name="RY_Service" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375" />
+    <leaf>
+      <file leaf-file-name="ry_config.h" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ry_config.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="386">
+              <caret line="24" column="66" selection-start-line="24" selection-start-column="66" selection-end-line="24" selection-end-column="66" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -130,7 +148,6 @@
         <option value="$PROJECT_DIR$/src/61850_static.c" />
         <option value="$PROJECT_DIR$/src/61850-cfg.c" />
         <option value="$PROJECT_DIR$/src/test/61850-cfg.c" />
-        <option value="$PROJECT_DIR$/src/ry_config.h" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/ry_iec61850.c" />
         <option value="$PROJECT_DIR$/src/ry_nvr_mgr.c" />
@@ -142,6 +159,7 @@
         <option value="$PROJECT_DIR$/src/ry_iec61850.h" />
         <option value="$PROJECT_DIR$/src/main.c" />
         <option value="$PROJECT_DIR$/src/ry_mqtt.c" />
+        <option value="$PROJECT_DIR$/src/ry_config.h" />
       </list>
     </option>
   </component>
@@ -255,7 +273,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -265,12 +282,23 @@
             </path>
             <path>
               <item name="RY_SERVICE" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rec-service" type="462c0819:PsiDirectoryNode" />
+              <item name="bin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RY_SERVICE" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rec-service" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RY_SERVICE" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -282,16 +310,17 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/ini" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/lib" />
+      <recent name="$PROJECT_DIR$/src/test" />
+      <recent name="$PROJECT_DIR$/bin" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/static-model" />
       <recent name="$PROJECT_DIR$/doc" />
       <recent name="$PROJECT_DIR$/src/dny-model" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/lib" />
-      <recent name="$PROJECT_DIR$/src/test" />
-      <recent name="$PROJECT_DIR$/bin" />
-      <recent name="D:\Projects\RY-Service\include" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -631,6 +660,7 @@
       <workItem from="1528333333860" duration="6182000" />
       <workItem from="1528372803013" duration="1643000" />
       <workItem from="1528384745102" duration="79000" />
+      <workItem from="1529478362340" duration="1066000" />
     </task>
     <task id="LOCAL-00001" summary="初始化版本">
       <created>1490217132985</created>
@@ -832,7 +862,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="420396000" />
+    <option name="totallyTimeSpent" value="421462000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -845,15 +875,17 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1050" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4936306" visible="true" weight="0.19503172" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.23820224" />
+      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.49375" visible="true" weight="0.23258427" />
       <window_info anchor="bottom" id="CMake" order="14" weight="0.26292136" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5029054" side_tool="true" weight="0.29810902" />
       <window_info anchor="bottom" id="Version Control" order="12" weight="0.23820224" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49709457" weight="0.2977528" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.17684887" />
-      <window_info anchor="bottom" id="Terminal" order="13" sideWeight="0.49181193" visible="true" weight="0.22247191" />
+      <window_info anchor="bottom" id="Terminal" order="13" sideWeight="0.49181193" weight="0.22222222" />
       <window_info id="Favorites" order="2" sideWeight="0.5063694" side_tool="true" weight="0.18258575" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.31123596" />
       <window_info anchor="bottom" id="Salesforce" order="11" weight="0.21564245" />
@@ -863,7 +895,6 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Debug Logs" order="9" weight="0.32960895" />
       <window_info anchor="bottom" id="Execute Anonymous" order="10" weight="0.32960895" />
-      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.49375" weight="0.23258427" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4981511" weight="0.3247191" />
@@ -874,23 +905,23 @@
       <window_info anchor="bottom" id="Debug Logs" order="9" weight="0.32960895" />
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4936306" visible="true" weight="0.22079314" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.31777778" />
-      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.4978903" weight="0.2522222" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="Data View" order="3" weight="0.329582" />
       <window_info id="Structure" order="1" weight="0.17684887" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.24042553" />
-      <window_info anchor="bottom" id="Version Control" order="12" weight="0.29787233" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32666665" />
+      <window_info anchor="bottom" id="CMake" order="14" weight="0.26666668" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.26222223" />
       <window_info anchor="bottom" id="Execute Anonymous" order="10" weight="0.32960895" />
       <window_info anchor="bottom" id="Terminal" order="13" sideWeight="0.49356914" weight="0.22555555" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50643086" side_tool="true" weight="0.22703274" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="12" weight="0.29787233" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="CMake" order="14" weight="0.26666668" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32666665" />
+      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.4978903" weight="0.2522222" />
       <window_info id="Favorites" order="2" sideWeight="0.5063694" side_tool="true" weight="0.18258575" />
     </layout-to-restore>
   </component>
@@ -989,13 +1020,7 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.vscode/.cmaketools.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1034">
-          <caret line="47" column="42" lean-forward="true" selection-start-line="47" selection-start-column="42" selection-end-line="47" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/.vscode/.cmaketools.json" />
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -1064,13 +1089,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/ry_inc.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="6" lean-forward="true" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/test_dynamic.c" />
     <entry file="file:///usr/include/string.h">
       <provider selected="true" editor-type-id="text-editor">
@@ -1083,13 +1101,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18">
           <caret line="39" column="21" selection-start-line="39" selection-start-column="21" selection-end-line="39" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/parson/parson.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="1231" column="4" selection-start-line="1231" selection-start-column="4" selection-end-line="1231" selection-end-column="4" />
         </state>
       </provider>
     </entry>
@@ -1168,13 +1179,6 @@
         <state relative-caret-position="-108" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-180">
-          <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/61850-cfg.c" />
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
@@ -1183,38 +1187,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ini.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="15" selection-start-line="30" selection-start-column="15" selection-end-line="30" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ini.h">
+    <entry file="file://$PROJECT_DIR$/src/ini/ini.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ry_config.h">
+    <entry file="file://$PROJECT_DIR$/src/parson/parson.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
+        <state relative-caret-position="-1070">
+          <caret line="1231" column="4" selection-start-line="1231" selection-start-column="4" selection-end-line="1231" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ry_error.h">
+    <entry file="file://$PROJECT_DIR$/src/ini/ini.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        <state relative-caret-position="-2229">
+          <caret line="30" column="15" selection-start-line="30" selection-start-column="15" selection-end-line="30" selection-end-column="15" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ry_iec61850.h">
+    <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
+        <state relative-caret-position="-697">
+          <caret line="14" column="12" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="21" column="41" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
+          <folding>
+            <element signature="e#150#165#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1225,22 +1232,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.c">
+    <entry file="file://$PROJECT_DIR$/src/ry_error.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1292">
-          <caret line="68" selection-start-line="68" selection-end-line="68" />
-          <folding>
-            <element signature="e#150#165#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="361">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ry_iec61850.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2812">
+        <state relative-caret-position="-2546">
           <caret line="148" column="10" selection-start-line="148" selection-start-column="10" selection-end-line="148" selection-end-column="10" />
           <folding>
             <element signature="e#71#97#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ry_iec61850.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ry_inc.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ry_mqtt.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1820">
+          <caret line="156" selection-start-line="156" selection-end-line="156" />
+          <folding>
+            <element signature="e#178#196#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1252,20 +1280,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ry_mqtt.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="156" selection-start-line="156" selection-end-line="156" />
-          <folding>
-            <element signature="e#178#196#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bin/cfg.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
           <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ry_config.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="386">
+          <caret line="24" column="66" selection-start-line="24" selection-start-column="66" selection-end-line="24" selection-end-column="66" />
         </state>
       </provider>
     </entry>

@@ -13,7 +13,7 @@
 #include "ry_iec61850.h"
 #include "ry_config.h"
 #include "ry_mqtt.h"
-#include "ini.h"
+#include "ini/ini.h"
 
 // 是否得到过61850的配置
 volatile int inited_61850 = 0;

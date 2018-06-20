@@ -15,14 +15,14 @@ extern "C" {
 #define RY_VIDEO_PUB_TOPIC "rec/srv/video/from"         // 发送主题
 
 // -------------------61850配置--------------------
-#define RY_61850_PORT 102
+#define RY_61850_PORT 102                               // 61850 端口，通过配置文件进行配置
 
-#define LN_TYPE_INPUT    102
-#define LN_TYPE_ANALOG   201
-#define LN_TYPE_SWITCH   101
+#define LN_TYPE_INPUT    102                            // 遥信
+#define LN_TYPE_ANALOG   201                            // 遥测
+#define LN_TYPE_SWITCH   101                            // 遥控
 
 // device 常量
-#define DEVICE_ON       21
+#define DEVICE_ON       21                              // 开关为开的常量
 #define DEVICE_OFF      20
 //------------------------------------
 #ifdef __cplusplus

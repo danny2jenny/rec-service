@@ -8,7 +8,7 @@
 #include <uv.h>
 #include "ry_mqtt.h"
 #include "ry_iec61850.h"
-#include "ini.h"
+#include "ini/ini.h"
 
 
 //-------------------全局变量---------------------------
