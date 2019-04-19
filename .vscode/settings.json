@@ -3,6 +3,9 @@
         "ry_iec61850.h": "c",
         "uv.h": "c",
         "ini.h": "c",
-        "uthash.h": "c"
-    }
+        "uthash.h": "c",
+        "ry_mqtt.h": "c",
+        "stdio.h": "c"
+    },
+    "C_Cpp.configurationWarnings": "Disabled"
 }

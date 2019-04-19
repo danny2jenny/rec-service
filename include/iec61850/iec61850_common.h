@@ -37,6 +37,15 @@ extern "C" {
  */
 /**@{*/
 
+/** IEC 61850 edition 1 */
+#define IEC_61850_EDITION_1   0
+
+/** IEC 61850 edition 2 */
+#define IEC_61850_EDITION_2   1
+
+/** IEC 61850 edition 2.1 */
+#define IEC_61850_EDITION_2_1 2
+
 /** PhyComAddress type contains Ethernet address and VLAN attributes */
 typedef struct {
     uint8_t vlanPriority;
@@ -236,6 +245,8 @@ typedef enum eFunctionalConstraint {
     IEC61850_FC_BR = 16,
     /** Log control blocks */
     IEC61850_FC_LG = 17,
+    /** Goose control blocks */
+    IEC61850_FC_GO = 18,
 
     /** All FCs - wildcard value */
     IEC61850_FC_ALL = 99,
@@ -285,6 +296,8 @@ typedef uint16_t Validity;
 #define QUALITY_TEST 2048
 
 #define QUALITY_OPERATOR_BLOCKED  4096
+
+#define QUALITY_DERIVED 8192
 
 Validity
 Quality_getValidity(Quality* self);
@@ -421,11 +434,10 @@ Timestamp_toMmsValue(Timestamp* self, MmsValue* mmsValue);
 /**
  * \brief Get the version of the library as string
  *
- * \return the version of the library (e.g. "0.8.3")
+ * \return the version of the library (e.g. "1.2.2")
  */
 char*
 LibIEC61850_getVersionString(void);
-
 
 /** @} */
 

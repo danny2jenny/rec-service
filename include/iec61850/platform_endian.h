@@ -1,7 +1,7 @@
 /*
- *  time.c
+ *  platform_endian.h
  *
- *  Copyright 2013, 2014 Michael Zillgith
+ *  Copyright 2013-2018 Michael Zillgith
  *
  *  This file is part of libIEC61850.
  *
@@ -21,49 +21,31 @@
  *  See COPYING file for the complete license text.
  */
 
-#ifndef HAL_C_
-#define HAL_C_
+#ifndef ENDIAN_H_
+#define ENDIAN_H_
 
-#ifdef __cplusplus
-extern "C" {
+#ifndef PLATFORM_IS_BIGENDIAN
+#ifdef __GNUC__
+#ifdef __BYTE_ORDER__
+#if (__BYTE_ORDER__ == __ORDER_BIG_ENDIAN__)
+#define PLATFORM_IS_BIGENDIAN 1
 #endif
 
-#include <stdint.h>
+#else
 
-/**
- * \file hal_time.h
- * \brief Abstraction layer for system time access
- */
-
-/*! \addtogroup hal
-   *
-   *  @{
-   */
-
-/**
- * @defgroup HAL_TIME Time related functions
- *
- * @{
- */
-
-/**
- * Get the system time in milliseconds.
- *
- * The time value returned as 64-bit unsigned integer should represent the milliseconds
- * since the UNIX epoch (1970/01/01 00:00 UTC).
- *
- * \return the system time with millisecond resolution.
- */
-uint64_t
-Hal_getTimeInMs(void);
-
-/*! @} */
-
-/*! @} */
-
-#ifdef __cplusplus
-}
+/* older versions of GCC have __BYTE_ORDER__ not defined! */
+#ifdef __PPC__
+#define PLATFORM_IS_BIGENDIAN 1
 #endif
 
+#endif /* __BYTE_ORDER__ */
+#endif /* __GNUC__ */
+#endif
 
-#endif /* HAL_C_ */
+#if (PLATFORM_IS_BIGENDIAN == 1)
+#  define ORDER_LITTLE_ENDIAN 0
+#else
+#  define ORDER_LITTLE_ENDIAN 1
+#endif
+
+#endif /* ENDIAN_H_ */

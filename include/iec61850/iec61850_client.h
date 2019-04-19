@@ -1058,6 +1058,42 @@ uint64_t
 ClientReport_getTimestamp(ClientReport self);
 
 /**
+ * \brief indicates if the report contains a sub sequence number and a more segments follow flags (for segmented reporting)
+ *
+ * \param self the ClientReport instance
+ *
+ * \returns true if the report contains sub-sequence-number and more-follows-flag, false otherwise
+ */
+bool
+ClientReport_hasSubSeqNum(ClientReport self);
+
+/**
+ * \brief get the sub sequence number of the report (for segmented reporting)
+ *
+ * Returns the sub sequence number of the report. This is 0 for the first report of a segmented report and
+ * will be increased by one for each report segment.
+ *
+ * \param self the ClientReport instance
+ *
+ * \return the sub sequence number of the last received report message.
+ */
+uint16_t
+ClientReport_getSubSeqNum(ClientReport self);
+
+/**
+ * \brief get the more segments follow flag of the received report segment (for segmented reporting)
+ *
+ * Will return true in case this is part of a segmented report and more report segments will follow or false, if
+ * the current report is not a segmented report or is the last segment of a segmented report.
+ *
+ * \param self the ClientReport instance
+ *
+ * \return true when more segments of the current report will follow, false otherwise
+ */
+bool
+ClientReport_getMoreSeqmentsFollow(ClientReport self);
+
+/**
  * \brief get the reason for inclusion of as a human readable string
  *
  * \param reasonCode
@@ -1126,9 +1162,21 @@ ClientReportControlBlock_setDataSetReference(ClientReportControlBlock self, cons
 uint32_t
 ClientReportControlBlock_getConfRev(ClientReportControlBlock self);
 
+/**
+ * \brief Gets the OptFlds parameter of the RCB (decides what information to include in a report)
+ *
+ * \param self the RCB instance
+ * \return bit field representing the optional fields of a report (uses flags from \ref REPORT_OPTIONS)
+ */
 int
 ClientReportControlBlock_getOptFlds(ClientReportControlBlock self);
 
+/**
+ * \brief Set the OptFlds parameter of the RCB (decides what information to include in a report)
+ *
+ * \param self the RCB instance
+ * \param optFlds bit field representing the optional fields of a report (use flags from \ref REPORT_OPTIONS)
+ */
 void
 ClientReportControlBlock_setOptFlds(ClientReportControlBlock self, int optFlds);
 
@@ -1162,8 +1210,23 @@ ClientReportControlBlock_setGI(ClientReportControlBlock self, bool gi);
 bool
 ClientReportControlBlock_getPurgeBuf(ClientReportControlBlock self);
 
+/**
+ * \brief Set the "PurgeBuf" attribute value (only BRCB)
+ *
+ * When set to true the report buffer will be cleared.
+ *
+ * \param purgeBuf attribute value
+ */
 void
 ClientReportControlBlock_setPurgeBuf(ClientReportControlBlock self, bool purgeBuf);
+
+/**
+ *  \brief Check if optional attribute "ResvTms" is present in BRCB
+ *
+ *  \return true when present, false otherwise
+ */
+bool
+ClientReportControlBlock_hasResvTms(ClientReportControlBlock self);
 
 int16_t
 ClientReportControlBlock_getResvTms(ClientReportControlBlock self);
@@ -1596,6 +1659,19 @@ ControlModel
 ControlObjectClient_getControlModel(ControlObjectClient self);
 
 /**
+ * \brief Get the type of ctlVal.
+ *
+ * This type is required for the ctlVal parameter of the \ref ControlObjectClient_operate
+ * and \ref  ControlObjectClient_selectWithValue functions.
+ *
+ * \param self the control object instance to use
+ *
+ * \return MmsType required for the ctlVal value.
+ */
+MmsType
+ControlObjectClient_getCtlValType(ControlObjectClient self);
+
+/**
  * \brief Send an operate command to the server
  *
  * \param self the control object instance to use
@@ -1607,11 +1683,24 @@ ControlObjectClient_getControlModel(ControlObjectClient self);
 bool
 ControlObjectClient_operate(ControlObjectClient self, MmsValue* ctlVal, uint64_t operTime);
 
+/**
+ * \brief Send a select command to the server
+ *
+ * The select command is only used for the control model "select-before-operate with normal security"
+ * (CONTROL_MODEL_SBO_NORMAL). The select command has to be sent before the operate command can be used.
+ *
+ * \param self the control object instance to use
+ *
+ * \return true if operation has been successful, false otherwise.
+ */
 bool
 ControlObjectClient_select(ControlObjectClient self);
 
 /**
  * \brief Send an select with value command to the server
+ *
+ * The select-with-value command is only used for the control model "select-before-operate with enhanced security"
+ * (CONTROL_MODEL_SBO_ENHANCED). The select-with-value command has to be sent before the operate command can be used.
  *
  * \param self the control object instance to use
  * \param ctlVal the control value (for APC the value may be either AnalogueValue (MMS_STRUCT) or MMS_FLOAT/MMS_INTEGER
@@ -1621,6 +1710,16 @@ ControlObjectClient_select(ControlObjectClient self);
 bool
 ControlObjectClient_selectWithValue(ControlObjectClient self, MmsValue* ctlVal);
 
+/**
+ * \brief Send a cancel command to the server
+ *
+ * The cancel command can be used to stop an ongoing operation (when the server and application
+ * support this) and to cancel a former select command.
+ *
+ * \param self the control object instance to use
+ *
+ * \return true if operation has been successful, false otherwise.
+ */
 bool
 ControlObjectClient_cancel(ControlObjectClient self);
 
@@ -1630,9 +1729,25 @@ ControlObjectClient_setLastApplError(ControlObjectClient self, LastApplError las
 LastApplError
 ControlObjectClient_getLastApplError(ControlObjectClient self);
 
+/**
+ * \brief Send commands in test mode.
+ *
+ * When the server supports test mode the commands that are sent with the test flag set
+ * are not executed (will have no effect on the attached physical process).
+ *
+ * \param self the control object instance to use
+ * \param value value if the test flag (true = test mode).
+ */
 void
 ControlObjectClient_setTestMode(ControlObjectClient self, bool value);
 
+/**
+ * \brief Set the origin parameter for control commands
+ *
+ * The origin parameter is used to identify the client/application that sent a control
+ * command. It is intended for later analysis.
+ *
+ */
 void
 ControlObjectClient_setOrigin(ControlObjectClient self, const char* orIdent, int orCat);
 

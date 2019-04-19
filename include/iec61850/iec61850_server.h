@@ -3,7 +3,7 @@
  *
  *  IEC 61850 server API for libiec61850.
  *
- *  Copyright 2013, 2014 Michael Zillgith
+ *  Copyright 2013-2018 Michael Zillgith
  *
  *  This file is part of libIEC61850.
  *
@@ -42,6 +42,228 @@ extern "C" {
 #include "iec61850_config_file_parser.h"
 
 /**
+ * \brief Configuration object to configure IEC 61850 stack features
+ */
+typedef struct sIedServerConfig* IedServerConfig;
+
+struct sIedServerConfig
+{
+    /** size of the report buffer associated with a buffered report control block */
+    int reportBufferSize;
+
+    /** Base path (directory where the file service serves files */
+    char* fileServiceBasepath;
+
+    /** when true (default) enable MMS file service */
+    bool enableFileService;
+
+    /** when true (default) enable dynamic data set services for MMS */
+    bool enableDynamicDataSetService;
+
+    /** the maximum number of allowed association specific data sets */
+    int maxAssociationSpecificDataSets;
+
+    /** the maximum number of allowed domain specific data sets */
+    int maxDomainSpecificDataSets;
+
+    /** maximum number of data set entries of dynamic data sets */
+    int maxDataSetEntries;
+
+    /** when true (default) enable log service */
+    bool enableLogService;
+
+    /** IEC 61850 edition (0 = edition 1, 1 = edition 2, 2 = edition 2.1, ...) */
+    uint8_t edition;
+
+    /** maximum number of MMS (TCP) connections */
+    int maxMmsConnections;
+};
+
+/**
+ * \brief Create a new configuration object
+ *
+ * \return a new configuration object with default configuration values
+ */
+IedServerConfig
+IedServerConfig_create(void);
+
+/**
+ * \brief Destroy the configuration object
+ */
+void
+IedServerConfig_destroy(IedServerConfig self);
+
+/**
+ * \brief Set the IEC 61850 standard edition to use (default is edition 2)
+ *
+ * \param edition IEC_61850_EDITION_1, IEC_61850_EDITION_2, or IEC_61850_EDITION_2_1
+ */
+void
+IedServerConfig_setEdition(IedServerConfig self, uint8_t edition);
+
+/**
+ * \brief Get the configued IEC 61850 standard edition
+ *
+ * \returns IEC_61850_EDITION_1, IEC_61850_EDITION_2, or IEC_61850_EDITION_2_1
+ */
+uint8_t
+IedServerConfig_getEdition(IedServerConfig self);
+
+/**
+ * \brief Set the report buffer size for buffered reporting
+ *
+ * \param reportBufferSize the buffer size for each buffered report control block
+ */
+void
+IedServerConfig_setReportBufferSize(IedServerConfig self, int reportBufferSize);
+
+/**
+ * \brief Gets the report buffer size for buffered reporting
+ *
+ * \return the buffer size for each buffered report control block
+ */
+int
+IedServerConfig_getReportBufferSize(IedServerConfig self);
+
+/**
+ * \brief Set the maximum number of MMS (TCP) connections the server accepts
+ *
+ * NOTE: Parameter has to be smaller than CONFIG_MAXIMUM_TCP_CLIENT_CONNECTIONS if
+ * CONFIG_MAXIMUM_TCP_CLIENT_CONNECTIONS != -1
+ *
+ * \param maxConnection maximum number of TCP connections
+ */
+void
+IedServerConfig_setMaxMmsConnections(IedServerConfig self, int maxConnections);
+
+/**
+ * \brief Get the maximum number of MMS (TCP) connections the server accepts
+ *
+ * \return maximum number of TCP connections
+ */
+int
+IedServerConfig_getMaxMmsConnections(IedServerConfig self);
+
+/**
+ * \brief Set the basepath of the file services
+ *
+ * NOTE: the basepath specifies the local directory that is served by MMS file services
+ *
+ * \param basepath new file service base path
+ */
+void
+IedServerConfig_setFileServiceBasePath(IedServerConfig self, const char* basepath);
+
+/**
+ * \brief Get the basepath of the file services
+ */
+const char*
+IedServerConfig_getFileServiceBasePath(IedServerConfig self);
+
+/**
+ * \brief Enable/disable the MMS file service support
+ *
+ * \param[in] enable set true to enable the file services, otherwise false
+ */
+void
+IedServerConfig_enableFileService(IedServerConfig self, bool enable);
+
+/**
+ * \brief Is the MMS file service enabled or disabled
+ *
+ * \return true if enabled, false otherwise
+ */
+bool
+IedServerConfig_isFileServiceEnabled(IedServerConfig self);
+
+/**
+ * \brief Enable/disable the dynamic data set service for MMS
+ *
+ * \param[in] enable set true to enable dynamic data set service, otherwise false
+ */
+void
+IedServerConfig_enableDynamicDataSetService(IedServerConfig self, bool enable);
+
+/**
+ * \brief Is the dynamic data set service for MMS enabled or disabled
+ *
+ * \return true if enabled, false otherwise
+ */
+bool
+IedServerConfig_isDynamicDataSetServiceEnabled(IedServerConfig self);
+
+/**
+ * \brief Set the maximum allowed number of association specific (non-permanent) data sets
+ *
+ * NOTE: This specifies the maximum number of non-permanent data sets per connection. When
+ * the connection is closed these data sets are deleted automatically.
+ *
+ * \param maxDataSets maximum number of allowed data sets.
+ */
+void
+IedServerConfig_setMaxAssociationSpecificDataSets(IedServerConfig self, int maxDataSets);
+
+/**
+ * \brief Get the maximum allowed number of association specific (non-permanent) data sets
+ *
+ * \return maximum number of allowed data sets.
+ */
+int
+IedServerConfig_getMaxAssociationSpecificDataSets(IedServerConfig self);
+
+/**
+ * \brief Set the maximum allowed number of domain specific (permanent) data sets
+ *
+ * \param maxDataSets maximum number of allowed data sets.
+ */
+void
+IedServerConfig_setMaxDomainSpecificDataSets(IedServerConfig self, int maxDataSets);
+
+/**
+ * \brief Get the maximum allowed number of domain specific (permanent) data sets
+ *
+ * \return maximum number of allowed data sets.
+ */
+int
+IedServerConfig_getMaxDomainSpecificDataSets(IedServerConfig self);
+
+/**
+ * \brief Set the maximum number of entries in dynamic data sets
+ *
+ * NOTE: this comprises the base data set entries (can be simple or complex variables).
+ * When the client tries to create a data set with more member the request will be
+ * rejected and the data set will not be created.
+ *
+ * \param maxDataSetEntries the maximum number of entries allowed in a data set
+ */
+void
+IedServerConfig_setMaxDataSetEntries(IedServerConfig self, int maxDataSetEntries);
+
+/**
+ * \brief Get the maximum number of entries in dynamic data sets
+ *
+ * \return the maximum number of entries allowed in a data sets
+ */
+int
+IedServerConfig_getMaxDatasSetEntries(IedServerConfig self);
+
+/**
+ * \brief Enable/disable the log service for MMS
+ *
+ * \param[in] enable set true to enable dynamic data set service, otherwise false
+ */
+void
+IedServerConfig_enableLogService(IedServerConfig self, bool enable);
+
+/**
+ * \brief Is the log service for MMS enabled or disabled
+ *
+ * \return true if enabled, false otherwise
+ */
+bool
+IedServerConfig_isLogServiceEnabled(IedServerConfig self);
+
+/**
  * An opaque handle for an IED server instance
  */
 typedef struct sIedServer* IedServer;
@@ -78,6 +300,16 @@ IedServer_create(IedModel* dataModel);
  */
 IedServer
 IedServer_createWithTlsSupport(IedModel* dataModel, TLSConfiguration tlsConfiguration);
+
+/**
+ * \brief Create new new IedServer with extended configurations parameters
+ *
+ * \param dataModel reference to the IedModel data structure to be used as IEC 61850 data model of the device
+ * \param tlsConfiguration TLS configuration object, or NULL to not use TLS
+ * \param serverConfiguration IED server configuration object for advanced server configuration
+ */
+IedServer
+IedServer_createWithConfig(IedModel* dataModel, TLSConfiguration tlsConfiguration, IedServerConfig serverConfiguration);
 
 /**
  * \brief Destroy an IedServer instance and release all resources (memory, TCP sockets)
@@ -338,8 +570,10 @@ IedServer_setConnectionIndicationHandler(IedServer self, IedConnectionIndication
 
 
 /**
- * \brief Lock the MMS server data model.
+ * \brief Lock the data model for data update.
  *
+ * This function should be called before the data model is updated.
+ * After updating the data model the function \ref IedServer_unlockDataModel should be called.
  * Client requests will be postponed until the lock is removed.
  *
  * NOTE: This method should never be called inside of a library callback function. In the context of
@@ -352,7 +586,7 @@ void
 IedServer_lockDataModel(IedServer self);
 
 /**
- * \brief Unlock the MMS server data model and process pending client requests.
+ * \brief Unlock the data model and process pending client requests.
  *
  * NOTE: This method should never be called inside of a library callback function. In the context of
  * a library callback the data model is always already locked!
@@ -1008,7 +1242,7 @@ IedServer_setSVCBHandler(IedServer self, SVControlBlock* svcb, SVCBEventHandler 
  **************************************************************************/
 
 /**
- * \brief callback handler to intercept/control client access to data attributes
+ * \brief callback handler to intercept/control client write access to data attributes
  *
  * User provided callback function to intercept/control MMS client access to
  * IEC 61850 data attributes. The application can install the same handler
@@ -1023,7 +1257,7 @@ IedServer_setSVCBHandler(IedServer self, SVControlBlock* svcb, SVCBEventHandler 
  * \param connection the connection object of the client connection that invoked the write operation
  * \param parameter the user provided parameter
  *
- * \return true if access is accepted, false if access is denied.
+ * \return DATA_ACCESS_ERROR_SUCCESS if access is accepted, DATA_ACCESS_ERROR_OBJECT_ACCESS_DENIED if access is denied.
  */
 typedef MmsDataAccessError
 (*WriteAccessHandler) (DataAttribute* dataAttribute, MmsValue* value, ClientConnection connection, void* parameter);
@@ -1062,6 +1296,37 @@ typedef enum {
  */
 void
 IedServer_setWriteAccessPolicy(IedServer self, FunctionalConstraint fc, AccessPolicy policy);
+
+/**
+ * \brief callback handler to control client read access to data attributes
+ *
+ * User provided callback function to control MMS client read access to IEC 61850
+ * data objects. The application is to allow read access to data objects for specific clients only.
+ * It can be used to implement a role based access control (RBAC).
+ *
+ * \param ld the logical device the client wants to access
+ * \param ln the logical node the client wants to access
+ * \param dataObject the data object the client wants to access
+ * \param fc the functional constraint of the access
+ * \param connection the client connection that causes the access
+ * \param parameter the user provided parameter
+ *
+ * \return DATA_ACCESS_ERROR_SUCCESS if access is accepted, DATA_ACCESS_ERROR_OBJECT_ACCESS_DENIED if access is denied.
+ */
+typedef MmsDataAccessError
+(*ReadAccessHandler) (LogicalDevice* ld, LogicalNode* ln, DataObject* dataObject, FunctionalConstraint fc, ClientConnection connection, void* parameter);
+
+/**
+ * \brief Install the global read access handler
+ *
+ * The read access handler will be called for every read access before the server grants access to the client.
+ *
+ * \param self the instance of IedServer to operate on.
+ * \param handler the callback function that is invoked if a client tries to read a data object.
+ * \param parameter a user provided parameter that is passed to the callback function.
+ */
+void
+IedServer_setReadAccessHandler(IedServer self, ReadAccessHandler handler, void* parameter);
 
 /**@}*/
 
