@@ -370,6 +370,7 @@ void NvrOnTimer() {
     if (!video_adp_state) {
         NvrRequestCfg();
     } else {
+        // 如要定时去维护掉线的NVR
         TimerStop();
         NvrLogin();
         TimerStart();

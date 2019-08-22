@@ -17,7 +17,7 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 # 源文件的预编译选项
-ADD_DEFINITIONS(-D_TEST)
+# ADD_DEFINITIONS(-D_TEST)
 
 # 工程中头文件存放位置
 include_directories(

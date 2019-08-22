@@ -37,12 +37,13 @@ void SigintHandler(int signalId) {
  * 定时事件，在这里循环执行各个功能模块的定时功能
  */
 static void OnTimer(uv_timer_t *handle) {
-    //NvrOnTimer();                 // video adapter 定时任务
+    //NvrOnTimer();                   // video adapter 定时任务
     IEC61850OnTimer();              // 61850 定时任务
 }
 
 /**
  * 开始定时器
+ * 1秒后开始，没2秒触发一次
  */
 void TimerStart() {
     // start after 1 secends, repeat every 2 seconds
